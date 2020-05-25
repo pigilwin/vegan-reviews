@@ -2,6 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:vegan_reviews/shared/shared.dart';
 
 class Header extends StatelessWidget {
+  
+  const Header({this.onlongPress});
+
+  final void Function() onlongPress;
+
   @override
   Widget build(BuildContext context) {
     return ClipPath(
@@ -23,7 +28,10 @@ class Header extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Logo(),
+              GestureDetector(
+                child: Logo(),
+                onLongPress: onlongPress,
+              ),
               const Divider(height: 40),
               WelcomeMessage()
             ],
