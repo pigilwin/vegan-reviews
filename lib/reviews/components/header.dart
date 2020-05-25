@@ -19,8 +19,8 @@ class Header extends StatelessWidget {
             begin: Alignment.topRight,
             end: Alignment.bottomLeft,
             colors: [
-              Color(0xFF3383CD),
-              Color(0xFF11249F),
+              Color(0xFF76BA1B),
+              Color(0xFF4C9A2A),
             ],
           )
         ),

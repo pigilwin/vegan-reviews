@@ -12,7 +12,7 @@ class Application extends StatelessWidget {
       child: MaterialApp(
         title: 'Vegan Reviews',
         theme: ThemeData(
-          primarySwatch: Colors.blue,
+          primarySwatch: Colors.green,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
         initialRoute: '/',
