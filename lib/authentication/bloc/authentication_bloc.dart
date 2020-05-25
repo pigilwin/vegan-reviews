@@ -2,6 +2,10 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+import 'package:vegan_reviews/authentication/authentication.dart';
+import 'package:vegan_reviews/shared/shared.dart';
 
 part 'authentication_event.dart';
 part 'authentication_state.dart';
@@ -12,18 +16,19 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
   final AuthenticationService authenticationService = AuthenticationService();
 
   @override
-  AuthenticationState get initialState => AuthenticationInitial();
+  AuthenticationState get initialState => const NoAuthentication();
 
   @override
   Stream<AuthenticationState> mapEventToState(
     AuthenticationEvent event,
   ) async* {
     if (event is RequestAuthenticationEvent) {
-      yield* _mapRequestAuthenticationEventToState();
+      yield* _mapRequestAuthenticationEventToState(event);
     }
   }
 
-  Stream<AuthenticationState> _mapRequestAuthenticationEventToState() async* {
-
+  Stream<AuthenticationState> _mapRequestAuthenticationEventToState(RequestAuthenticationEvent event) async* {
+    final User user = await authenticationService.signInWithPhoneNumber(event.number);
+    yield Authenticated(user);
   }
 }

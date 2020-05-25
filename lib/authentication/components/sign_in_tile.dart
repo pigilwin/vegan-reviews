@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vegan_reviews/authentication/authentication.dart';
+import 'package:vegan_reviews/shared/shared.dart';
 
 class SignInTile extends StatefulWidget{
   @override
@@ -52,7 +53,7 @@ class _SignInTileState extends State<SignInTile>{
       color: Theme.of(context).primaryColor,
       icon: const Icon(Icons.arrow_forward, color: Colors.white),
       onPressed: () {
-        authenticationBloc.add(const RequestAuthenticationEvent());
+        authenticationBloc.add(RequestAuthenticationEvent(PhoneNumber(controller.text)));
       },
       animationDuration: const Duration(seconds: 5),
       label: const Text("Sign In", style: TextStyle(color: Colors.white, fontSize: 20))
