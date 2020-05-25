@@ -22,7 +22,8 @@ class _SignInTileState extends State<SignInTile>{
 
   @override
   Widget build(BuildContext context) {
-    if (authenticationBloc.state is NoAuthentication) {
+    final AuthenticationState state = authenticationBloc.state;
+    if (state is NoAuthentication) {
       return Column(
         children: [
           Padding(
@@ -61,7 +62,14 @@ class _SignInTileState extends State<SignInTile>{
         ],
       );
     }
-    return Text("Foo");
+
+    if (state is Authenticated) {
+      return Center(
+        child: Text("Hello ${state.user.name}"),
+      );
+    }
+
+    return null;
   }
 
   Widget _signInButton(BuildContext context) {
