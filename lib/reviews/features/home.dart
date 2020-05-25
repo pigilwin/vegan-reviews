@@ -53,16 +53,19 @@ class _HomeState extends State<Home> {
   }
 
   Widget _getAddNewReviewButton() {
-    final AuthenticationState state = context.bloc<AuthenticationBloc>().state;
-    if (state is Authenticated){
-      return FloatingActionButton(
-        child: const Icon(Icons.add),
-        onPressed: () {
-          Navigator.of(context).pushNamed('/new-review');
-        },
-      );
-    }
-    return null;
+    return BlocBuilder<AuthenticationBloc, AuthenticationState>(
+      builder: (BuildContext context, AuthenticationState state) {
+        if (state is Authenticated){
+          return FloatingActionButton(
+            child: const Icon(Icons.add),
+            onPressed: () {
+              Navigator.of(context).pushNamed('/new-review');
+            },
+          );
+        }
+        return Container();
+      },
+    );
   }
 
   Widget _homePage() {

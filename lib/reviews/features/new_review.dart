@@ -10,6 +10,11 @@ class _NewReviewState extends State<NewReview> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Create a new review"),
+        centerTitle: true,
+      ),
+    );
   }
 }
