@@ -11,11 +11,11 @@ class WelcomeMessage extends StatelessWidget {
   String _getMessage() {
     final DateTime dateTime = DateTime.now().toLocal();
     if (dateTime.hour < 12) {
-      return "Good Morning";
+      return "Good Morning and Welcome";
     }
     if (dateTime.hour > 12 && dateTime.hour < 7) {
-      return "Good Afternoon";
+      return "Good Afternoon and Welcome";
     }
-    return "Good Evening";
+    return "Good Evening and Welcome";
   }
 }
