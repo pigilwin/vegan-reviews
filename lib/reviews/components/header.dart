@@ -23,7 +23,9 @@ class Header extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Logo()
+              Logo(),
+              const Divider(height: 40),
+              WelcomeMessage()
             ],
           ),
         ),
