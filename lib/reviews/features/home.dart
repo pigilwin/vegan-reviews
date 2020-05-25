@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:vegan_reviews/authentication/authentication.dart';
 import 'package:vegan_reviews/reviews/reviews.dart';
 
 class Home extends StatefulWidget {
@@ -34,7 +35,7 @@ class _HomeState extends State<Home> {
       color: Theme.of(context).primaryColor,
       icon: const Icon(Icons.arrow_forward, color: Colors.white),
       onPressed: () {
-
+        context.bloc<AuthenticationBloc>().add(const RequestAuthenticationEvent());
       },
       animationDuration: const Duration(seconds: 5),
       label: const Text("Sign In", style: TextStyle(color: Colors.white, fontSize: 20))
