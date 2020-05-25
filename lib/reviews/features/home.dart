@@ -19,12 +19,25 @@ class _HomeState extends State<Home> {
           return SingleChildScrollView(
             child: Column(
               children: [
-                Header()
+                Header(),
+                _getButton()
               ],
             ),
           );
         },
       ),
+    );
+  }
+
+  Widget _getButton() {
+    return RaisedButton.icon(
+      color: Theme.of(context).primaryColor,
+      icon: const Icon(Icons.arrow_forward, color: Colors.white),
+      onPressed: () {
+
+      },
+      animationDuration: const Duration(seconds: 5),
+      label: const Text("Sign In", style: TextStyle(color: Colors.white, fontSize: 20))
     );
   }
 }
