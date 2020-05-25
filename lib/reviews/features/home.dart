@@ -12,7 +12,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   
-  bool tryingToSignIn;
+  bool tryingToSignIn = false;
 
   @override
   Widget build(BuildContext context) {
@@ -20,17 +20,19 @@ class _HomeState extends State<Home> {
       body: BlocBuilder<ReviewsBloc, ReviewsState>(
         builder: (BuildContext context, ReviewsState state) {
           if (tryingToSignIn) {
-            return Column(
-              children: [
-                Header(
-                  onlongPress: () {
-                    setState(() {
-                      tryingToSignIn = false;
-                    });
-                  },
-                ),
-                SignInTile()
-              ],
+            return SingleChildScrollView(
+              child: Column(
+                children: [
+                  Header(
+                    onlongPress: () {
+                      setState(() {
+                        tryingToSignIn = false;
+                      });
+                    },
+                  ),
+                  SignInTile()
+                ],
+              ),
             );
           }
           return _homePage();
