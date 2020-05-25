@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vegan_reviews/shared/shared.dart';
 
 class Header extends StatelessWidget {
   @override
@@ -22,7 +23,7 @@ class Header extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text("Vegan Reviews", style: TextStyle(fontSize: 30, color: Colors.white))
+              Logo()
             ],
           ),
         ),
