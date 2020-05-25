@@ -47,7 +47,22 @@ class _HomeState extends State<Home> {
           },
         ),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+      floatingActionButton: _getAddNewReviewButton(),
     );
+  }
+
+  Widget _getAddNewReviewButton() {
+    final AuthenticationState state = context.bloc<AuthenticationBloc>().state;
+    if (state is Authenticated){
+      return FloatingActionButton(
+        child: const Icon(Icons.add),
+        onPressed: () {
+          Navigator.of(context).pushNamed('/new-review');
+        },
+      );
+    }
+    return null;
   }
 
   Widget _homePage() {
