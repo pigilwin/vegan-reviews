@@ -17,26 +17,35 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocBuilder<ReviewsBloc, ReviewsState>(
-        builder: (BuildContext context, ReviewsState state) {
-          if (tryingToSignIn) {
-            return SingleChildScrollView(
-              child: Column(
-                children: [
-                  Header(
-                    onlongPress: () {
-                      setState(() {
-                        tryingToSignIn = false;
-                      });
-                    },
-                  ),
-                  SignInTile()
-                ],
-              ),
-            );
+      body: BlocListener<AuthenticationBloc, AuthenticationState>(
+        listener: (BuildContext context, AuthenticationState state) {
+          if (state is Authenticated){
+            setState(() {
+              tryingToSignIn = false;
+            });
           }
-          return _homePage();
         },
+        child: BlocBuilder<ReviewsBloc, ReviewsState>(
+          builder: (BuildContext context, ReviewsState state) {
+            if (tryingToSignIn) {
+              return SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Header(
+                      onlongPress: () {
+                        setState(() {
+                          tryingToSignIn = false;
+                        });
+                      },
+                    ),
+                    SignInTile()
+                  ],
+                ),
+              );
+            }
+            return _homePage();
+          },
+        ),
       ),
     );
   }

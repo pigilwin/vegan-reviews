@@ -21,6 +21,13 @@ class _SignInTileState extends State<SignInTile>{
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    usernameController.dispose();
+    passwordController.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final AuthenticationState state = authenticationBloc.state;
     if (state is NoAuthentication) {
@@ -81,6 +88,8 @@ class _SignInTileState extends State<SignInTile>{
           Username(usernameController.text),
           Password(passwordController.text)
         ));
+        usernameController.clear();
+        passwordController.clear();
       },
       animationDuration: const Duration(seconds: 5),
       label: const Text("Sign In", style: TextStyle(color: Colors.white, fontSize: 20))
