@@ -21,3 +21,10 @@ class NoAuthentication extends AuthenticationState {
   @override
   List<Object> get props => [];
 }
+
+class AuthenticationLoading extends AuthenticationState {
+  const AuthenticationLoading();
+  
+  @override
+  List<Object> get props => [];
+}

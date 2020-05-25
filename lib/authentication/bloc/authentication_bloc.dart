@@ -27,7 +27,14 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
   }
 
   Stream<AuthenticationState> _mapRequestAuthenticationEventToState(RequestAuthenticationEvent event) async* {
+    yield const AuthenticationLoading();
     final User user = await authenticationService.signInWithUsernameAndPassword(event.email, event.password);
+    
+    if (user == null) {
+      yield const NoAuthentication();
+      return;
+    }
+
     yield Authenticated(user);
   }
 }
