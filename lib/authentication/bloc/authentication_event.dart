@@ -6,8 +6,10 @@ abstract class AuthenticationEvent extends Equatable {
 
 class RequestAuthenticationEvent extends AuthenticationEvent {
   
-  const RequestAuthenticationEvent();
+  const RequestAuthenticationEvent(this.number);
+
+  final PhoneNumber number;
   
   @override
-  List<Object> get props => []; 
+  List<Object> get props => [number.number]; 
 }
