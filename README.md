@@ -6,7 +6,6 @@
 
 - Show latest review
 - Sign in to add new reviews
-- Show message of either good morning or good afternoon
 
 ### Create a new review
 
