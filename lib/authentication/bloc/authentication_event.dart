@@ -6,10 +6,11 @@ abstract class AuthenticationEvent extends Equatable {
 
 class RequestAuthenticationEvent extends AuthenticationEvent {
   
-  const RequestAuthenticationEvent(this.number);
+  const RequestAuthenticationEvent(this.username, this.password);
 
-  final PhoneNumber number;
+  final Username username;
+  final Password password;
   
   @override
-  List<Object> get props => [number.number]; 
+  List<Object> get props => [username.value, password.value]; 
 }

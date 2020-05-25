@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vegan_reviews/authentication/authentication.dart';
-import 'package:vegan_reviews/shared/shared.dart';
 
 class SignInTile extends StatefulWidget{
   @override
@@ -10,7 +9,8 @@ class SignInTile extends StatefulWidget{
 
 class _SignInTileState extends State<SignInTile>{
   
-  final TextEditingController controller = TextEditingController();
+  final TextEditingController usernameController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
   AuthenticationBloc authenticationBloc;
 
@@ -28,17 +28,33 @@ class _SignInTileState extends State<SignInTile>{
           Padding(
             padding: const EdgeInsets.all(20),
             child: TextFormField(
-              controller: controller,
+              controller: usernameController,
               validator: (String value) {
                 if (value.isEmpty) {
-                  return "A value must be supplied";
-                }
-                if (int.tryParse(value) == null) {
-                  return "Only numbers can be supplied";
+                  return "A Email must be supplied";
                 }
                 return null;
               },
-              keyboardType: TextInputType.phone,
+              decoration: const InputDecoration(
+                labelText: 'Email'
+              ),
+              keyboardType: TextInputType.emailAddress,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(20),
+            child: TextFormField(
+              controller: passwordController,
+              validator: (String value) {
+                if (value.isEmpty) {
+                  return "A password must be supplied";
+                }
+                return null;
+              },
+              decoration: const InputDecoration(
+                labelText: 'Password'
+              ),
+              obscureText: true,
             ),
           ),
           _signInButton(context)
@@ -53,7 +69,10 @@ class _SignInTileState extends State<SignInTile>{
       color: Theme.of(context).primaryColor,
       icon: const Icon(Icons.arrow_forward, color: Colors.white),
       onPressed: () {
-        authenticationBloc.add(RequestAuthenticationEvent(PhoneNumber(controller.text)));
+        authenticationBloc.add(RequestAuthenticationEvent(
+          Username(usernameController.text),
+          Password(passwordController.text)
+        ));
       },
       animationDuration: const Duration(seconds: 5),
       label: const Text("Sign In", style: TextStyle(color: Colors.white, fontSize: 20))
