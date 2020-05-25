@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:vegan_reviews/authentication/authentication.dart';
 import 'package:vegan_reviews/reviews/reviews.dart';
 
 class Application extends StatelessWidget {
@@ -7,7 +8,7 @@ class Application extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: const [],
+      providers: _getProviders(),
       child: MaterialApp(
         title: 'Vegan Reviews',
         theme: ThemeData(
@@ -16,6 +17,7 @@ class Application extends StatelessWidget {
         ),
         initialRoute: '/',
         onGenerateRoute: onGenerateRoute,
+        debugShowCheckedModeBanner: false,
       ),
     );
   }
@@ -31,5 +33,16 @@ class Application extends StatelessWidget {
     return {
       '/': (BuildContext context) => Home()
     };
+  }
+
+  List<BlocProvider> _getProviders() {
+    return [
+      BlocProvider<AuthenticationBloc>(
+        create: (BuildContext context) => AuthenticationBloc(),
+      ),
+      BlocProvider<ReviewsBloc>(
+        create: (BuildContext context) => ReviewsBloc(),
+      )
+    ];
   }
 }
