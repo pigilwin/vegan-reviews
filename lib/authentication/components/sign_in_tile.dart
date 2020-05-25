@@ -72,7 +72,7 @@ class _SignInTileState extends State<SignInTile>{
 
     if (state is Authenticated) {
       return Center(
-        child: Text("Hello ${state.user.name}"),
+        child: Text("Hello ${state.user.email.value}"),
       );
     }
 
@@ -85,7 +85,7 @@ class _SignInTileState extends State<SignInTile>{
       icon: const Icon(Icons.arrow_forward, color: Colors.white),
       onPressed: () {
         authenticationBloc.add(RequestAuthenticationEvent(
-          Username(usernameController.text),
+          Email(usernameController.text),
           Password(passwordController.text)
         ));
         usernameController.clear();

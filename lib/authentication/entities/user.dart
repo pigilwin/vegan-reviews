@@ -1,19 +1,20 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:vegan_reviews/authentication/authentication.dart';
 
 class User {
   
   const User({
     this.id,
-    this.name
+    this.email
   });
   
   factory User.fromFirebaseUser(FirebaseUser user) {
     return User(
       id: user.uid,
-      name: user.displayName
+      email: Email(user.email)
     );
   }
 
-  final String name;
+  final Email email;
   final String id;
 }
