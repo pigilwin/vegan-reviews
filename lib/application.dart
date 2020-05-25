@@ -31,7 +31,8 @@ class Application extends StatelessWidget {
 
   Map<String, WidgetBuilder> _getRoutes(RouteSettings settings) {
     return {
-      '/': (BuildContext context) => Home()
+      '/': (BuildContext context) => Home(),
+      '/new-review': (BuildContext context) => NewReview()
     };
   }
 
