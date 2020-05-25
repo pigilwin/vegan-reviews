@@ -1,16 +1,26 @@
 # vegan_reviews
 
-A new Flutter project.
+## Things to do
 
-## Getting Started
+### Homepage
 
-This project is a starting point for a Flutter application.
+- Show latest review
+- Sign in to add new reviews
+- Show message of either good morning or good afternoon
 
-A few resources to get you started if this is your first Flutter project:
+### Create a new review
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+- Name of food
+- Description of food
+- Limited time or not
+- Worth it or not
+- Price
+- Location of food supplier
+- Out of 10 slider of stars
+- Emoji picker
+- Picture of food
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### List of all reviews
+
+- List all reviews
+- Filter by worth it or not
