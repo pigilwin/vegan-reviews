@@ -29,5 +29,6 @@ class ReviewsBloc extends Bloc<ReviewsEvent, ReviewsState> {
   Stream<ReviewsState> _mapAddNewReviewEventToState(AddNewReviewEvent event) async* {
     yield const LoadingReviews();
     await reviewsService.add(event.review);
+    yield LoadedReviews([]);
   }
 }

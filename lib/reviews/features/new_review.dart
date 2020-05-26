@@ -25,14 +25,30 @@ class _NewReviewState extends State<NewReview> {
         title: const Text("Create a new review"),
         centerTitle: true,
       ),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: ReviewEditor(
-            review: Review.empty(),
-            reviewFinished: (Review review) {
-              reviewsBloc.add(AddNewReviewEvent(review));
-            },
-          ),
+      body: BlocListener<ReviewsBloc, ReviewsState>(
+        listener: (BuildContext context, ReviewsState state) {
+          if (state is LoadedReviews) {
+            Navigator.of(context).pop();
+          }
+        },
+        child: BlocBuilder<ReviewsBloc, ReviewsState>(
+          builder: (BuildContext context, ReviewsState state) {
+            if (state is LoadingReviews) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+            return SafeArea(
+              child: SingleChildScrollView(
+                child: ReviewEditor(
+                  review: Review.empty(),
+                  reviewFinished: (Review review) {
+                    reviewsBloc.add(AddNewReviewEvent(review));
+                  },
+                ),
+              ),
+            );
+          },
         ),
       ),
     );
