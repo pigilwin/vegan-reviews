@@ -16,6 +16,8 @@ class ReviewEditor extends StatefulWidget{
 }
 
 class _ReviewEditorState extends State<ReviewEditor> {
+
+  final _formKey = GlobalKey<FormState>();//No type here due to it breaking the validation
   
   TextEditingController nameController;
   TextEditingController descriptionController;
@@ -41,6 +43,7 @@ class _ReviewEditorState extends State<ReviewEditor> {
   @override
   Widget build(BuildContext context) {
     return Form(
+      key: _formKey,
       child: Column(
         children: [
            _getName(),
@@ -50,7 +53,9 @@ class _ReviewEditorState extends State<ReviewEditor> {
            _getWorthIt(),
            _getLimited(),
            _getSupplier(),
-           _getPhotoUpload()
+           _getPhotoViewer(),
+           _getPhotoButtons(),
+           _getSaveButton()
         ],
       ),
     );
@@ -175,14 +180,57 @@ class _ReviewEditorState extends State<ReviewEditor> {
     );
   }
 
-  Widget _getPhotoUpload() {
-    return FlatButton(
-      child: const Text("Choose image", style: TextStyle(fontSize: 20)),
-      onPressed: () {
-        setState(() async {
-          image = await ImagePicker.pickImage(source: ImageSource.camera);
-        });
-      },
+  Widget _getPhotoViewer() {
+    if (image == null) {
+      return const SizedBox.shrink();
+    }
+    return Padding(
+      padding: const EdgeInsets.all(20),
+      child: Image.file(image),
+    );
+  }
+
+  Widget _getPhotoButtons() {
+    final Color color = Theme.of(context).primaryColor;
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        FlatButton(
+          color: color,
+          child: const Text("Take a image", style: TextStyle(fontSize: 20)),
+          onPressed: () async {
+            final io.File cameraImage = await ImagePicker.pickImage(source: ImageSource.camera);
+            setState(() {
+              image = cameraImage;
+            });
+          },
+        ),
+        FlatButton(
+          color: color,
+          child: const Text("Choose a image", style: TextStyle(fontSize: 20)),
+          onPressed: () async {
+            final io.File galleryImage = await ImagePicker.pickImage(source: ImageSource.gallery);
+            setState(() {
+              image = galleryImage;
+            });
+          },
+        )
+      ],
+    );
+  }
+
+  Widget _getSaveButton() {
+    return Padding(
+      padding: const EdgeInsets.all(20),
+      child: FlatButton(
+        color: Theme.of(context).primaryColor,
+        child: const Text("Save", style: TextStyle(fontSize: 20)),
+        onPressed: () {
+          if (_formKey.currentState.validate()) {
+
+          }
+        },
+      ),
     );
   }
 }
