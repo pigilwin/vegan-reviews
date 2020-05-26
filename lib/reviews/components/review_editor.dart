@@ -30,6 +30,7 @@ class _ReviewEditorState extends State<ReviewEditor> {
   bool worthIt;
   bool limitedTime;
   io.File image;
+  String type;
 
   @override
   void initState() {
@@ -42,6 +43,7 @@ class _ReviewEditorState extends State<ReviewEditor> {
     worthIt = widget.review.worthIt;
     limitedTime = widget.review.limited;
     image = widget.review.image;
+    type = widget.review.type;
   }
 
   @override
@@ -127,7 +129,14 @@ class _ReviewEditorState extends State<ReviewEditor> {
   Widget _getType() {
     return Padding(
       padding: const EdgeInsets.all(20),
-      child: FoodTypeSelector(),
+      child: FoodTypeSelector(
+        selected: (String foodType) {
+          setState(() {
+            type = foodType;
+          });
+        },
+        value: type,
+      ),
     );
   }
 

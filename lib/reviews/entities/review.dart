@@ -32,6 +32,11 @@ class Review {
     );
   }
 
+  static const List<String> types = [
+    'savoury',
+    'sweet'
+  ];
+
   final String id;
   final String name;
   final String description;
