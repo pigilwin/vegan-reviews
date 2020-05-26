@@ -50,7 +50,12 @@ class _SignInTileState extends State<SignInTile>{
         builder: (BuildContext context, AuthenticationState state) {
           if (state is Authenticated) {
             return Center(
-              child: Text("Hello ${state.user.email.value}"),
+              child: Column(
+                children: [
+                  Text("Hello ${state.user.email.value}", style: const TextStyle(fontSize: 20)),
+                  _signOutButton(context)
+                ],
+              ),
             );
           }
           if (state is AuthenticationLoading) {
@@ -111,6 +116,8 @@ class _SignInTileState extends State<SignInTile>{
     return RaisedButton.icon(
       color: Theme.of(context).primaryColor,
       icon: const Icon(Icons.arrow_forward, color: Colors.white),
+      animationDuration: const Duration(seconds: 5),
+      label: const Text("Sign In", style: TextStyle(color: Colors.white, fontSize: 20)),
       onPressed: () {
         if (_formKey.currentState.validate()){
           authenticationBloc.add(RequestAuthenticationEvent(
@@ -118,9 +125,19 @@ class _SignInTileState extends State<SignInTile>{
             Password(passwordController.text)
           ));
         }
-      },
+      }
+    );
+  }
+
+  Widget _signOutButton(BuildContext context) {
+    return RaisedButton.icon(
+      color: Theme.of(context).primaryColor,
+      icon: const Icon(Icons.arrow_forward, color: Colors.white),
       animationDuration: const Duration(seconds: 5),
-      label: const Text("Sign In", style: TextStyle(color: Colors.white, fontSize: 20))
+      label: const Text("Sign Out", style: TextStyle(color: Colors.white, fontSize: 20)),
+      onPressed: () {
+        authenticationBloc.add(const SignOutEvent());
+      },
     );
   }
 }

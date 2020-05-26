@@ -24,6 +24,9 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
     if (event is RequestAuthenticationEvent) {
       yield* _mapRequestAuthenticationEventToState(event);
     }
+    if (event is SignOutEvent) {
+      yield* _mapSignOutEventToState();
+    }
   }
 
   Stream<AuthenticationState> _mapRequestAuthenticationEventToState(RequestAuthenticationEvent event) async* {
@@ -36,5 +39,11 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
     }
 
     yield Authenticated(user);
+  }
+
+  Stream<AuthenticationState> _mapSignOutEventToState() async* {
+    yield const AuthenticationLoading();
+    await authenticationService.signOut();
+    yield const NoAuthentication();
   }
 }

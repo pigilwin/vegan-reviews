@@ -14,3 +14,11 @@ class RequestAuthenticationEvent extends AuthenticationEvent {
   @override
   List<Object> get props => [email.value, password.value]; 
 }
+
+class SignOutEvent extends AuthenticationEvent {
+
+  const SignOutEvent();
+
+  @override
+  List<Object> get props => [];
+}
