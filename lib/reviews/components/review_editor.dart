@@ -53,6 +53,7 @@ class _ReviewEditorState extends State<ReviewEditor> {
            _getName(),
            _getDescription(),
            _getPrice(),
+           _getType(),
            _getStars(),
            _getWorthIt(),
            _getLimited(),
@@ -120,6 +121,13 @@ class _ReviewEditorState extends State<ReviewEditor> {
         keyboardType: TextInputType.number,
         controller: priceController,
       ),
+    );
+  }
+
+  Widget _getType() {
+    return Padding(
+      padding: const EdgeInsets.all(20),
+      child: FoodTypeSelector(),
     );
   }
 
@@ -252,7 +260,6 @@ class _ReviewEditorState extends State<ReviewEditor> {
   io.File _renameImage(io.File file) {
     final String dir = dirname(file.path);
     final String newPath = join(dir, "${widget.review.id}.jpg");
-    print(newPath);
     return file.renameSync(newPath);
   }
 }

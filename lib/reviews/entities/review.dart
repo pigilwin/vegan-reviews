@@ -13,7 +13,8 @@ class Review {
     this.worthIt,
     this.price,
     this.supplier,
-    this.limited
+    this.limited,
+    this.type
   });
 
   factory Review.empty() {
@@ -26,7 +27,8 @@ class Review {
       worthIt: false,
       price: 0,
       supplier: '',
-      limited: false
+      limited: false,
+      type: 'savoury'
     );
   }
 
@@ -39,6 +41,7 @@ class Review {
   final double price;
   final String supplier;
   final bool limited;
+  final String type;
 
   Map<String, dynamic> toMap() {
     return {
@@ -49,9 +52,12 @@ class Review {
       'worthIt': _boolToInt(worthIt),
       'limited': _boolToInt(limited),
       'supplier': supplier,
-      'image-name': basename(image.path)
+      'type': type,
+      'image-name': imageName
     };
   }
+
+  String get imageName => basename(image.path);
 
   int _boolToInt(bool value) {
     if (value) {
