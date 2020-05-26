@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:vegan_reviews/reviews/reviews.dart';
 
 part 'reviews_event.dart';
 part 'reviews_state.dart';
@@ -14,6 +15,12 @@ class ReviewsBloc extends Bloc<ReviewsEvent, ReviewsState> {
   Stream<ReviewsState> mapEventToState(
     ReviewsEvent event,
   ) async* {
-    // TODO: implement mapEventToState
+    if (event is AddNewReviewEvent) {
+      yield* _mapAddNewReviewEventToState(event);
+    }
+  }
+
+  Stream<ReviewsState> _mapAddNewReviewEventToState(AddNewReviewEvent event) async* {
+    
   }
 }
