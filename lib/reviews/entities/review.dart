@@ -1,6 +1,9 @@
+import 'package:uuid/uuid.dart';
+
 class Review {
 
   const Review({
+    this.id,
     this.name,
     this.description,
     this.imagePath,
@@ -12,7 +15,8 @@ class Review {
   });
 
   factory Review.empty() {
-    return const Review(
+    return Review(
+      id: Uuid().v4(),
       name: '',
       description: '',
       imagePath: '',
@@ -24,6 +28,7 @@ class Review {
     );
   }
 
+  final String id;
   final String name;
   final String description;
   final String imagePath;
