@@ -29,7 +29,7 @@ class Review {
   final String name;
   final String description;
   final String imagePath;
-  final double stars;
+  final int stars;
   final bool worthIt;
   final double price;
   final String supplier;
