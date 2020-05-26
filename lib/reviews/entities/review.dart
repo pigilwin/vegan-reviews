@@ -1,20 +1,21 @@
 import 'dart:io' as io;
+import 'package:flutter/foundation.dart';
 import 'package:path/path.dart';
 import 'package:uuid/uuid.dart';
 
 class Review {
 
   const Review({
-    this.id,
-    this.name,
-    this.description,
-    this.image,
-    this.stars,
-    this.worthIt,
-    this.price,
-    this.supplier,
-    this.limited,
-    this.type
+    @required this.id,
+    @required this.name,
+    @required this.description,
+    @required this.image,
+    @required this.stars,
+    @required this.worthIt,
+    @required this.price,
+    @required this.supplier,
+    @required this.limited,
+    @required this.type
   });
 
   factory Review.empty() {
