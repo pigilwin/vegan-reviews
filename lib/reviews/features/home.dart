@@ -69,6 +69,13 @@ class _HomeState extends State<Home> {
   }
 
   Widget _homePage(ReviewsState state) {
+    
+    Review review;
+
+    if (state is LoadedReviews) {
+      review = state.latestReview;
+    }
+    
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -79,7 +86,9 @@ class _HomeState extends State<Home> {
               });
             },
           ),
-          
+          ReviewOverviewCard(
+            review: review,
+          )
         ],
       ),
     );
