@@ -257,7 +257,8 @@ class _ReviewEditorState extends State<ReviewEditor> {
               limited: limitedTime,
               supplier: supplierController.text,
               image: image,
-              id: widget.review.id
+              id: widget.review.id,
+              type: type
             );
             widget.reviewFinished(review);
           }
