@@ -8,8 +8,7 @@ class Review {
     this.worthIt,
     this.price,
     this.supplier,
-    this.limited,
-    this.emoji
+    this.limited
   });
 
   factory Review.empty() {
@@ -21,8 +20,7 @@ class Review {
       worthIt: false,
       price: 0,
       supplier: '',
-      limited: false,
-      emoji: ''
+      limited: false
     );
   }
 
@@ -34,5 +32,4 @@ class Review {
   final double price;
   final String supplier;
   final bool limited;
-  final String emoji;
 }
