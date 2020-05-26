@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io' as io;
 
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -21,14 +22,26 @@ class ReviewsBloc extends Bloc<ReviewsEvent, ReviewsState> {
   Stream<ReviewsState> mapEventToState(
     ReviewsEvent event,
   ) async* {
+
+    if (event is LoadReviewsEvent) {
+      yield* _mapLoadReviewsEventToState();
+    }
+
     if (event is AddNewReviewEvent) {
       yield* _mapAddNewReviewEventToState(event);
     }
   }
 
+  Stream<ReviewsState> _mapLoadReviewsEventToState() async* {
+    yield const LoadingReviews();
+    final List<Review> reviews = await reviewsService.fetch();
+    yield LoadedReviews(reviews);
+  }
+
   Stream<ReviewsState> _mapAddNewReviewEventToState(AddNewReviewEvent event) async* {
     yield const LoadingReviews();
     await reviewsService.add(event.review);
-    yield LoadedReviews([]);
+    final List<Review> reviews = await reviewsService.fetch();
+    yield LoadedReviews(reviews);
   }
 }

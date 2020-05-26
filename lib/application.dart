@@ -42,7 +42,7 @@ class Application extends StatelessWidget {
         create: (BuildContext context) => AuthenticationBloc(),
       ),
       BlocProvider<ReviewsBloc>(
-        create: (BuildContext context) => ReviewsBloc(),
+        create: (BuildContext context) => ReviewsBloc()..add(const LoadReviewsEvent()),
       )
     ];
   }
