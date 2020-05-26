@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:connectivity/connectivity.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -31,6 +32,12 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
 
   Stream<AuthenticationState> _mapRequestAuthenticationEventToState(RequestAuthenticationEvent event) async* {
     yield const AuthenticationLoading();
+
+    if (await Connectivity().checkConnectivity() != ConnectivityResult.none) {
+      yield const NoAuthentication(wasPreviouslyLoggedIn: false);
+      return;
+    }
+
     final User user = await authenticationService.signInWithUsernameAndPassword(event.email, event.password);
     
     if (user == null) {
