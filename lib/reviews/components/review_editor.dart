@@ -258,7 +258,8 @@ class _ReviewEditorState extends State<ReviewEditor> {
               supplier: supplierController.text,
               image: image,
               id: widget.review.id,
-              type: type
+              type: type,
+              created: DateTime.now()
             );
             widget.reviewFinished(review);
           }

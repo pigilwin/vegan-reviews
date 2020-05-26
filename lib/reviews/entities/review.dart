@@ -1,5 +1,4 @@
 import 'dart:io' as io;
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:path/path.dart';
 import 'package:uuid/uuid.dart';
@@ -10,6 +9,7 @@ class Review {
     @required this.id,
     @required this.name,
     @required this.description,
+    @required this.created,
     @required this.image,
     @required this.stars,
     @required this.worthIt,
@@ -30,7 +30,8 @@ class Review {
       price: 0,
       supplier: '',
       limited: false,
-      type: 'savoury'
+      type: 'savoury',
+      created: DateTime.now()
     );
   }
 
@@ -49,6 +50,7 @@ class Review {
   final String supplier;
   final bool limited;
   final String type;
+  final DateTime created;
 
   Map<String, dynamic> toMap() {
     return {
