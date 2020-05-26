@@ -96,7 +96,7 @@ class _ReviewEditorState extends State<ReviewEditor> {
           }
           return null;
         },
-        controller: nameController,
+        controller: descriptionController,
       ),
     );
   }
@@ -158,7 +158,7 @@ class _ReviewEditorState extends State<ReviewEditor> {
       value: limitedTime,
       onChanged: (bool newlimitedTime){
         setState(() {
-          limitedTime = limitedTime;
+          limitedTime = newlimitedTime;
         });
       },
       title: const Text("Limited time?"),
