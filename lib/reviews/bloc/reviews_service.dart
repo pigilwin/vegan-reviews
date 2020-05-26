@@ -15,8 +15,9 @@ class ReviewsService {
       io.File image;
 
       if (imageName.isNotEmpty) {
+        final io.Directory directory = await getTemporaryDirectory();
         final StorageReference reference = _firebaseStorage.ref().child(imageName);
-        image = io.File(imageName);
+        image = io.File(join(directory.path, imageName));
         reference.writeToFile(image);
       }
       
