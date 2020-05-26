@@ -1,17 +1,17 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:connectivity/connectivity.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:vegan_reviews/authentication/authentication.dart';
+import 'package:vegan_reviews/shared/shared.dart';
 
 part 'authentication_event.dart';
 part 'authentication_state.dart';
 part 'authentication_service.dart';
 
-class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> {
+class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> with Network {
 
   final AuthenticationService authenticationService = AuthenticationService();
 
@@ -33,7 +33,7 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
   Stream<AuthenticationState> _mapRequestAuthenticationEventToState(RequestAuthenticationEvent event) async* {
     yield const AuthenticationLoading();
 
-    if (await Connectivity().checkConnectivity() != ConnectivityResult.none) {
+    if (await hasNetworkAccess()) {
       yield const NoAuthentication(wasPreviouslyLoggedIn: false);
       return;
     }
