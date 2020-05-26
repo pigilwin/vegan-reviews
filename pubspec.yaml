@@ -22,7 +22,8 @@ dependencies:
   uuid: 2.0.4
   connectivity: 0.4.8+6
   path: 1.7.0
-
+  path_provider: 1.6.9
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter
