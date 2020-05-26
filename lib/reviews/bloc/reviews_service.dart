@@ -31,7 +31,8 @@ class ReviewsService {
         supplier: data['supplier'],
         worthIt: _intToBool(data['worthIt']),
         limited: _intToBool(data['limited']),
-        price: data['price']
+        price: data['price'],
+        created: DateTime.tryParse(data['created'])
       ));
     }
     return reviews;
