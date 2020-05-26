@@ -29,6 +29,11 @@ class StarRating extends StatelessWidget {
   }
 
   Widget _buildStar(BuildContext context, int index) {
+    
+    if (!canBeEditted) {
+      return _buildIcon(context, index);
+    }
+    
     return GestureDetector(
       child: _buildIcon(context, index),
       onTap: () {
