@@ -1,4 +1,6 @@
+import 'dart:io' as io;
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:vegan_reviews/reviews/reviews.dart';
 
 class ReviewEditor extends StatefulWidget{
@@ -22,6 +24,7 @@ class _ReviewEditorState extends State<ReviewEditor> {
   int rating;
   bool worthIt;
   bool limitedTime;
+  io.File image;
 
   @override
   void initState() {
@@ -46,7 +49,8 @@ class _ReviewEditorState extends State<ReviewEditor> {
            _getStars(),
            _getWorthIt(),
            _getLimited(),
-           _getSupplier()
+           _getSupplier(),
+           _getPhotoUpload()
         ],
       ),
     );
@@ -128,34 +132,28 @@ class _ReviewEditorState extends State<ReviewEditor> {
   }
 
   Widget _getWorthIt() {
-    return Padding(
-      padding: const EdgeInsets.all(20),
-      child: SwitchListTile(
-        value: worthIt,
-        onChanged: (bool newWorthIt){
-          setState(() {
-            worthIt = newWorthIt;
-          });
-        },
-        title: const Text("Worth It?"),
-        subtitle: const Text("Was the food worth it?"),
-      ),
+    return SwitchListTile(
+      value: worthIt,
+      onChanged: (bool newWorthIt){
+        setState(() {
+          worthIt = newWorthIt;
+        });
+      },
+      title: const Text("Worth It?"),
+      subtitle: const Text("Was the food worth it?"),
     );
   }
 
   Widget _getLimited() {
-    return Padding(
-      padding: const EdgeInsets.all(20),
-      child: SwitchListTile(
-        value: worthIt,
-        onChanged: (bool newWorthIt){
-          setState(() {
-            worthIt = newWorthIt;
-          });
-        },
-        title: const Text("Limited time?"),
-        subtitle: const Text("Was this a limited time option?"),
-      ),
+    return SwitchListTile(
+      value: worthIt,
+      onChanged: (bool newWorthIt){
+        setState(() {
+          worthIt = newWorthIt;
+        });
+      },
+      title: const Text("Limited time?"),
+      subtitle: const Text("Was this a limited time option?"),
     );
   }
 
@@ -174,6 +172,17 @@ class _ReviewEditorState extends State<ReviewEditor> {
           return null;
         },
       ),
+    );
+  }
+
+  Widget _getPhotoUpload() {
+    return FlatButton(
+      child: const Text("Choose image", style: TextStyle(fontSize: 20)),
+      onPressed: () {
+        setState(() async {
+          image = await ImagePicker.pickImage(source: ImageSource.camera);
+        });
+      },
     );
   }
 }
