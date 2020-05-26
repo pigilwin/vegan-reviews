@@ -34,7 +34,7 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
     final User user = await authenticationService.signInWithUsernameAndPassword(event.email, event.password);
     
     if (user == null) {
-      yield const NoAuthentication();
+      yield const NoAuthentication(wasPreviouslyLoggedIn: false);
       return;
     }
 
@@ -44,6 +44,6 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
   Stream<AuthenticationState> _mapSignOutEventToState() async* {
     yield const AuthenticationLoading();
     await authenticationService.signOut();
-    yield const NoAuthentication();
+    yield const NoAuthentication(wasPreviouslyLoggedIn: true);
   }
 }

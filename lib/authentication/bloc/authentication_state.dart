@@ -16,7 +16,9 @@ class Authenticated extends AuthenticationState {
 
 class NoAuthentication extends AuthenticationState {
 
-  const NoAuthentication();
+  const NoAuthentication({this.wasPreviouslyLoggedIn});
+
+  final bool wasPreviouslyLoggedIn;
 
   @override
   List<Object> get props => [];

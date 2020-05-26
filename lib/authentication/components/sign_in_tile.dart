@@ -34,10 +34,12 @@ class _SignInTileState extends State<SignInTile>{
       bloc: authenticationBloc,
       listener: (BuildContext context, AuthenticationState state) {
         if (state is NoAuthentication) {
-          Scaffold.of(context).showSnackBar(const SnackBar(
-            content: Text("Failed to login", style: TextStyle(color: Colors.red)),
-            duration: Duration(seconds: 5),
-          ));
+          if (!state.wasPreviouslyLoggedIn){//Only show the message if the user was not previouslly logged in
+            Scaffold.of(context).showSnackBar(const SnackBar(
+              content: Text("Failed to login", style: TextStyle(color: Colors.red)),
+              duration: Duration(seconds: 5),
+            ));
+          }
         }
 
         if (state is Authenticated){
