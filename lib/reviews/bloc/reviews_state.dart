@@ -26,6 +26,25 @@ class LoadedReviews extends ReviewsState {
 
   final List<Review> reviews;
 
+  Review get latestReview {
+    
+    if (reviews.isEmpty) {
+      return null;
+    }
+    
+    reviews.sort((Review first, Review second) {
+      if (first.created.isAfter(second.created)) {
+        return 1;
+      }
+      if (first.created.isAtSameMomentAs(second.created)) {
+        return 0;
+      }
+      return -1;
+    });
+
+    return reviews.first;
+  }
+
   @override
   List<Object> get props => [];
 }

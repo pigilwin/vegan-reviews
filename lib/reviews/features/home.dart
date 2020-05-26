@@ -43,7 +43,7 @@ class _HomeState extends State<Home> {
                 ),
               );
             }
-            return _homePage();
+            return _homePage(state);
           },
         ),
       ),
@@ -68,7 +68,7 @@ class _HomeState extends State<Home> {
     );
   }
 
-  Widget _homePage() {
+  Widget _homePage(ReviewsState state) {
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -79,6 +79,7 @@ class _HomeState extends State<Home> {
               });
             },
           ),
+          
         ],
       ),
     );
