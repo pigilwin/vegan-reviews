@@ -1,3 +1,4 @@
+import 'dart:io' as io;
 import 'package:uuid/uuid.dart';
 
 class Review {
@@ -6,7 +7,7 @@ class Review {
     this.id,
     this.name,
     this.description,
-    this.imagePath,
+    this.image,
     this.stars,
     this.worthIt,
     this.price,
@@ -19,7 +20,7 @@ class Review {
       id: Uuid().v4(),
       name: '',
       description: '',
-      imagePath: '',
+      image: null,
       stars: 0,
       worthIt: false,
       price: 0,
@@ -31,7 +32,7 @@ class Review {
   final String id;
   final String name;
   final String description;
-  final String imagePath;
+  final io.File image;
   final int stars;
   final bool worthIt;
   final double price;

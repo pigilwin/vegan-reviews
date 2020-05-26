@@ -6,10 +6,12 @@ import 'package:vegan_reviews/reviews/reviews.dart';
 class ReviewEditor extends StatefulWidget{
 
   const ReviewEditor({
-    @required this.review
+    @required this.review,
+    @required this.reviewFinished
   });
 
   final Review review;
+  final void Function(Review review) reviewFinished;
 
   @override
   _ReviewEditorState createState() => _ReviewEditorState();
@@ -38,6 +40,7 @@ class _ReviewEditorState extends State<ReviewEditor> {
     rating = widget.review.stars ?? 0;
     worthIt = widget.review.worthIt;
     limitedTime = widget.review.limited;
+    image = widget.review.image;
   }
 
   @override
@@ -151,10 +154,10 @@ class _ReviewEditorState extends State<ReviewEditor> {
 
   Widget _getLimited() {
     return SwitchListTile(
-      value: worthIt,
-      onChanged: (bool newWorthIt){
+      value: limitedTime,
+      onChanged: (bool newlimitedTime){
         setState(() {
-          worthIt = newWorthIt;
+          limitedTime = limitedTime;
         });
       },
       title: const Text("Limited time?"),
@@ -227,7 +230,18 @@ class _ReviewEditorState extends State<ReviewEditor> {
         child: const Text("Save", style: TextStyle(fontSize: 20)),
         onPressed: () {
           if (_formKey.currentState.validate()) {
-
+            final Review review = Review(
+              name: nameController.text,
+              description: descriptionController.text,
+              price: double.tryParse(priceController.text),
+              stars: rating,
+              worthIt: worthIt,
+              limited: limitedTime,
+              supplier: supplierController.text,
+              image: image,
+              id: widget.review.id
+            );
+            widget.reviewFinished(review);
           }
         },
       ),
