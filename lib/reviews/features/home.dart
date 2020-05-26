@@ -86,8 +86,18 @@ class _HomeState extends State<Home> {
               });
             },
           ),
-          ReviewOverviewCard(
+          LatestReviewOverviewCard(
             review: review,
+            onTap: (Review review) {
+              Navigator.of(context).pushNamed('/review', arguments: review.id);
+            }
+          ),
+          FlatButton(
+            color: Theme.of(context).primaryColor,
+            child: const Text("Search for review?", style: TextStyle(fontSize: 20)),
+            onPressed: () {
+              Navigator.of(context).pushNamed('/search');
+            },
           )
         ],
       ),
