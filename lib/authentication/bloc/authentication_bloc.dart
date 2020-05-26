@@ -33,7 +33,7 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
   Stream<AuthenticationState> _mapRequestAuthenticationEventToState(RequestAuthenticationEvent event) async* {
     yield const AuthenticationLoading();
 
-    if (await hasNetworkAccess()) {
+    if (await hasNoNetworkAccess()) {
       yield const NoAuthentication(wasPreviouslyLoggedIn: false);
       return;
     }

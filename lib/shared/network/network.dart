@@ -1,7 +1,7 @@
 import 'package:connectivity/connectivity.dart';
 
 mixin Network {
-  Future<bool> hasNetworkAccess() async {
-    return await Connectivity().checkConnectivity() != ConnectivityResult.none;
+  Future<bool> hasNoNetworkAccess() async {
+    return await Connectivity().checkConnectivity() == ConnectivityResult.none;
   }
 }
