@@ -1,4 +1,5 @@
 import 'dart:io' as io;
+import 'package:path/path.dart';
 import 'package:uuid/uuid.dart';
 
 class Review {
@@ -38,4 +39,24 @@ class Review {
   final double price;
   final String supplier;
   final bool limited;
+
+  Map<String, dynamic> toMap() {
+    return {
+      'name': name,
+      'description': description,
+      'stars': stars,
+      'price': price,
+      'worthIt': _boolToInt(worthIt),
+      'limited': _boolToInt(limited),
+      'supplier': supplier,
+      'image-name': basename(image.path)
+    };
+  }
+
+  int _boolToInt(bool value) {
+    if (value) {
+      return 1;
+    }
+    return 0;
+  }
 }

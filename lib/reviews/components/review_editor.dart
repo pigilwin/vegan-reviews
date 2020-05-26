@@ -1,6 +1,7 @@
 import 'dart:io' as io;
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:path/path.dart';
 import 'package:vegan_reviews/reviews/reviews.dart';
 
 class ReviewEditor extends StatefulWidget{
@@ -57,8 +58,8 @@ class _ReviewEditorState extends State<ReviewEditor> {
            _getLimited(),
            _getSupplier(),
            _getPhotoViewer(),
-           _getPhotoButtons(),
-           _getSaveButton()
+           _getPhotoButtons(context),
+           _getSaveButton(context)
         ],
       ),
     );
@@ -193,7 +194,7 @@ class _ReviewEditorState extends State<ReviewEditor> {
     );
   }
 
-  Widget _getPhotoButtons() {
+  Widget _getPhotoButtons(BuildContext context) {
     final Color color = Theme.of(context).primaryColor;
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -202,7 +203,7 @@ class _ReviewEditorState extends State<ReviewEditor> {
           color: color,
           child: const Text("Take a image", style: TextStyle(fontSize: 20)),
           onPressed: () async {
-            final io.File cameraImage = await ImagePicker.pickImage(source: ImageSource.camera);
+            final io.File cameraImage = _renameImage(await ImagePicker.pickImage(source: ImageSource.camera));
             setState(() {
               image = cameraImage;
             });
@@ -212,7 +213,7 @@ class _ReviewEditorState extends State<ReviewEditor> {
           color: color,
           child: const Text("Choose a image", style: TextStyle(fontSize: 20)),
           onPressed: () async {
-            final io.File galleryImage = await ImagePicker.pickImage(source: ImageSource.gallery);
+            final io.File galleryImage = _renameImage(await ImagePicker.pickImage(source: ImageSource.gallery));
             setState(() {
               image = galleryImage;
             });
@@ -222,7 +223,7 @@ class _ReviewEditorState extends State<ReviewEditor> {
     );
   }
 
-  Widget _getSaveButton() {
+  Widget _getSaveButton(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(20),
       child: FlatButton(
@@ -246,5 +247,12 @@ class _ReviewEditorState extends State<ReviewEditor> {
         },
       ),
     );
+  }
+
+  io.File _renameImage(io.File file) {
+    final String dir = dirname(file.path);
+    final String newPath = join(dir, "${widget.review.id}.jpg");
+    print(newPath);
+    return file.renameSync(newPath);
   }
 }
