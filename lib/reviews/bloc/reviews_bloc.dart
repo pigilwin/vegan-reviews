@@ -15,7 +15,7 @@ class ReviewsBloc extends Bloc<ReviewsEvent, ReviewsState> {
   final ReviewsService reviewsService = ReviewsService();
   
   @override
-  ReviewsState get initialState => ReviewsInitial();
+  ReviewsState get initialState => const NoReviews();
 
   @override
   Stream<ReviewsState> mapEventToState(
@@ -27,6 +27,7 @@ class ReviewsBloc extends Bloc<ReviewsEvent, ReviewsState> {
   }
 
   Stream<ReviewsState> _mapAddNewReviewEventToState(AddNewReviewEvent event) async* {
+    yield const LoadingReviews();
     await reviewsService.add(event.review);
   }
 }
