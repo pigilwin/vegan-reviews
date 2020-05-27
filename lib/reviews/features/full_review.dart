@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:vegan_reviews/authentication/authentication.dart';
 import 'package:vegan_reviews/reviews/reviews.dart';
 
 class FullReview extends StatefulWidget {
@@ -65,7 +66,25 @@ class _FullReviewState extends State<FullReview> {
               ],
             ),
           ),
+          floatingActionButton: _getEditReviewButton(),
+          floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
         );
+      },
+    );
+  }
+
+  Widget _getEditReviewButton() {
+    return BlocBuilder<AuthenticationBloc, AuthenticationState>(
+      builder: (BuildContext context, AuthenticationState state) {
+        if (state is Authenticated){
+          return FloatingActionButton(
+            child: const Icon(Icons.edit),
+            onPressed: () {
+              Navigator.of(context).pushNamed('/new-review');
+            },
+          );
+        }
+        return Container();
       },
     );
   }
