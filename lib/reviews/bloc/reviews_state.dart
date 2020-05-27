@@ -45,6 +45,12 @@ class LoadedReviews extends ReviewsState {
     return reviews.first;
   }
 
+    Review getReviewById(String reviewId) {
+      return reviews.firstWhere((Review element) {
+        return element.id == reviewId;
+      });
+    }
+
   @override
   List<Object> get props => [];
 }
