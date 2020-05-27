@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:vegan_reviews/authentication/authentication.dart';
 import 'package:vegan_reviews/reviews/reviews.dart';
+import 'package:vegan_reviews/shared/shared.dart';
 
 class FullReview extends StatefulWidget {
   
@@ -18,6 +19,7 @@ class _FullReviewState extends State<FullReview> {
   
   ReviewsBloc reviewsBloc;
   Review review;
+  bool editMode = false;
 
   @override
   void initState() {
@@ -33,62 +35,114 @@ class _FullReviewState extends State<FullReview> {
   Widget build(BuildContext context) {
     return BlocBuilder<ReviewsBloc, ReviewsState>(
       builder: (BuildContext context, ReviewsState state) {
-        return Scaffold(
-          appBar: AppBar(
-            centerTitle: true,
-            title: Text(review.name, style: const TextStyle(color: Colors.white)),
-          ),
-          body: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(),
-                Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: ReviewOverviewCard(
-                    onTap: null,
-                    review: review,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(10),
-                  child:Material(
-                    child: SafeArea(
-                      child: Text(review.description,
-                        overflow: TextOverflow.clip,
-                        textAlign: TextAlign.justify,
-                        style: const TextStyle(fontSize: 20),
-                      ),
-                    ),
-                  ),
-                ),
-                _getSupplier(),
-                _getType(),
-                const Divider(
-                  height: 16,
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: StarRating(
-                    canBeEditted: false,
-                    onRatingChanged: null,
-                    stars: 10,
-                    rating: review.stars,
-                    size: 30.0,
-                  ),
-                ),
-                const Divider(
-                  height: 16,
-                ),
-                _getLimitedTime(),
-                _getCreatedTime()
-              ],
+        
+        if (state is LoadingReviews) {
+          return const Scaffold(
+            body: Center(
+              child: CircularProgressIndicator(),
             ),
-          ),
-          floatingActionButton: _getEditReviewButton(),
-          floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-        );
+          );
+        }
+        
+        if (editMode) {
+          return Scaffold(
+            appBar: AppBar(
+              leading: IconButton(
+                icon: const Icon(Icons.arrow_back),
+                onPressed: () {
+                  setState(() {
+                    editMode = false;
+                  });
+                },
+              ),
+              title: Text("Editting ${review.name}"),
+              centerTitle: true,
+            ),
+            body: SafeArea(
+              child: SingleChildScrollView(
+                child: ReviewEditor(
+                  review: review,
+                  reviewFinished: (Review review) {
+                    reviewsBloc.add(EditReviewEvent(review));
+                    setState(() {
+                      editMode = false;
+                      this.review = review;
+                    });
+                  },
+                ),
+              ),
+            )
+          );
+        }
+        return _getFullReviewPage();
       },
+    );
+  }
+
+  Widget _getFullReviewPage() {
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text(review.name, style: const TextStyle(color: Colors.white)),
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(10),
+              child: ReviewOverviewCard(
+                onTap: null,
+                review: review,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(10),
+              child:Material(
+                child: SafeArea(
+                  child: Text(review.description,
+                    overflow: TextOverflow.clip,
+                    textAlign: TextAlign.justify,
+                    style: const TextStyle(fontSize: 20),
+                  ),
+                ),
+              ),
+            ),
+            Container(
+              decoration: BoxDecoration(
+                gradient: const VeganGradient(),
+                borderRadius: BorderRadius.circular(5)
+              ),
+              child: Column(
+                children: [
+                  _getSupplier(),
+                  _getType(),
+                ],
+              ),
+            ),
+            const Divider(
+              height: 16,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(10),
+              child: StarRating(
+                canBeEditted: false,
+                onRatingChanged: null,
+                stars: 10,
+                rating: review.stars,
+                size: 30.0,
+              ),
+            ),
+            const Divider(
+              height: 16,
+            ),
+            _getLimitedTime(),
+            _getCreatedTime()
+          ],
+        ),
+      ),
+      floatingActionButton: _getEditReviewButton(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
   }
   
@@ -142,7 +196,9 @@ class _FullReviewState extends State<FullReview> {
           return FloatingActionButton(
             child: const Icon(Icons.edit),
             onPressed: () {
-              Navigator.of(context).pushNamed('/new-review');
+              setState(() {
+                editMode = true;
+              });
             },
           );
         }
