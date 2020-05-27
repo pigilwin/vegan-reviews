@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vegan_reviews/authentication/authentication.dart';
+import 'package:vegan_reviews/shared/shared.dart';
 
 class SignInTile extends StatefulWidget{
   @override
@@ -55,7 +56,12 @@ class _SignInTileState extends State<SignInTile>{
               child: Column(
                 children: [
                   Text("Hello ${state.user.email.value}", style: const TextStyle(fontSize: 20)),
-                  _signOutButton(context)
+                  Button(
+                    buttonText: 'Sign Out',
+                    onPressed: () {
+                      authenticationBloc.add(const SignOutEvent());
+                    },
+                  )
                 ],
               ),
             );
@@ -108,38 +114,19 @@ class _SignInTileState extends State<SignInTile>{
               obscureText: true,
             ),
           ),
-          _signInButton(context)
+          Button(
+            buttonText: 'Sign In',
+            onPressed: () {
+              if (_formKey.currentState.validate()){
+                authenticationBloc.add(RequestAuthenticationEvent(
+                  Email(usernameController.text),
+                  Password(passwordController.text)
+                ));
+              }
+            },
+          )
         ],
       ),
-    );
-  }
-
-  Widget _signInButton(BuildContext context) {
-    return RaisedButton.icon(
-      color: Theme.of(context).primaryColor,
-      icon: const Icon(Icons.arrow_forward, color: Colors.white),
-      animationDuration: const Duration(seconds: 5),
-      label: const Text("Sign In", style: TextStyle(color: Colors.white, fontSize: 20)),
-      onPressed: () {
-        if (_formKey.currentState.validate()){
-          authenticationBloc.add(RequestAuthenticationEvent(
-            Email(usernameController.text),
-            Password(passwordController.text)
-          ));
-        }
-      }
-    );
-  }
-
-  Widget _signOutButton(BuildContext context) {
-    return RaisedButton.icon(
-      color: Theme.of(context).primaryColor,
-      icon: const Icon(Icons.arrow_forward, color: Colors.white),
-      animationDuration: const Duration(seconds: 5),
-      label: const Text("Sign Out", style: TextStyle(color: Colors.white, fontSize: 20)),
-      onPressed: () {
-        authenticationBloc.add(const SignOutEvent());
-      },
     );
   }
 }

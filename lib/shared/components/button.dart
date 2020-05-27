@@ -14,7 +14,7 @@ class Button extends StatelessWidget {
   Widget build(BuildContext context) {
     return FlatButton(
       color: Theme.of(context).primaryColor,
-      child: Text(buttonText, style: const TextStyle(fontSize: 20)),
+      child: Text(buttonText, style: const TextStyle(fontSize: 20, color: Colors.white)),
       onPressed: onPressed,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20)

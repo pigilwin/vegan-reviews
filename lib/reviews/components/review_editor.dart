@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart';
 import 'package:vegan_reviews/reviews/reviews.dart';
+import 'package:vegan_reviews/shared/shared.dart';
 
 class ReviewEditor extends StatefulWidget{
 
@@ -212,13 +213,11 @@ class _ReviewEditorState extends State<ReviewEditor> {
   }
 
   Widget _getPhotoButtons(BuildContext context) {
-    final Color color = Theme.of(context).primaryColor;
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        FlatButton(
-          color: color,
-          child: const Text("Take a image", style: TextStyle(fontSize: 20)),
+        Button(
+          buttonText: 'Take a image',
           onPressed: () async {
             final io.File cameraImage = _renameImage(await ImagePicker.pickImage(source: ImageSource.camera));
             setState(() {
@@ -226,9 +225,8 @@ class _ReviewEditorState extends State<ReviewEditor> {
             });
           },
         ),
-        FlatButton(
-          color: color,
-          child: const Text("Choose a image", style: TextStyle(fontSize: 20)),
+        Button(
+          buttonText: "Choose a image",
           onPressed: () async {
             final io.File galleryImage = _renameImage(await ImagePicker.pickImage(source: ImageSource.gallery));
             setState(() {
@@ -243,9 +241,8 @@ class _ReviewEditorState extends State<ReviewEditor> {
   Widget _getSaveButton(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(20),
-      child: FlatButton(
-        color: Theme.of(context).primaryColor,
-        child: const Text("Save", style: TextStyle(fontSize: 20)),
+      child: Button(
+        buttonText: 'Save',
         onPressed: () {
           if (_formKey.currentState.validate()) {
             final Review review = Review(
