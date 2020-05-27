@@ -10,7 +10,7 @@ class Bottom extends StatelessWidget {
         height: 100,
         width: double.infinity,
         decoration: BoxDecoration(
-          gradient: VeganGradient.gradient
+          gradient: VeganGradient.gradient(1.0)
         ),
       ),
     );

@@ -91,7 +91,7 @@ class _FullReviewState extends State<FullReview> {
       ),
       body: Container(
         decoration: BoxDecoration(
-          gradient: VeganGradient.gradient
+          gradient: VeganGradient.gradient(0.2)
         ),
         child: SingleChildScrollView(
           child: Column(

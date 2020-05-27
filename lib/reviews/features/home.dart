@@ -40,7 +40,6 @@ class _HomeState extends State<Home> {
                       },
                     ),
                     SignInTile(),
-                    Bottom()
                   ],
                 ),
               );
