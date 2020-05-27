@@ -104,35 +104,38 @@ class _FullReviewState extends State<FullReview> {
                   review: review,
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(10),
-                child:Material(
-                  child: SafeArea(
-                    child: Text(review.description,
-                      overflow: TextOverflow.clip,
-                      textAlign: TextAlign.justify,
-                      style: const TextStyle(fontSize: 20),
+              Card(
+                margin: const EdgeInsets.all(10),
+                child: Column(
+                  children: [
+                    SafeArea(
+                      child: Text(review.description,
+                        overflow: TextOverflow.clip,
+                        textAlign: TextAlign.justify,
+                        style: const TextStyle(fontSize: 20),
+                      ),
+                    ),
+                    _getSupplier(),
+                    _getType()
+                  ],
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.all(10),
+                width: double.infinity,
+                child: Card(
+                  margin: EdgeInsets.zero,
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: StarRating(
+                      canBeEditted: false,
+                      onRatingChanged: null,
+                      stars: 10,
+                      rating: review.stars,
+                      size: 30.0,
                     ),
                   ),
                 ),
-              ),
-              _getSupplier(),
-              _getType(),
-              const Divider(
-                height: 16,
-              ),
-              Padding(
-                padding: const EdgeInsets.all(10),
-                child: StarRating(
-                  canBeEditted: false,
-                  onRatingChanged: null,
-                  stars: 10,
-                  rating: review.stars,
-                  size: 30.0,
-                ),
-              ),
-              const Divider(
-                height: 16,
               ),
               _getLimitedTime(),
               _getCreatedTime()
@@ -147,14 +150,17 @@ class _FullReviewState extends State<FullReview> {
   
   Widget _getLimitedTime() {
     if (review.limited) {
-      return const Padding(
-        padding: EdgeInsets.all(10),
-        child: SafeArea(
-          child: Text("This was a limited time item so may not be avalible anylonger", 
-            style: TextStyle(fontSize: 20),
-            overflow: TextOverflow.clip,
-          ),
-        )
+      return const Card(
+        margin: EdgeInsets.all(10),
+        child: Padding(
+          padding: EdgeInsets.all(5),
+          child: SafeArea(
+            child: Text("This was a limited time item so may not be avalible anylonger", 
+              style: TextStyle(fontSize: 20),
+              overflow: TextOverflow.clip,
+            ),
+          )
+        ),
       );
     }
     return const SizedBox.shrink();
@@ -163,7 +169,7 @@ class _FullReviewState extends State<FullReview> {
   Widget _getType() {
     return Padding(
       padding: const EdgeInsets.all(10),
-      child: Text("This type of food is ${review.type}", style: const TextStyle(fontSize: 20)),
+      child: Text("This food is ${review.type}", style: const TextStyle(fontSize: 20)),
     );
   }
 
@@ -182,9 +188,12 @@ class _FullReviewState extends State<FullReview> {
  
   Widget _getCreatedTime() {
     final DateFormat dateFormat = DateFormat.yMMMMEEEEd();
-    return Padding(
-      padding: const EdgeInsets.all(20),
-      child: Text("This was reviewed on ${dateFormat.format(review.created)}", style: const TextStyle(fontSize: 18)),
+    return Card(
+      margin: const EdgeInsets.all(10),
+      child: Padding(
+        padding: const EdgeInsets.all(5),
+        child: Text("This was reviewed on ${dateFormat.format(review.created)}", style: const TextStyle(fontSize: 18)),
+      ),
     );
   }
 
