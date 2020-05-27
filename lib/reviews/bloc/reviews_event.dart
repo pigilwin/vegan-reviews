@@ -21,3 +21,13 @@ class AddNewReviewEvent extends ReviewsEvent {
   @override
   List<Object> get props => [review];
 }
+
+class EditReviewEvent extends ReviewsEvent {
+  
+  const EditReviewEvent(this.review);
+
+  final Review review;
+  
+  @override
+  List<Object> get props => [review];
+}
