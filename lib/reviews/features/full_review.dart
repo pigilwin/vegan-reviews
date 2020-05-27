@@ -98,21 +98,26 @@ class _FullReviewState extends State<FullReview> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Padding(
-                padding: const EdgeInsets.all(10),
+                padding: const EdgeInsets.all(5),
                 child: ReviewOverviewCard(
                   onTap: null,
                   review: review,
                 ),
               ),
-              Card(
-                margin: const EdgeInsets.all(10),
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.white
+                ),
                 child: Column(
                   children: [
-                    SafeArea(
-                      child: Text(review.description,
-                        overflow: TextOverflow.clip,
-                        textAlign: TextAlign.justify,
-                        style: const TextStyle(fontSize: 20),
+                    Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: SafeArea(
+                        child: Text(review.description,
+                          overflow: TextOverflow.clip,
+                          textAlign: TextAlign.justify,
+                          style: const TextStyle(fontSize: 20),
+                        ),
                       ),
                     ),
                     const Divider(height: 20),
@@ -126,7 +131,8 @@ class _FullReviewState extends State<FullReview> {
                     _getSupplier(),
                     _getPrice(),
                     _getType(),
-                    _getLimitedTime()
+                    _getLimitedTime(),
+                    Bottom()
                   ],
                 ),
               ),

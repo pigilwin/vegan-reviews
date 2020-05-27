@@ -103,6 +103,8 @@ class _ReviewEditorState extends State<ReviewEditor> {
           return null;
         },
         controller: descriptionController,
+        keyboardType: TextInputType.multiline,
+        maxLines: null,
       ),
     );
   }

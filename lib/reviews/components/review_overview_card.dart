@@ -39,7 +39,10 @@ class ReviewOverviewCard extends StatelessWidget {
                   topLeft: Radius.circular(5),
                   topRight: Radius.circular(5)
                 ),
-                child: Image.file(review.image, fit: BoxFit.contain),
+                child: Image.file(
+                  review.image,
+                  fit: BoxFit.contain
+                ),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
