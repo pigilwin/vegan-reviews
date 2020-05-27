@@ -41,7 +41,7 @@ class ReviewOverviewCard extends StatelessWidget {
                 topLeft: Radius.circular(20),
                 topRight: Radius.circular(20)
               ),
-              child: Image.file(review.image),
+              child: Image.file(review.image, width: 300, height: 300, cacheHeight: 300, cacheWidth: 300),
             ),
             Padding(
               padding: const EdgeInsets.all(16.0),
