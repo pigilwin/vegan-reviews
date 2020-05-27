@@ -45,7 +45,6 @@ class _FullReviewState extends State<FullReview> {
                 Padding(
                   padding: const EdgeInsets.all(10),
                   child: ReviewOverviewCard(
-                    latestReview: false,
                     onTap: null,
                     review: review,
                   ),
@@ -55,14 +54,31 @@ class _FullReviewState extends State<FullReview> {
                   child:Material(
                     child: SafeArea(
                       child: Text(review.description,
-                        overflow: TextOverflow.ellipsis,
+                        overflow: TextOverflow.clip,
                         textDirection: TextDirection.ltr,
                         textAlign: TextAlign.justify,
                         style: const TextStyle(fontSize: 20),
                       ),
                     ),
                   ),
-                )
+                ),
+                const Divider(
+                  height: 16,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: StarRating(
+                    canBeEditted: false,
+                    onRatingChanged: null,
+                    stars: 10,
+                    rating: review.stars,
+                    size: 30.0,
+                  ),
+                ),
+                const Divider(
+                  height: 16,
+                ),
+                _getLimitedTime()
               ],
             ),
           ),
@@ -71,6 +87,21 @@ class _FullReviewState extends State<FullReview> {
         );
       },
     );
+  }
+  
+  Widget _getLimitedTime() {
+    if (review.limited) {
+      return const Padding(
+        padding: EdgeInsets.all(10),
+        child: SafeArea(
+          child: Text("This was a limited time item so may not be avalible anylonger", 
+            style: TextStyle(fontSize: 20),
+            overflow: TextOverflow.clip,
+          ),
+        )
+      );
+    }
+    return const SizedBox.shrink();
   }
 
   Widget _getEditReviewButton() {

@@ -93,8 +93,7 @@ class _HomeState extends State<Home> {
               review: review,
               onTap: (Review review) {
                 Navigator.of(context).pushNamed('/review', arguments: review.id);
-              },
-              latestReview: true,
+              }
             ),
           ),
           Button(

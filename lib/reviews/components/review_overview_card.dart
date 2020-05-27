@@ -5,61 +5,50 @@ class ReviewOverviewCard extends StatelessWidget {
 
   const ReviewOverviewCard({
     this.review,
-    this.onTap,
-    this.latestReview
+    this.onTap
   });
 
   final Review review;
   final void Function(Review review) onTap;
-  final bool latestReview;
 
   @override
   Widget build(BuildContext context) {
     
     if (review == null) {
       return const SizedBox.shrink();
-    }
-
-    String reviewText = review.name;
-    if (latestReview) {
-      reviewText = "Latest Review: ${review.name}";
-    }
-    
+    }    
     return GestureDetector(
       onTap: () {
         onTap(review);
       },
-      child: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20)
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            ClipRRect(
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(20),
-                topRight: Radius.circular(20)
-              ),
-              child: Image.file(review.image, width: 300, height: 300, cacheHeight: 300, cacheWidth: 300),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          ClipRRect(
+            borderRadius: const BorderRadius.all(Radius.circular(20)),
+            child: Image.file(review.image, width: 300, height: 300, cacheHeight: 300, cacheWidth: 300, fit: BoxFit.fill),
+          ),
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 20),
+            child: Material(
+              elevation: 1,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 8.0),
+                    padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      reviewText,
-                      style: const TextStyle(fontSize: 20),
+                      review.name,
+                      style: const TextStyle(fontSize: 30),
                     ),
                   ),
+                  WorthIt(worthIt: review.worthIt)
                 ],
               ),
-            )
-          ],
-        )
+            ),
+          )
+        ]
       ),
     );
   }
