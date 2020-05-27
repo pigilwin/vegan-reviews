@@ -8,6 +8,8 @@ class ReviewOverviewCard extends StatelessWidget {
     this.onTap
   });
 
+  static const double imageDimensions = 300;
+
   final Review review;
   final void Function(Review review) onTap;
 
@@ -21,35 +23,34 @@ class ReviewOverviewCard extends StatelessWidget {
       onTap: () {
         onTap(review);
       },
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          ClipRRect(
-            borderRadius: const BorderRadius.all(Radius.circular(20)),
-            child: Image.file(review.image, width: 300, height: 300, cacheHeight: 300, cacheWidth: 300, fit: BoxFit.fill),
+      child: Card(
+        child: Container(
+          decoration: const BoxDecoration(
+            borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(10),
+              bottomRight: Radius.circular(10)
+            )
           ),
-          Container(
-            margin: const EdgeInsets.symmetric(horizontal: 30),
-            child: Material(
-              elevation: 1,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Text(
-                      review.name,
-                      style: const TextStyle(fontSize: 30),
-                    ),
-                  ),
+          child: Column(
+            children: [
+              ClipRRect(
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(10),
+                  topRight: Radius.circular(10)
+                ),
+                child: Image.file(review.image, fit: BoxFit.contain),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Text(review.name, style: const TextStyle(fontSize: 20)),
                   WorthIt(worthIt: review.worthIt)
                 ],
-              ),
-            ),
-          )
-        ]
-      ),
+              )
+            ],
+          ),
+        ),
+      )
     );
   }
 }
