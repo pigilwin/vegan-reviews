@@ -30,7 +30,7 @@ class Review {
       price: 0,
       supplier: '',
       limited: false,
-      type: 'savoury',
+      type: 'Savoury',
       created: DateTime.now()
     );
   }
