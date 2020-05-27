@@ -9,11 +9,13 @@ class ReviewEditor extends StatefulWidget{
 
   const ReviewEditor({
     @required this.review,
-    @required this.reviewFinished
+    @required this.reviewFinished,
+    this.reviewDeleted
   });
 
   final Review review;
   final void Function(Review review) reviewFinished;
+  final void Function(Review review) reviewDeleted;
 
   @override
   _ReviewEditorState createState() => _ReviewEditorState();
@@ -239,28 +241,45 @@ class _ReviewEditorState extends State<ReviewEditor> {
   }
 
   Widget _getSaveButton(BuildContext context) {
+    
+    Widget deleteButton = const SizedBox.shrink();
+    if (widget.reviewDeleted != null) {
+      deleteButton = Button(
+        buttonText: 'Delete',
+        onPressed: () {
+          widget.reviewDeleted(widget.review);
+        },
+      );
+    }
+    
     return Padding(
       padding: const EdgeInsets.all(20),
-      child: Button(
-        buttonText: 'Save',
-        onPressed: () {
-          if (_formKey.currentState.validate()) {
-            final Review review = Review(
-              name: nameController.text,
-              description: descriptionController.text,
-              price: double.tryParse(priceController.text),
-              stars: rating,
-              worthIt: worthIt,
-              limited: limitedTime,
-              supplier: supplierController.text,
-              image: image,
-              id: widget.review.id,
-              type: type,
-              created: DateTime.now()
-            );
-            widget.reviewFinished(review);
-          }
-        },
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Button(
+            buttonText: 'Save',
+            onPressed: () {
+              if (_formKey.currentState.validate()) {
+                final Review review = Review(
+                  name: nameController.text,
+                  description: descriptionController.text,
+                  price: double.tryParse(priceController.text),
+                  stars: rating,
+                  worthIt: worthIt,
+                  limited: limitedTime,
+                  supplier: supplierController.text,
+                  image: image,
+                  id: widget.review.id,
+                  type: type,
+                  created: DateTime.now()
+                );
+                widget.reviewFinished(review);
+              }
+            },
+          )
+          deleteButton
+        ],
       ),
     );
   }
