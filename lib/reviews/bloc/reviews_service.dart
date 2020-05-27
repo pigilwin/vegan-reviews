@@ -46,6 +46,13 @@ class ReviewsService {
     await _firestore.collection('reviews').document(review.id).setData(review.toMap());
   }
 
+  Future<void> edit(Review review) async {
+    await _firebaseStorage.ref().child(review.imageName).delete();
+    final StorageUploadTask task = _firebaseStorage.ref().child(review.imageName).putFile(review.image);
+    await task.onComplete;
+    await _firestore.collection('reviews').document(review.id).setData(review.toMap());
+  }
+
   bool _intToBool(int i) {
     if (i > 0) {
       return true;

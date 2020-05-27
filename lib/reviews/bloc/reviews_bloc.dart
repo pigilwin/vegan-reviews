@@ -32,6 +32,10 @@ class ReviewsBloc extends Bloc<ReviewsEvent, ReviewsState> {
     if (event is AddNewReviewEvent) {
       yield* _mapAddNewReviewEventToState(event);
     }
+
+    if (event is EditReviewEvent) {
+      yield* _mapEditReviewEventToState(event);
+    }
   }
 
   Stream<ReviewsState> _mapLoadReviewsEventToState() async* {
@@ -43,6 +47,13 @@ class ReviewsBloc extends Bloc<ReviewsEvent, ReviewsState> {
   Stream<ReviewsState> _mapAddNewReviewEventToState(AddNewReviewEvent event) async* {
     yield const LoadingReviews();
     await reviewsService.add(event.review);
+    final List<Review> reviews = await reviewsService.fetch();
+    yield LoadedReviews(reviews);
+  }
+
+  Stream<ReviewsState> _mapEditReviewEventToState(EditReviewEvent event) async* {
+    yield const LoadingReviews();
+    await reviewsService.edit(event.review);
     final List<Review> reviews = await reviewsService.fetch();
     yield LoadedReviews(reviews);
   }
