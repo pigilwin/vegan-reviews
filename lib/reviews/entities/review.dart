@@ -36,8 +36,8 @@ class Review {
   }
 
   static const List<String> types = [
-    'savoury',
-    'sweet'
+    'Savoury',
+    'Sweet'
   ];
 
   final String id;
