@@ -39,7 +39,7 @@ class _HomeState extends State<Home> {
                         });
                       },
                     ),
-                    SignInTile(),
+                    SignInTile()
                   ],
                 ),
               );
@@ -88,6 +88,7 @@ class _HomeState extends State<Home> {
     
     return SingleChildScrollView(
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Header(
             onlongPress: () {
@@ -106,7 +107,6 @@ class _HomeState extends State<Home> {
               }
             ),
           ),
-          Bottom()
         ],
       ),
     );
