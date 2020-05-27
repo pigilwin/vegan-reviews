@@ -130,9 +130,9 @@ class _FullReviewState extends State<FullReview> {
                     child: StarRating(
                       canBeEditted: false,
                       onRatingChanged: null,
-                      stars: 10,
+                      stars: 5,
                       rating: review.stars,
-                      size: 30.0,
+                      size: 60.0,
                     ),
                   ),
                 ),

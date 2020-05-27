@@ -153,7 +153,7 @@ class _ReviewEditorState extends State<ReviewEditor> {
             rating = newRating;
           });
         },
-        stars: 10,
+        stars: 5,
         rating: rating,
         size: 30.0,
       ),
