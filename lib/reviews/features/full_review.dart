@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:vegan_reviews/authentication/authentication.dart';
 import 'package:vegan_reviews/reviews/reviews.dart';
 
@@ -55,13 +56,13 @@ class _FullReviewState extends State<FullReview> {
                     child: SafeArea(
                       child: Text(review.description,
                         overflow: TextOverflow.clip,
-                        textDirection: TextDirection.ltr,
                         textAlign: TextAlign.justify,
                         style: const TextStyle(fontSize: 20),
                       ),
                     ),
                   ),
                 ),
+                _getSupplier(),
                 const Divider(
                   height: 16,
                 ),
@@ -78,7 +79,8 @@ class _FullReviewState extends State<FullReview> {
                 const Divider(
                   height: 16,
                 ),
-                _getLimitedTime()
+                _getLimitedTime(),
+                _getCreatedTime()
               ],
             ),
           ),
@@ -102,6 +104,27 @@ class _FullReviewState extends State<FullReview> {
       );
     }
     return const SizedBox.shrink();
+  }
+
+  Widget _getSupplier() {
+    return Padding(
+      padding: const EdgeInsets.all(10),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Text("Supplier: ${review.supplier}", style: const TextStyle(fontSize: 20)),
+          Text("Price: ${review.price}", style: const TextStyle(fontSize: 20)),
+        ],
+      )
+    );
+  }
+ 
+  Widget _getCreatedTime() {
+    final DateFormat dateFormat = DateFormat.yMMMMEEEEd();
+    return Padding(
+      padding: const EdgeInsets.all(20),
+      child: Text("This was reviewed on ${dateFormat.format(review.created)}", style: const TextStyle(fontSize: 18)),
+    );
   }
 
   Widget _getEditReviewButton() {
