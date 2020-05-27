@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vegan_reviews/authentication/authentication.dart';
 import 'package:vegan_reviews/reviews/reviews.dart';
+import 'package:vegan_reviews/shared/shared.dart';
 
 class Home extends StatefulWidget {
 
@@ -96,9 +97,8 @@ class _HomeState extends State<Home> {
               latestReview: true,
             ),
           ),
-          FlatButton(
-            color: Theme.of(context).primaryColor,
-            child: const Text("Search for review?", style: TextStyle(fontSize: 20)),
+          Button(
+            buttonText: 'Search for review',
             onPressed: () {
               Navigator.of(context).pushNamed('/search');
             },
