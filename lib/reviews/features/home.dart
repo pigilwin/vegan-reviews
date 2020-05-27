@@ -78,7 +78,7 @@ class _HomeState extends State<Home> {
       review = state.latestReview;
       if (state.reviews.isNotEmpty){
         searchButton = Button(
-          buttonText: 'Search for review',
+          buttonText: 'Search for reviews',
           onPressed: () {
             Navigator.of(context).pushNamed('/search');
           },
