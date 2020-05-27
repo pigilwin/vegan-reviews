@@ -86,12 +86,15 @@ class _HomeState extends State<Home> {
               });
             },
           ),
-          ReviewOverviewCard(
-            review: review,
-            onTap: (Review review) {
-              Navigator.of(context).pushNamed('/review', arguments: review.id);
-            },
-            latestReview: true,
+          Padding(
+            padding: const EdgeInsets.all(20),
+            child: ReviewOverviewCard(
+              review: review,
+              onTap: (Review review) {
+                Navigator.of(context).pushNamed('/review', arguments: review.id);
+              },
+              latestReview: true,
+            ),
           ),
           FlatButton(
             color: Theme.of(context).primaryColor,
