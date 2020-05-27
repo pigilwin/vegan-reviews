@@ -29,6 +29,44 @@ class _FullReviewState extends State<FullReview> {
 
   @override
   Widget build(BuildContext context) {
-    
+    return BlocBuilder<ReviewsBloc, ReviewsState>(
+      builder: (BuildContext context, ReviewsState state) {
+        return Scaffold(
+          appBar: AppBar(
+            centerTitle: true,
+            title: Text(review.name, style: const TextStyle(color: Colors.white)),
+          ),
+          body: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(),
+                Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: ReviewOverviewCard(
+                    latestReview: false,
+                    onTap: null,
+                    review: review,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(10),
+                  child:Material(
+                    child: SafeArea(
+                      child: Text(review.description,
+                        overflow: TextOverflow.ellipsis,
+                        textDirection: TextDirection.ltr,
+                        textAlign: TextAlign.justify,
+                        style: const TextStyle(fontSize: 20),
+                      ),
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
+        );
+      },
+    );
   }
 }
