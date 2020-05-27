@@ -277,7 +277,7 @@ class _ReviewEditorState extends State<ReviewEditor> {
                 widget.reviewFinished(review);
               }
             },
-          )
+          ),
           deleteButton
         ],
       ),

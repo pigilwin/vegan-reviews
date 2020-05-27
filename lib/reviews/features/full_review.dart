@@ -69,6 +69,10 @@ class _FullReviewState extends State<FullReview> {
                       this.review = review;
                     });
                   },
+                  reviewDeleted: (Review review) {
+                    reviewsBloc.add(DeleteReviewEvent(review));
+                    Navigator.of(context).pop();
+                  },
                 ),
               ),
             )
