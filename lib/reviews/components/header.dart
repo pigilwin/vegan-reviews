@@ -15,14 +15,7 @@ class Header extends StatelessWidget {
         height: 250,
         width: double.infinity,
         decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topRight,
-            end: Alignment.bottomLeft,
-            colors: [
-              Color(0xFF76BA1B),
-              Color(0xFF4C9A2A),
-            ],
-          )
+          gradient: VeganGradient()
         ),
         child: Center(
           child: Column(
