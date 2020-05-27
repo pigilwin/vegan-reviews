@@ -5,17 +5,24 @@ class ReviewOverviewCard extends StatelessWidget {
 
   const ReviewOverviewCard({
     this.review,
-    this.onTap
+    this.onTap,
+    this.latestReview
   });
 
   final Review review;
   final void Function(Review review) onTap;
+  final bool latestReview;
 
   @override
   Widget build(BuildContext context) {
     
     if (review == null) {
       return const SizedBox.shrink();
+    }
+
+    String reviewText = review.name;
+    if (latestReview) {
+      reviewText = "Latest Review: ${review.name}";
     }
     
     return GestureDetector(
@@ -44,7 +51,7 @@ class ReviewOverviewCard extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(bottom: 8.0),
                     child: Text(
-                      review.name,
+                      reviewText,
                       style: const TextStyle(fontSize: 20),
                     ),
                   ),
