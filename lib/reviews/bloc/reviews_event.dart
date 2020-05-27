@@ -31,3 +31,13 @@ class EditReviewEvent extends ReviewsEvent {
   @override
   List<Object> get props => [review];
 }
+
+class DeleteReviewEvent extends ReviewsEvent {
+  
+  const DeleteReviewEvent(this.review);
+
+  final Review review;
+  
+  @override
+  List<Object> get props => [review];
+}
