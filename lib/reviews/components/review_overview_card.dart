@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:vegan_reviews/reviews/reviews.dart';
 
 class ReviewOverviewCard extends StatelessWidget {
@@ -44,13 +45,22 @@ class ReviewOverviewCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Text(review.name, style: const TextStyle(fontSize: 20)),
-                  WorthIt(worthIt: review.worthIt)
+                  WorthIt(worthIt: review.worthIt),
                 ],
-              )
+              ),
+              _getCreatedTime()
             ],
           ),
         ),
       )
+    );
+  }
+
+  Widget _getCreatedTime() {
+    final DateFormat dateFormat = DateFormat.yMMMMEEEEd();
+    return Padding(
+      padding: const EdgeInsets.all(10),
+      child: Text("${dateFormat.format(review.created)}", style: const TextStyle(fontSize: 18)),
     );
   }
 }

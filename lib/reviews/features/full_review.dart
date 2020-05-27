@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
+
 import 'package:vegan_reviews/authentication/authentication.dart';
 import 'package:vegan_reviews/reviews/reviews.dart';
 import 'package:vegan_reviews/shared/shared.dart';
@@ -115,30 +115,21 @@ class _FullReviewState extends State<FullReview> {
                         style: const TextStyle(fontSize: 20),
                       ),
                     ),
+                    const Divider(height: 20),
+                    StarRating(
+                      canBeEditted: false,
+                      onRatingChanged: null,
+                      stars: 10,
+                      rating: review.stars,
+                      size: 30.0,
+                    ),
                     _getSupplier(),
-                    _getType()
+                    _getPrice(),
+                    _getType(),
+                    _getLimitedTime()
                   ],
                 ),
               ),
-              Container(
-                margin: const EdgeInsets.all(10),
-                width: double.infinity,
-                child: Card(
-                  margin: EdgeInsets.zero,
-                  child: Align(
-                    alignment: Alignment.center,
-                    child: StarRating(
-                      canBeEditted: false,
-                      onRatingChanged: null,
-                      stars: 5,
-                      rating: review.stars,
-                      size: 60.0,
-                    ),
-                  ),
-                ),
-              ),
-              _getLimitedTime(),
-              _getCreatedTime()
             ],
           ),
         ),
@@ -150,17 +141,14 @@ class _FullReviewState extends State<FullReview> {
   
   Widget _getLimitedTime() {
     if (review.limited) {
-      return const Card(
-        margin: EdgeInsets.all(10),
-        child: Padding(
-          padding: EdgeInsets.all(5),
-          child: SafeArea(
-            child: Text("This was a limited time item so may not be avalible anylonger", 
-              style: TextStyle(fontSize: 20),
-              overflow: TextOverflow.clip,
-            ),
+      return const Padding(
+        padding: EdgeInsets.all(10),
+        child: SafeArea(
+          child: Text("This was a limited time item so may not be avalible anylonger", 
+            style: TextStyle(fontSize: 20),
+            overflow: TextOverflow.clip,
           )
-        ),
+        )
       );
     }
     return const SizedBox.shrink();
@@ -176,24 +164,14 @@ class _FullReviewState extends State<FullReview> {
   Widget _getSupplier() {
     return Padding(
       padding: const EdgeInsets.all(10),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Text("Supplier: ${review.supplier}", style: const TextStyle(fontSize: 20)),
-          Text("Price: ${review.price}", style: const TextStyle(fontSize: 20)),
-        ],
-      )
+      child: Text("Supplier: ${review.supplier}", style: const TextStyle(fontSize: 20)),
     );
   }
- 
-  Widget _getCreatedTime() {
-    final DateFormat dateFormat = DateFormat.yMMMMEEEEd();
-    return Card(
-      margin: const EdgeInsets.all(10),
-      child: Padding(
-        padding: const EdgeInsets.all(5),
-        child: Text("This was reviewed on ${dateFormat.format(review.created)}", style: const TextStyle(fontSize: 18)),
-      ),
+
+  Widget _getPrice() {
+    return Padding(
+      padding: const EdgeInsets.all(10),
+      child: Text("Price: £${review.price}", style: const TextStyle(fontSize: 20)),
     );
   }
 
