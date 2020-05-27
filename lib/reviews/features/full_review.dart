@@ -63,6 +63,7 @@ class _FullReviewState extends State<FullReview> {
                   ),
                 ),
                 _getSupplier(),
+                _getType(),
                 const Divider(
                   height: 16,
                 ),
@@ -104,6 +105,13 @@ class _FullReviewState extends State<FullReview> {
       );
     }
     return const SizedBox.shrink();
+  }
+
+  Widget _getType() {
+    return Padding(
+      padding: const EdgeInsets.all(10),
+      child: Text("This type of food is ${review.type}", style: const TextStyle(fontSize: 20)),
+    );
   }
 
   Widget _getSupplier() {
