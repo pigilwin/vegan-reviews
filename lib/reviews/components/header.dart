@@ -14,8 +14,8 @@ class Header extends StatelessWidget {
       child: Container(
         height: 250,
         width: double.infinity,
-        decoration: const BoxDecoration(
-          gradient: VeganGradient()
+        decoration: BoxDecoration(
+          gradient: VeganGradient.gradient
         ),
         child: Center(
           child: Column(

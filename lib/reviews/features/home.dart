@@ -39,7 +39,8 @@ class _HomeState extends State<Home> {
                         });
                       },
                     ),
-                    SignInTile()
+                    SignInTile(),
+                    Bottom()
                   ],
                 ),
               );

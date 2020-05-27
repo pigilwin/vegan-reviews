@@ -9,8 +9,8 @@ class Bottom extends StatelessWidget {
       child: Container(
         height: 100,
         width: double.infinity,
-        decoration: const BoxDecoration(
-          gradient: VeganGradient()
+        decoration: BoxDecoration(
+          gradient: VeganGradient.gradient
         ),
       ),
     );

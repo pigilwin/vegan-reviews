@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 
-class VeganGradient extends LinearGradient{
+class VeganGradient {
   
-  const VeganGradient(): super(
-    colors: const [
-      Color(0xFF76BA1B),
-      Color(0xFF4C9A2A),
-    ],
-    begin: Alignment.topLeft,
-    end: Alignment.bottomRight
-  );
+  static LinearGradient get gradient {
+    return LinearGradient(
+      colors: [
+        const Color(0xFF76BA1B).withOpacity(0.2),
+        const Color(0xFF4C9A2A).withOpacity(0.2)
+      ],
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight
+    );
+  }
 }

@@ -89,60 +89,55 @@ class _FullReviewState extends State<FullReview> {
         centerTitle: true,
         title: Text(review.name, style: const TextStyle(color: Colors.white)),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(10),
-              child: ReviewOverviewCard(
-                onTap: null,
-                review: review,
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: VeganGradient.gradient
+        ),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(10),
+                child: ReviewOverviewCard(
+                  onTap: null,
+                  review: review,
+                ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(10),
-              child:Material(
-                child: SafeArea(
-                  child: Text(review.description,
-                    overflow: TextOverflow.clip,
-                    textAlign: TextAlign.justify,
-                    style: const TextStyle(fontSize: 20),
+              Padding(
+                padding: const EdgeInsets.all(10),
+                child:Material(
+                  child: SafeArea(
+                    child: Text(review.description,
+                      overflow: TextOverflow.clip,
+                      textAlign: TextAlign.justify,
+                      style: const TextStyle(fontSize: 20),
+                    ),
                   ),
                 ),
               ),
-            ),
-            Container(
-              decoration: BoxDecoration(
-                gradient: const VeganGradient(),
-                borderRadius: BorderRadius.circular(5)
+              _getSupplier(),
+              _getType(),
+              const Divider(
+                height: 16,
               ),
-              child: Column(
-                children: [
-                  _getSupplier(),
-                  _getType(),
-                ],
+              Padding(
+                padding: const EdgeInsets.all(10),
+                child: StarRating(
+                  canBeEditted: false,
+                  onRatingChanged: null,
+                  stars: 10,
+                  rating: review.stars,
+                  size: 30.0,
+                ),
               ),
-            ),
-            const Divider(
-              height: 16,
-            ),
-            Padding(
-              padding: const EdgeInsets.all(10),
-              child: StarRating(
-                canBeEditted: false,
-                onRatingChanged: null,
-                stars: 10,
-                rating: review.stars,
-                size: 30.0,
+              const Divider(
+                height: 16,
               ),
-            ),
-            const Divider(
-              height: 16,
-            ),
-            _getLimitedTime(),
-            _getCreatedTime()
-          ],
+              _getLimitedTime(),
+              _getCreatedTime()
+            ],
+          ),
         ),
       ),
       floatingActionButton: _getEditReviewButton(),
