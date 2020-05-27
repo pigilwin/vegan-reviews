@@ -53,6 +53,11 @@ class ReviewsService {
     await _firestore.collection('reviews').document(review.id).setData(review.toMap());
   }
 
+  Future<void> delete(Review review) async {
+    await _firebaseStorage.ref().child(review.imageName).delete();
+    await _firestore.collection('reviews').document(review.id).delete();
+  }
+
   bool _intToBool(int i) {
     if (i > 0) {
       return true;
