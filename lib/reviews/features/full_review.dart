@@ -145,7 +145,7 @@ class _FullReviewState extends State<FullReview> {
         padding: EdgeInsets.all(10),
         child: SafeArea(
           child: Text("This was a limited time item so may not be avalible anylonger", 
-            style: TextStyle(fontSize: 20),
+            style: TextStyle(fontSize: 20, color: Colors.red),
             overflow: TextOverflow.clip,
           )
         )
