@@ -105,7 +105,7 @@ class _FullReviewState extends State<FullReview> {
                 ),
               ),
               Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Colors.white
                 ),
                 child: Column(
