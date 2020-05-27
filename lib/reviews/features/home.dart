@@ -96,6 +96,7 @@ class _HomeState extends State<Home> {
               });
             },
           ),
+          searchButton,
           Padding(
             padding: const EdgeInsets.all(20),
             child: ReviewOverviewCard(
@@ -105,7 +106,7 @@ class _HomeState extends State<Home> {
               }
             ),
           ),
-          searchButton
+          Bottom()
         ],
       ),
     );
