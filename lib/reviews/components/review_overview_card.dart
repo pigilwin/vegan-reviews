@@ -29,7 +29,7 @@ class ReviewOverviewCard extends StatelessWidget {
             child: Image.file(review.image, width: 300, height: 300, cacheHeight: 300, cacheWidth: 300, fit: BoxFit.fill),
           ),
           Container(
-            margin: const EdgeInsets.symmetric(horizontal: 20),
+            margin: const EdgeInsets.symmetric(horizontal: 30),
             child: Material(
               elevation: 1,
               child: Row(
@@ -37,7 +37,7 @@ class ReviewOverviewCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(10.0),
                     child: Text(
                       review.name,
                       style: const TextStyle(fontSize: 30),
