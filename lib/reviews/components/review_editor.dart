@@ -30,7 +30,6 @@ class _ReviewEditorState extends State<ReviewEditor> {
   TextEditingController priceController;
   TextEditingController supplierController;
   int rating;
-  bool worthIt;
   bool limitedTime;
   io.File image;
   String imageUrl;
@@ -44,7 +43,6 @@ class _ReviewEditorState extends State<ReviewEditor> {
     priceController = TextEditingController(text: widget.review.price.toString());
     supplierController = TextEditingController(text: widget.review.supplier);
     rating = widget.review.stars ?? 0;
-    worthIt = widget.review.worthIt;
     limitedTime = widget.review.limited;
     image = widget.review.image;
     imageUrl = widget.review.imageUrl;
@@ -62,7 +60,6 @@ class _ReviewEditorState extends State<ReviewEditor> {
            _getPrice(),
            _getType(),
            _getStars(),
-           _getWorthIt(),
            _getLimited(),
            _getSupplier(),
            _getPhotoViewer(),
@@ -161,19 +158,6 @@ class _ReviewEditorState extends State<ReviewEditor> {
         rating: rating,
         size: 30.0,
       ),
-    );
-  }
-
-  Widget _getWorthIt() {
-    return SwitchListTile(
-      value: worthIt,
-      onChanged: (bool newWorthIt){
-        setState(() {
-          worthIt = newWorthIt;
-        });
-      },
-      title: const Text("Worth It?"),
-      subtitle: const Text("Was the food worth it?"),
     );
   }
 
@@ -279,7 +263,6 @@ class _ReviewEditorState extends State<ReviewEditor> {
                   description: descriptionController.text,
                   price: double.tryParse(priceController.text),
                   stars: rating,
-                  worthIt: worthIt,
                   limited: limitedTime,
                   supplier: supplierController.text,
                   image: image,

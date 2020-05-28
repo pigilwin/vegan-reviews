@@ -1,6 +1,5 @@
 import 'dart:io' as io;
 import 'package:flutter/foundation.dart';
-import 'package:path/path.dart';
 import 'package:uuid/uuid.dart';
 
 class Review {
@@ -11,7 +10,6 @@ class Review {
     @required this.description,
     @required this.created,
     @required this.stars,
-    @required this.worthIt,
     @required this.price,
     @required this.supplier,
     @required this.limited,
@@ -28,7 +26,6 @@ class Review {
       image: null,
       imageUrl: '',
       stars: 0,
-      worthIt: false,
       price: 0,
       supplier: '',
       limited: false,
@@ -46,7 +43,6 @@ class Review {
   final String name;
   final String description;
   final int stars;
-  final bool worthIt;
   final double price;
   final String supplier;
   final bool limited;
@@ -62,7 +58,6 @@ class Review {
       'description': description,
       'stars': stars,
       'price': price,
-      'worthIt': _boolToInt(worthIt),
       'limited': _boolToInt(limited),
       'supplier': supplier,
       'type': type,
@@ -71,7 +66,7 @@ class Review {
     };
   }
 
-  String get imageName => basename(image.path);
+  String get imageName => "${id}.jpg";
 
   int _boolToInt(bool value) {
     if (value) {
