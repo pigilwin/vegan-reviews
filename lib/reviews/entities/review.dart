@@ -61,7 +61,6 @@ class Review {
       'limited': _boolToInt(limited),
       'supplier': supplier,
       'type': type,
-      'image-name': imageName,
       'created': created.toIso8601String()
     };
   }

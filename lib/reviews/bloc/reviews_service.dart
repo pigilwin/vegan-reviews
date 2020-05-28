@@ -10,7 +10,7 @@ class ReviewsService {
     for (DocumentSnapshot documentSnapshot in snapshot.documents) {
       
       final Map<String, dynamic> data = documentSnapshot.data;
-      final String imageName = data['image-name'];
+      final String imageName = "${documentSnapshot.documentID}.jpg";
       String imageUrl;
 
       if (imageName.isNotEmpty) {
