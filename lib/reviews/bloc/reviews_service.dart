@@ -11,11 +11,13 @@ class ReviewsService {
       
       final Map<String, dynamic> data = documentSnapshot.data;
       final String imageName = "${documentSnapshot.documentID}.jpg";
-      String imageUrl;
+      String imageUrl = '';
 
-      if (imageName.isNotEmpty) {
+      try{
         final StorageReference reference = _firebaseStorage.ref().child(imageName);
         imageUrl = await reference.getDownloadURL();
+      } on PlatformException{
+        imageUrl = '';//An error is thrown if the image is not found
       }
       
       reviews.add(Review(
@@ -44,9 +46,11 @@ class ReviewsService {
   }
 
   Future<void> edit(Review review) async {
-    await _firebaseStorage.ref().child(review.imageName).delete();
-    final StorageUploadTask task = _firebaseStorage.ref().child(review.imageName).putFile(review.image);
-    await task.onComplete;
+    if (review.image != null){//If we have selected a new image then we will delete the old one and upload
+      await _firebaseStorage.ref().child(review.imageName).delete();
+      final StorageUploadTask task = _firebaseStorage.ref().child(review.imageName).putFile(review.image);
+      await task.onComplete;
+    }
     await _firestore.collection('reviews').document(review.id).setData(review.toMap());
   }
 
