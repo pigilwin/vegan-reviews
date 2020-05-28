@@ -1,7 +1,6 @@
 import 'dart:io' as io;
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:path/path.dart';
 import 'package:vegan_reviews/reviews/reviews.dart';
 import 'package:vegan_reviews/shared/shared.dart';
 
