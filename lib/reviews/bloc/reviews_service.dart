@@ -47,7 +47,9 @@ class ReviewsService {
 
   Future<void> edit(Review review) async {
     if (review.image != null){//If we have selected a new image then we will delete the old one and upload
-      await _firebaseStorage.ref().child(review.imageName).delete();
+      try{
+        await _firebaseStorage.ref().child(review.imageName).delete();//If the image does exist then delete it
+      } on PlatformException {}
       final StorageUploadTask task = _firebaseStorage.ref().child(review.imageName).putFile(review.image);
       await task.onComplete;
     }
