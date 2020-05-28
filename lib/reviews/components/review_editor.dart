@@ -209,21 +209,22 @@ class _ReviewEditorState extends State<ReviewEditor> {
   }
 
   Widget _getPhotoViewer() {
+    
+    if (image != null){
+      return Padding(
+        padding: const EdgeInsets.all(20),
+        child: Image.file(image),
+      );
+    }
 
     if (imageUrl.isNotEmpty) {
       return Padding(
         padding: const EdgeInsets.all(20),
         child: Image.network(imageUrl),
       );
-    } 
-
-    if (image == null) {
-      return const SizedBox.shrink();
     }
-    return Padding(
-      padding: const EdgeInsets.all(20),
-      child: Image.file(image),
-    );
+
+    return const SizedBox.shrink();
   }
 
   Widget _getPhotoButtons(BuildContext context) {
@@ -233,7 +234,7 @@ class _ReviewEditorState extends State<ReviewEditor> {
         Button(
           buttonText: 'Take a image',
           onPressed: () async {
-            final io.File cameraImage = _renameImage(await ImagePicker.pickImage(source: ImageSource.camera));
+            final io.File cameraImage = await ImagePicker.pickImage(source: ImageSource.camera);
             setState(() {
               image = cameraImage;
             });
@@ -242,7 +243,7 @@ class _ReviewEditorState extends State<ReviewEditor> {
         Button(
           buttonText: "Choose a image",
           onPressed: () async {
-            final io.File galleryImage = _renameImage(await ImagePicker.pickImage(source: ImageSource.gallery));
+            final io.File galleryImage = await ImagePicker.pickImage(source: ImageSource.gallery);
             setState(() {
               image = galleryImage;
             });
@@ -294,11 +295,5 @@ class _ReviewEditorState extends State<ReviewEditor> {
         ],
       ),
     );
-  }
-
-  io.File _renameImage(io.File file) {
-    final String dir = dirname(file.path);
-    final String newPath = join(dir, "${widget.review.id}.jpg");
-    return file.renameSync(newPath);
   }
 }
