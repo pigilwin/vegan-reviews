@@ -33,6 +33,7 @@ class _ReviewEditorState extends State<ReviewEditor> {
   bool worthIt;
   bool limitedTime;
   io.File image;
+  String imageUrl;
   String type;
 
   @override
@@ -46,6 +47,7 @@ class _ReviewEditorState extends State<ReviewEditor> {
     worthIt = widget.review.worthIt;
     limitedTime = widget.review.limited;
     image = widget.review.image;
+    imageUrl = widget.review.imageUrl;
     type = widget.review.type;
   }
 
@@ -207,6 +209,14 @@ class _ReviewEditorState extends State<ReviewEditor> {
   }
 
   Widget _getPhotoViewer() {
+
+    if (imageUrl.isNotEmpty) {
+      return Padding(
+        padding: const EdgeInsets.all(20),
+        child: Image.network(imageUrl),
+      );
+    } 
+
     if (image == null) {
       return const SizedBox.shrink();
     }

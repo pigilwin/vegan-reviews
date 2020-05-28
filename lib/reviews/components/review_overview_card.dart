@@ -34,16 +34,7 @@ class ReviewOverviewCard extends StatelessWidget {
           ),
           child: Column(
             children: [
-              ClipRRect(
-                borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(5),
-                  topRight: Radius.circular(5)
-                ),
-                child: Image.file(
-                  review.image,
-                  fit: BoxFit.contain
-                ),
-              ),
+              _getImage(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -56,6 +47,19 @@ class ReviewOverviewCard extends StatelessWidget {
           ),
         ),
       )
+    );
+  }
+
+  Widget _getImage() {
+    if (review.imageUrl.isEmpty) {
+      return const SizedBox.shrink();
+    }
+    return ClipRRect(
+      borderRadius: const BorderRadius.only(
+        topLeft: Radius.circular(5),
+        topRight: Radius.circular(5)
+      ),
+      child: Image.network(review.imageUrl),
     );
   }
 

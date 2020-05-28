@@ -10,13 +10,14 @@ class Review {
     @required this.name,
     @required this.description,
     @required this.created,
-    @required this.image,
     @required this.stars,
     @required this.worthIt,
     @required this.price,
     @required this.supplier,
     @required this.limited,
-    @required this.type
+    @required this.type,
+    this.image,
+    this.imageUrl
   });
 
   factory Review.empty() {
@@ -25,6 +26,7 @@ class Review {
       name: '',
       description: '',
       image: null,
+      imageUrl: '',
       stars: 0,
       worthIt: false,
       price: 0,
@@ -43,7 +45,6 @@ class Review {
   final String id;
   final String name;
   final String description;
-  final io.File image;
   final int stars;
   final bool worthIt;
   final double price;
@@ -51,6 +52,9 @@ class Review {
   final bool limited;
   final String type;
   final DateTime created;
+
+  final io.File image;
+  final String imageUrl;
 
   Map<String, dynamic> toMap() {
     return {

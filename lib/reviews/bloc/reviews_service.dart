@@ -11,14 +11,11 @@ class ReviewsService {
       
       final Map<String, dynamic> data = documentSnapshot.data;
       final String imageName = data['image-name'];
-      
-      io.File image;
+      String imageUrl;
 
       if (imageName.isNotEmpty) {
-        final io.Directory directory = await getTemporaryDirectory();
         final StorageReference reference = _firebaseStorage.ref().child(imageName);
-        image = io.File(join(directory.path, imageName));
-        reference.writeToFile(image);
+        imageUrl = await reference.getDownloadURL();
       }
       
       reviews.add(Review(
@@ -27,7 +24,8 @@ class ReviewsService {
         description: data['description'],
         stars: data['stars'],
         type: data['type'],
-        image: image,
+        image: null,
+        imageUrl: imageUrl,
         supplier: data['supplier'],
         worthIt: _intToBool(data['worthIt']),
         limited: _intToBool(data['limited']),
