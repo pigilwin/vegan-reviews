@@ -42,6 +42,13 @@ class ReviewOverviewCard extends StatelessWidget {
                   WorthIt(worthIt: review.stars >= 5),
                 ],
               ),
+              StarRating(
+                canBeEditted: false,
+                onRatingChanged: null,
+                stars: 10,
+                rating: review.stars,
+                size: 30.0,
+              ),
               _getCreatedTime()
             ],
           ),

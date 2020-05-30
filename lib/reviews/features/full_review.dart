@@ -121,13 +121,6 @@ class _FullReviewState extends State<FullReview> {
                       ),
                     ),
                     const Divider(height: 20),
-                    StarRating(
-                      canBeEditted: false,
-                      onRatingChanged: null,
-                      stars: 10,
-                      rating: review.stars,
-                      size: 30.0,
-                    ),
                     _getSupplier(),
                     _getPrice(),
                     _getLimitedTime(),
