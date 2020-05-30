@@ -1,29 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:vegan_reviews/reviews/reviews.dart';
 
 class WorthIt extends StatelessWidget {
   
   const WorthIt({
-    @required this.worthIt
+    @required this.review
   });
 
-  final bool worthIt;
+  final Review review;
+
+  static const Map<String, List<int>> emojis = {
+    "🤢": [0, 1, 2],
+    "😞": [3, 4],
+    "😑": [5, 6],
+    "😊": [7, 8],
+    "😍": [9, 10]
+  };
 
   @override
   Widget build(BuildContext context) {
-    if (worthIt) {
-      return const Padding(
-        padding: EdgeInsets.all(10),
-        child: Tooltip(
-          message: 'Worth it',
-          child: Text("😍", style: TextStyle(fontSize: 20)),
-        ),
-      );
-    }
-    return const Padding(
-      padding: EdgeInsets.all(10),
+    
+    String emoji = "";
+    emojis.forEach((String face, List<int> value) { 
+      if (value.contains(review.stars)){
+        emoji = face;
+      }
+    });
+
+    return Padding(
+      padding: const EdgeInsets.all(10),
       child: Tooltip(
-        message: 'Not worth it',
-        child: Text("🤢", style: TextStyle(fontSize: 20)),
+        message: 'Worth it',
+        child: Text(emoji, style: const TextStyle(fontSize: 20)),
       ),
     );
   }

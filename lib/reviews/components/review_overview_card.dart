@@ -39,7 +39,7 @@ class ReviewOverviewCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Text(review.name, style: const TextStyle(fontSize: 20)),
-                  WorthIt(worthIt: review.stars >= 5),
+                  WorthIt(review: review),
                 ],
               ),
               StarRating(
