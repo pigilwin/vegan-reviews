@@ -7,7 +7,7 @@ class Bottom extends StatelessWidget {
     return ClipPath(
       clipper: BottomClipper(),
       child: Container(
-        height: 100,
+        height: 150,
         width: double.infinity,
         decoration: BoxDecoration(
           gradient: VeganGradient.gradient(1.0)
