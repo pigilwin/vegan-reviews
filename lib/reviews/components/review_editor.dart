@@ -264,11 +264,12 @@ class _ReviewEditorState extends State<ReviewEditor> {
                   stars: rating,
                   limited: limitedTime,
                   supplier: supplierController.text,
-                  image: image,
                   id: widget.review.id,
                   type: type,
-                  created: DateTime.now()
+                  created: DateTime.now(),
+                  imageUrl: ''
                 );
+                review.image = image;
                 widget.reviewFinished(review);
               }
             },
