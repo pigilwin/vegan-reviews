@@ -34,6 +34,7 @@ class Application extends StatelessWidget {
       '/': (BuildContext context) => Home(),
       '/new-review': (BuildContext context) => NewReview(),
       '/review': (BuildContext context) => FullReview(settings.arguments),
+      '/search': (BuildContext context) => Search()
     };
   }
 
