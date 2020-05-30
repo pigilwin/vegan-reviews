@@ -42,7 +42,7 @@ class LoadedReviews extends ReviewsState {
       return -1;
     });
 
-    return reviews.first;
+    return reviews.last;
   }
 
     Review getReviewById(String reviewId) {
