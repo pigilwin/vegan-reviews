@@ -155,7 +155,7 @@ class _FullReviewState extends State<FullReview> {
   Widget _getSupplier() {
     return Padding(
       padding: const EdgeInsets.all(10),
-      child: Text("Supplier: ${review.supplier}", style: const TextStyle(fontSize: 20)),
+      child: Text("Brand: ${review.supplier}", style: const TextStyle(fontSize: 20)),
     );
   }
 
