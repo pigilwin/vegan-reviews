@@ -57,7 +57,6 @@ class ReviewsService {
   }
 
   Future<void> delete(Review review) async {
-    review.image.deleteSync();
     await _firebaseStorage.ref().child(review.imageName).delete();
     await _firestore.collection('reviews').document(review.id).delete();
   }
