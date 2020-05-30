@@ -26,7 +26,6 @@ class ReviewsService {
         description: data['description'],
         stars: data['stars'],
         type: data['type'],
-        image: null,
         imageUrl: imageUrl,
         supplier: data['supplier'],
         limited: _intToBool(data['limited']),

@@ -1,10 +1,11 @@
 import 'dart:io' as io;
+import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:uuid/uuid.dart';
 
-class Review {
+class Review extends Equatable {
 
-  const Review({
+  Review({
     @required this.id,
     @required this.name,
     @required this.description,
@@ -14,8 +15,7 @@ class Review {
     @required this.supplier,
     @required this.limited,
     @required this.type,
-    this.image,
-    this.imageUrl
+    @required this.imageUrl
   });
 
   factory Review.empty() {
@@ -23,7 +23,6 @@ class Review {
       id: Uuid().v4(),
       name: '',
       description: '',
-      image: null,
       imageUrl: '',
       stars: 0,
       price: 0,
@@ -48,9 +47,9 @@ class Review {
   final bool limited;
   final String type;
   final DateTime created;
-
-  final io.File image;
   final String imageUrl;
+
+  io.File image;
 
   Map<String, dynamic> toMap() {
     return {
@@ -73,4 +72,16 @@ class Review {
     }
     return 0;
   }
+
+  @override
+  List<Object> get props => [
+    id,
+    name,
+    description,
+    stars,
+    price,
+    supplier,
+    limited,
+    imageUrl
+  ];
 }
