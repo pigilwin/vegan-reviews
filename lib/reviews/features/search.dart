@@ -18,19 +18,20 @@ class _SearchState extends State<Search> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: const Text("Search"),
-      ),
-      body: BlocBuilder<ReviewsBloc, ReviewsState>(
-        builder: (BuildContext context, ReviewsState state) {
-          return PageView(
-            controller: controller,
-            children: buildChildren(state),
-          );
-        },
-      ),
+    return Builder(
+      builder: (BuildContext context) {
+        return Scaffold(
+          appBar: _getAppBar(context),
+          body: BlocBuilder<ReviewsBloc, ReviewsState>(
+            builder: (BuildContext context, ReviewsState state) {
+              return PageView(
+                controller: controller,
+                children: buildChildren(state),
+              );
+            },
+          ),
+        );
+      },
     );
   }
 
@@ -50,5 +51,20 @@ class _SearchState extends State<Search> {
       return children;
     }
     return [];
+  }
+
+  AppBar _getAppBar(BuildContext context) {
+    return AppBar(
+      centerTitle: true,
+      title: const Text("Search"),
+      actions: [
+        IconButton(
+          icon: const Icon(Icons.menu),
+          onPressed: () {
+            Scaffold.of(context).openEndDrawer();
+          },
+        )
+      ],
+    );
   }
 }
