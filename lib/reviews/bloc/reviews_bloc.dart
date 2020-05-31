@@ -61,17 +61,17 @@ class ReviewsBloc extends Bloc<ReviewsEvent, ReviewsState> {
   }
 
   Stream<ReviewsState> _mapAddNewReviewEventToState(AddNewReviewEvent event) async* {
-    yield LoadingReviews();
+    yield LoadingReviews(state.reviews);
     await reviewsService.add(event.review);
   }
 
   Stream<ReviewsState> _mapEditReviewEventToState(EditReviewEvent event) async* {
-    yield LoadingReviews();
+    yield LoadingReviews(state.reviews);
     await reviewsService.edit(event.review);
   }
 
   Stream<ReviewsState> _mapDeleteReviewEventToState(DeleteReviewEvent event) async* {
-    yield LoadingReviews();
+    yield LoadingReviews(state.reviews);
     await reviewsService.delete(event.review);
   }
 }

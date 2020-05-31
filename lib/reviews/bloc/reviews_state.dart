@@ -41,7 +41,7 @@ class NoReviews extends ReviewsState {
 
 class LoadingReviews extends ReviewsState {
   
-  LoadingReviews(): super([]);
+  const LoadingReviews(List<Review> reviews): super(reviews);
 }
 
 class LoadedReviews extends ReviewsState {
