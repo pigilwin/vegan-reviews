@@ -1,13 +1,5 @@
 # vegan_reviews
 
-## Things to do
+## Generate the icons
 
-### Homepage
-
-- Show latest review
-- Sign in to add new reviews
-
-### List of all reviews
-
-- List all reviews
-- Filter by worth it or not
+Generate the icons with `flutter pub run flutter_launcher_icons:main`
