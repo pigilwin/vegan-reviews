@@ -37,7 +37,7 @@ class _SearchState extends State<Search> {
   List<Widget> buildChildren(ReviewsState state) {
     if (state is LoadedReviews){
       final List<Widget> children = [];
-      for (Review review in state.reviews) {
+      for (Review review in state.filteredReviews) {
         children.add(SingleChildScrollView(
           child: ReviewOverviewCard(
             onTap: (Review review) {

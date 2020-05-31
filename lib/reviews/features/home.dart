@@ -74,16 +74,13 @@ class _HomeState extends State<Home> {
     Review review;
     Widget searchButton = const SizedBox.shrink();
 
-    if (state is LoadedReviews) {
-      review = state.latestReview;
-      if (state.reviews.isNotEmpty){
-        searchButton = Button(
-          buttonText: 'Search for reviews',
-          onPressed: () {
-            Navigator.of(context).pushNamed('/search');
-          },
-        );
-      }
+    if (state.allPossibleReviews.isNotEmpty){
+      searchButton = Button(
+        buttonText: 'Search for reviews',
+        onPressed: () {
+          Navigator.of(context).pushNamed('/search');
+        },
+      );
     }
     
     return SingleChildScrollView(
