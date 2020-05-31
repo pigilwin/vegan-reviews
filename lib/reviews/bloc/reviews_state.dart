@@ -33,7 +33,10 @@ abstract class ReviewsState extends Equatable {
   }
 
   @override
-  List<Object> get props => [allPossibleReviews];
+  List<Object> get props => [
+    allPossibleReviews, 
+    filteredReviews
+  ];
 }
 
 class NoReviews extends ReviewsState {

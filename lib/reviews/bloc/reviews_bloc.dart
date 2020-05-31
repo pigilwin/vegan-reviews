@@ -43,6 +43,10 @@ class ReviewsBloc extends Bloc<ReviewsEvent, ReviewsState> {
     if (event is DeleteReviewEvent) {
       yield* _mapDeleteReviewEventToState(event);
     }
+
+    if (event is FilterReviewsEvent) {
+      yield* _mapFilterReviewsEventToState(event);
+    }
   }
 
   Stream<ReviewsState> _mapNewLoadedReviewsEventToState(NewLoadedReviewsEvent event) async* {
@@ -73,5 +77,30 @@ class ReviewsBloc extends Bloc<ReviewsEvent, ReviewsState> {
   Stream<ReviewsState> _mapDeleteReviewEventToState(DeleteReviewEvent event) async* {
     yield LoadingReviews(state.allPossibleReviews, state.filteredReviews);
     await reviewsService.delete(event.review);
+  }
+
+  Stream<ReviewsState> _mapFilterReviewsEventToState(FilterReviewsEvent event) async* {
+    final List<Review> allPossibleReviews = List.from(state.allPossibleReviews);
+    final List<Review> filteredReviews = allPossibleReviews.where((Review review) {
+      
+      if (event.stars != null) {
+        if (review.stars < event.stars) {
+          return false;
+        }
+      }
+
+      if (event.limited != review.limited) {
+        return false;
+      }
+
+      if (event.foodType != null) {
+        if (event.foodType != review.type) {
+          return false;
+        }
+      }
+
+      return true;
+    }).toList();
+    yield LoadedReviews(allPossibleReviews, filteredReviews);
   }
 }
