@@ -22,9 +22,12 @@ class _FilterDrawerState extends State<FilterDrawer> {
           gradient: VeganGradient.gradient(0.2)
         ),
         child: ListView(
+          padding: const EdgeInsets.all(10),
           children: [
             const DrawerHeader(
-              child: Text("Filter Reviews", style: TextStyle(fontSize: 22)),
+              child: Center(
+                child: Text("Filter Reviews", style: TextStyle(fontSize: 22)),
+              ),
             ),
             SwitchListTile(
               onChanged: (bool changed) {
