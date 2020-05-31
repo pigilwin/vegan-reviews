@@ -4,12 +4,15 @@ abstract class ReviewsEvent extends Equatable {
   const ReviewsEvent();
 }
 
-class LoadReviewsEvent extends ReviewsEvent {
+class NewLoadedReviewsEvent extends ReviewsEvent {
   
-  const LoadReviewsEvent();
+  const NewLoadedReviewsEvent(this.reviews, this.deleted);
+
+  final List<Review> reviews;
+  final List<String> deleted;
 
   @override
-  List<Object> get props => [];
+  List<Object> get props => [reviews, deleted];
 }
 
 class AddNewReviewEvent extends ReviewsEvent {

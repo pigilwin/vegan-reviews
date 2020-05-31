@@ -4,38 +4,20 @@ class ReviewsService {
   final Firestore _firestore = Firestore.instance;
   final FirebaseStorage _firebaseStorage = FirebaseStorage.instance;
 
-  Future<List<Review>> fetch() async {
-    final QuerySnapshot snapshot = await _firestore.collection('reviews').getDocuments();
-    final List<Review> reviews = [];
-    for (DocumentSnapshot documentSnapshot in snapshot.documents) {
-      
-      final Map<String, dynamic> data = documentSnapshot.data;
-      final String imageName = "${documentSnapshot.documentID}.jpg";
-      String imageUrl = '';
-
-      try{
-        final StorageReference reference = _firebaseStorage.ref().child(imageName);
-        imageUrl = await reference.getDownloadURL();
-      } on PlatformException{
-        imageUrl = '';//An error is thrown if the image is not found
+  void onCollectionChanges(Function(List<Review>, List<String>) notifier) {
+    _firestore.collection('reviews').snapshots().listen((QuerySnapshot snapshot) async { 
+      final List<Review> changedReviews = [];
+      final List<String> deletedReviews = [];
+      for (DocumentChange change in snapshot.documentChanges) {
+        if (change.type != DocumentChangeType.removed){
+          changedReviews.add(await _fromDocumentChange(change));
+        } else {
+          deletedReviews.add(change.document.documentID);
+        }
       }
-      
-      reviews.add(Review(
-        id: documentSnapshot.documentID,
-        name: data['name'],
-        description: data['description'],
-        stars: data['stars'],
-        type: data['type'],
-        imageUrl: imageUrl,
-        supplier: data['supplier'],
-        limited: _intToBool(data['limited']),
-        price: data['price'],
-        created: DateTime.tryParse(data['created'])
-      ));
-    }
-    return reviews;
+      notifier(changedReviews, deletedReviews);
+    });
   }
-
 
   Future<void> add(Review review) async {
     final StorageReference reference = _firebaseStorage.ref().child(review.imageName);
@@ -52,12 +34,38 @@ class ReviewsService {
       final StorageUploadTask task = _firebaseStorage.ref().child(review.imageName).putFile(review.image);
       await task.onComplete;
     }
-    await _firestore.collection('reviews').document(review.id).setData(review.toMap());
+    await _firestore.collection('reviews').document(review.id).updateData(review.toMap());
   }
 
   Future<void> delete(Review review) async {
     await _firebaseStorage.ref().child(review.imageName).delete();
     await _firestore.collection('reviews').document(review.id).delete();
+  }
+
+  Future<Review> _fromDocumentChange(DocumentChange documentChange) async {
+    final Map<String, dynamic> data = documentChange.document.data;
+    final String imageName = "${documentChange.document.documentID}.jpg";
+    
+    String imageUrl = '';
+    try{
+      final StorageReference reference = _firebaseStorage.ref().child(imageName);
+      imageUrl = await reference.getDownloadURL();
+    } on PlatformException{
+      imageUrl = '';//An error is thrown if the image is not found
+    }
+    
+    return Review(
+      id: documentChange.document.documentID,
+      name: data['name'],
+      description: data['description'],
+      stars: data['stars'],
+      type: data['type'],
+      imageUrl: imageUrl,
+      supplier: data['supplier'],
+      limited: _intToBool(data['limited']),
+      price: data['price'],
+      created: DateTime.tryParse(data['created'])
+    );
   }
 
   bool _intToBool(int i) {

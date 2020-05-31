@@ -1,28 +1,7 @@
 part of 'reviews_bloc.dart';
 
 abstract class ReviewsState extends Equatable {
-  const ReviewsState();
-}
-
-class NoReviews extends ReviewsState {
-  
-  const NoReviews();
-  
-  @override
-  List<Object> get props => [];
-}
-
-class LoadingReviews extends ReviewsState {
-  
-  const LoadingReviews();
-
-  @override
-  List<Object> get props => [];
-}
-
-class LoadedReviews extends ReviewsState {
-  
-  const LoadedReviews(this.reviews);
+  const ReviewsState(this.reviews);
 
   final List<Review> reviews;
 
@@ -45,12 +24,27 @@ class LoadedReviews extends ReviewsState {
     return reviews.last;
   }
 
-    Review getReviewById(String reviewId) {
-      return reviews.firstWhere((Review element) {
-        return element.id == reviewId;
-      });
-    }
+  Review getReviewById(String reviewId) {
+    return reviews.firstWhere((Review element) {
+      return element.id == reviewId;
+    });
+  }
 
   @override
-  List<Object> get props => [];
+  List<Object> get props => [reviews];
+}
+
+class NoReviews extends ReviewsState {
+  
+  NoReviews(): super([]);
+}
+
+class LoadingReviews extends ReviewsState {
+  
+  LoadingReviews(): super([]);
+}
+
+class LoadedReviews extends ReviewsState {
+  
+  const LoadedReviews(List<Review> reviews): super(reviews);
 }
