@@ -49,15 +49,18 @@ class FilterReviewsEvent extends ReviewsEvent {
 
   const FilterReviewsEvent({
     this.foodType,
-    this.limited
+    this.limited,
+    this.stars
   });
 
   final String foodType;
   final bool limited;
+  final int stars;
 
   @override
   List<Object> get props => [
     foodType,
-    limited
+    limited,
+    stars
   ];
 }

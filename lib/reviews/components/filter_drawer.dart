@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vegan_reviews/reviews/reviews.dart';
 import 'package:vegan_reviews/shared/shared.dart';
 
@@ -9,9 +10,10 @@ class FilterDrawer extends StatefulWidget {
 
 class _FilterDrawerState extends State<FilterDrawer> {
   
-  bool limitedTime;
+  bool limitedTime = false;
   String foodType;
-  
+  int stars;
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -29,6 +31,7 @@ class _FilterDrawerState extends State<FilterDrawer> {
                 setState(() {
                   limitedTime = changed;
                 });
+                submitFilterRequest();
               },
               value: false,
               title: const Text("Limited time items only"),
@@ -38,12 +41,30 @@ class _FilterDrawerState extends State<FilterDrawer> {
                 setState(() {
                   foodType = type;
                 });
+                submitFilterRequest();
               },
               value: null,
+            ),
+            StarAmountChooser(
+              value: null,
+              selected: (int v) {
+                setState(() {
+                  stars = v;
+                });
+                submitFilterRequest();
+              },
             )
           ],
         ),
       ),
     );
+  }
+
+  void submitFilterRequest() {
+    context.bloc<ReviewsBloc>().add(FilterReviewsEvent(
+      foodType: foodType,
+      limited: limitedTime,
+      stars: stars
+    ));
   }
 }
