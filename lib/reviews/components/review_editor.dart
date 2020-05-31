@@ -267,7 +267,7 @@ class _ReviewEditorState extends State<ReviewEditor> {
                   id: widget.review.id,
                   type: type,
                   created: DateTime.now(),
-                  imageUrl: ''
+                  imageUrl: widget.review.imageUrl
                 );
                 review.image = image;
                 widget.reviewFinished(review);
