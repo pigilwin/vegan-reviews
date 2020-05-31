@@ -75,6 +75,7 @@ class _HomeState extends State<Home> {
     Widget searchButton = const SizedBox.shrink();
 
     if (state.allPossibleReviews.isNotEmpty){
+      review = state.latestReview;
       searchButton = Button(
         buttonText: 'Search for reviews',
         onPressed: () {
