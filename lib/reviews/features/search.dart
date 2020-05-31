@@ -10,6 +10,7 @@ class Search extends StatefulWidget {
 class _SearchState extends State<Search> {
   
   final PageController controller = PageController();
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
@@ -18,20 +19,18 @@ class _SearchState extends State<Search> {
 
   @override
   Widget build(BuildContext context) {
-    return Builder(
-      builder: (BuildContext context) {
-        return Scaffold(
-          appBar: _getAppBar(context),
-          body: BlocBuilder<ReviewsBloc, ReviewsState>(
-            builder: (BuildContext context, ReviewsState state) {
-              return PageView(
-                controller: controller,
-                children: buildChildren(state),
-              );
-            },
-          ),
-        );
-      },
+    return Scaffold(
+      key: scaffoldKey,
+      appBar: _getAppBar(context),
+      body: BlocBuilder<ReviewsBloc, ReviewsState>(
+        builder: (BuildContext context, ReviewsState state) {
+          return PageView(
+            controller: controller,
+            children: buildChildren(state),
+          );
+        },
+      ),
+      endDrawer: FilterDrawer(),
     );
   }
 
@@ -61,7 +60,7 @@ class _SearchState extends State<Search> {
         IconButton(
           icon: const Icon(Icons.menu),
           onPressed: () {
-            Scaffold.of(context).openEndDrawer();
+            scaffoldKey.currentState.openEndDrawer();
           },
         )
       ],

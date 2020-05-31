@@ -1,4 +1,5 @@
 export './bottom.dart';
+export './filter_drawer.dart';
 export './food_type_selector.dart';
 export './header.dart';
 export './review_editor.dart';
