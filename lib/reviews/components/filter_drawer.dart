@@ -36,7 +36,7 @@ class _FilterDrawerState extends State<FilterDrawer> {
                 });
                 submitFilterRequest();
               },
-              value: false,
+              value: limitedTime,
               title: const Text("Limited time items only"),
             ),
             FoodTypeSelector(
@@ -46,10 +46,10 @@ class _FilterDrawerState extends State<FilterDrawer> {
                 });
                 submitFilterRequest();
               },
-              value: null,
+              value: foodType,
             ),
             StarAmountChooser(
-              value: null,
+              value: stars,
               selected: (int v) {
                 setState(() {
                   stars = v;
