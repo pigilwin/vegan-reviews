@@ -7,7 +7,7 @@
          FlutterApplication and put your custom class here. -->
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="vegan_reviews"
+        android:label="Jody's Vegan Reviews"
         android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"
