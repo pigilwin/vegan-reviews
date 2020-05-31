@@ -13,11 +13,6 @@ class _SearchState extends State<Search> {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
@@ -35,21 +30,18 @@ class _SearchState extends State<Search> {
   }
 
   List<Widget> buildChildren(ReviewsState state) {
-    if (state is LoadedReviews){
-      final List<Widget> children = [];
-      for (Review review in state.filteredReviews) {
-        children.add(SingleChildScrollView(
-          child: ReviewOverviewCard(
-            onTap: (Review review) {
-              Navigator.of(context).pushNamed('/review', arguments: review.id);
-            },
-            review: review,
-          ),
-        ));
-      }
-      return children;
+    final List<Widget> children = [];
+    for (Review review in state.filteredReviews) {
+      children.add(SingleChildScrollView(
+        child: ReviewOverviewCard(
+          onTap: (Review review) {
+            Navigator.of(context).pushNamed('/review', arguments: review.id);
+          },
+          review: review,
+        ),
+      ));
     }
-    return [];
+    return children;
   }
 
   AppBar _getAppBar(BuildContext context) {
