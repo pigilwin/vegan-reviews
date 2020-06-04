@@ -30,7 +30,9 @@ class ReviewsService {
     if (review.image != null){//If we have selected a new image then we will delete the old one and upload
       try{
         await _firebaseStorage.ref().child(review.imageName).delete();//If the image does exist then delete it
-      } on PlatformException {}
+      } on PlatformException {
+        print('No image to delete');
+      }
       final StorageUploadTask task = _firebaseStorage.ref().child(review.imageName).putFile(review.image);
       await task.onComplete;
     }
@@ -38,7 +40,11 @@ class ReviewsService {
   }
 
   Future<void> delete(Review review) async {
-    await _firebaseStorage.ref().child(review.imageName).delete();
+    try{
+      await _firebaseStorage.ref().child(review.imageName).delete();//If the image does exist then delete it
+    } on PlatformException {
+      print('No image to delete');
+    }
     await _firestore.collection('reviews').document(review.id).delete();
   }
 
