@@ -46,7 +46,7 @@ abstract class ReviewsState extends Equatable {
 
 class NoReviews extends ReviewsState {
   
-  NoReviews(): super([], [], null);
+  NoReviews(): super([], [], ReviewsFilterConfiguration.noFiltersApplied());
 }
 
 class LoadingReviews extends ReviewsState {

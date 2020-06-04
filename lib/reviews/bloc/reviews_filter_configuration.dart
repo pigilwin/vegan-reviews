@@ -7,6 +7,14 @@ class ReviewsFilterConfiguration {
     this.stars
   });
 
+  factory ReviewsFilterConfiguration.noFiltersApplied() {
+    return const ReviewsFilterConfiguration(
+      foodType: null,
+      limited: false,
+      stars: null
+    );
+  }
+
   final String foodType;
   final bool limited;
   final int stars;
