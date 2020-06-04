@@ -2,10 +2,15 @@ part of 'reviews_bloc.dart';
 
 abstract class ReviewsState extends Equatable {
   
-  const ReviewsState(this.allPossibleReviews, this.filteredReviews);
+  const ReviewsState(
+    this.allPossibleReviews, 
+    this.filteredReviews,
+    this.filterConfiguration
+  );
 
   final List<Review> allPossibleReviews;
   final List<Review> filteredReviews;
+  final ReviewsFilterConfiguration filterConfiguration;
 
   Review get latestReview {
     
@@ -41,15 +46,31 @@ abstract class ReviewsState extends Equatable {
 
 class NoReviews extends ReviewsState {
   
-  NoReviews(): super([], []);
+  NoReviews(): super([], [], null);
 }
 
 class LoadingReviews extends ReviewsState {
   
-  const LoadingReviews(List<Review> reviews, List<Review> filteredReviews): super(reviews, filteredReviews);
+  const LoadingReviews(
+    List<Review> reviews, 
+    List<Review> filteredReviews,
+    ReviewsFilterConfiguration filterConfiguration
+  ): super(
+    reviews, 
+    filteredReviews, 
+    filterConfiguration
+  );
 }
 
 class LoadedReviews extends ReviewsState {
   
-  const LoadedReviews(List<Review> reviews, List<Review> filteredReviews): super(reviews, filteredReviews);
+  const LoadedReviews(
+    List<Review> reviews, 
+    List<Review> filteredReviews,
+    ReviewsFilterConfiguration filterConfiguration
+  ): super(
+    reviews, 
+    filteredReviews,
+    filterConfiguration
+  );
 }

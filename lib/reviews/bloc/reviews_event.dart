@@ -48,19 +48,11 @@ class DeleteReviewEvent extends ReviewsEvent {
 class FilterReviewsEvent extends ReviewsEvent {
 
   const FilterReviewsEvent({
-    this.foodType,
-    this.limited,
-    this.stars
+    this.filterConfiguration
   });
 
-  final String foodType;
-  final bool limited;
-  final int stars;
+  final ReviewsFilterConfiguration filterConfiguration;
 
   @override
-  List<Object> get props => [
-    foodType,
-    limited,
-    stars
-  ];
+  List<Object> get props => [filterConfiguration];
 }

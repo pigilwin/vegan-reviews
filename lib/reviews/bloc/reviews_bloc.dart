@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:vegan_reviews/reviews/reviews.dart';
 
 part 'reviews_event.dart';
+part 'reviews_filter_configuration.dart';
 part 'reviews_state.dart';
 part 'reviews_service.dart';
 
@@ -61,21 +62,33 @@ class ReviewsBloc extends Bloc<ReviewsEvent, ReviewsState> {
       return !modifiedReviewIds.contains(element.id);
     }).toList();
     reviewsWithoutModified.addAll(event.reviews);
-    yield LoadedReviews(reviewsWithoutModified, reviewsWithoutModified);
+    yield LoadedReviews(reviewsWithoutModified, reviewsWithoutModified, state.filterConfiguration);
   }
 
   Stream<ReviewsState> _mapAddNewReviewEventToState(AddNewReviewEvent event) async* {
-    yield LoadingReviews(state.allPossibleReviews, state.filteredReviews);
+    yield LoadingReviews(
+      state.allPossibleReviews, 
+      state.filteredReviews, 
+      state.filterConfiguration
+    );
     await reviewsService.add(event.review);
   }
 
   Stream<ReviewsState> _mapEditReviewEventToState(EditReviewEvent event) async* {
-    yield LoadingReviews(state.allPossibleReviews, state.filteredReviews);
+    yield LoadingReviews(
+      state.allPossibleReviews, 
+      state.filteredReviews, 
+      state.filterConfiguration
+    );
     await reviewsService.edit(event.review);
   }
 
   Stream<ReviewsState> _mapDeleteReviewEventToState(DeleteReviewEvent event) async* {
-    yield LoadingReviews(state.allPossibleReviews, state.filteredReviews);
+    yield LoadingReviews(
+      state.allPossibleReviews, 
+      state.filteredReviews, 
+      state.filterConfiguration
+    );
     await reviewsService.delete(event.review);
   }
 
@@ -83,24 +96,24 @@ class ReviewsBloc extends Bloc<ReviewsEvent, ReviewsState> {
     final List<Review> allPossibleReviews = List.from(state.allPossibleReviews);
     final List<Review> filteredReviews = allPossibleReviews.where((Review review) {
       
-      if (event.stars != null) {
-        if (review.stars < event.stars) {
+      if (event.filterConfiguration.stars != null) {
+        if (review.stars < event.filterConfiguration.stars) {
           return false;
         }
       }
 
-      if (event.limited != review.limited) {
+      if (event.filterConfiguration.limited != review.limited) {
         return false;
       }
 
-      if (event.foodType != null) {
-        if (event.foodType != review.type) {
+      if (event.filterConfiguration.foodType != null) {
+        if (event.filterConfiguration.foodType != review.type) {
           return false;
         }
       }
 
       return true;
     }).toList();
-    yield LoadedReviews(allPossibleReviews, filteredReviews);
+    yield LoadedReviews(allPossibleReviews, filteredReviews, event.filterConfiguration);
   }
 }

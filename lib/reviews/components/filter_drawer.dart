@@ -64,10 +64,10 @@ class _FilterDrawerState extends State<FilterDrawer> {
   }
 
   void submitFilterRequest() {
-    context.bloc<ReviewsBloc>().add(FilterReviewsEvent(
+    context.bloc<ReviewsBloc>().add(FilterReviewsEvent(filterConfiguration: ReviewsFilterConfiguration(
       foodType: foodType,
       limited: limitedTime,
       stars: stars
-    ));
+    )));
   }
 }
