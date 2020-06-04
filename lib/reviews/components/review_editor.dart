@@ -139,6 +139,12 @@ class _ReviewEditorState extends State<ReviewEditor> {
           });
         },
         value: type,
+        validator: (String value) {
+          if (value == 'None Selected'){
+            return "A value must be selected";
+          }
+          return null;
+        },
       ),
     );
   }

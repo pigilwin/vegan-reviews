@@ -56,6 +56,9 @@ class _FilterDrawerState extends State<FilterDrawer> {
                 submitFilterRequest();
               },
               value: foodType,
+              validator: (String value) {
+                return null;
+              },
             ),
             StarAmountChooser(
               value: stars,
