@@ -9,7 +9,7 @@ class ReviewsFilterConfiguration {
 
   factory ReviewsFilterConfiguration.noFiltersApplied() {
     return const ReviewsFilterConfiguration(
-      foodType: null,
+      foodType: 'None Selected',
       limited: false,
       stars: null
     );
