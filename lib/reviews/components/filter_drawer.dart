@@ -15,6 +15,15 @@ class _FilterDrawerState extends State<FilterDrawer> {
   int stars;
 
   @override
+  void initState() {
+    super.initState();
+    final ReviewsFilterConfiguration filterConfiguration = context.bloc<ReviewsBloc>().state.filterConfiguration;
+    limitedTime = filterConfiguration.limited;
+    foodType = filterConfiguration.foodType;
+    stars = filterConfiguration.stars;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Drawer(
       child: Container(
