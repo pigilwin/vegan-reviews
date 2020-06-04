@@ -28,16 +28,16 @@ class Review extends Equatable {
       price: 0,
       supplier: '',
       limited: false,
-      type: 'None Selected',
+      type: 'none',
       created: DateTime.now()
     );
   }
 
-  static const List<String> types = [
-    'None Selected',
-    'Savoury',
-    'Sweet'
-  ];
+  static const Map<String, String> types = {
+    "none": 'None Selected',
+    "savoury": 'Savoury',
+    "sweet": 'Sweet'
+  };
 
   final String id;
   final String name;

@@ -106,8 +106,8 @@ class ReviewsBloc extends Bloc<ReviewsEvent, ReviewsState> {
         return false;
       }
 
-      if (event.filterConfiguration.foodType != 'None Selected') {
-        if (event.filterConfiguration.foodType != review.type) {
+      if (event.filterConfiguration.foodType != 'none') {
+        if (event.filterConfiguration.foodType != review.type){
           return false;
         }
       }

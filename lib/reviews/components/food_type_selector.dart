@@ -25,12 +25,18 @@ class FoodTypeSelector extends StatelessWidget {
       validator: validator,
       iconSize: 24,
       elevation: 16,
-      items: Review.types.map<DropdownMenuItem<String>>((String value) {
-        return DropdownMenuItem<String>(
-          value: value,
-          child: Text(value),
-        );
-      }).toList(),
+      items: _getItems(),
     );
+  }
+
+  List<DropdownMenuItem<String>> _getItems() {
+    final List<DropdownMenuItem<String>> items = [];
+    Review.types.forEach((String key, String value) { 
+      items.add(DropdownMenuItem(
+        value: key,
+        child: Text(value),
+      ));
+    });
+    return items;
   }
 }
