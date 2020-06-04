@@ -95,7 +95,6 @@ class ReviewsBloc extends Bloc<ReviewsEvent, ReviewsState> {
   Stream<ReviewsState> _mapFilterReviewsEventToState(FilterReviewsEvent event) async* {
     final List<Review> allPossibleReviews = List.from(state.allPossibleReviews);
     final List<Review> filteredReviews = allPossibleReviews.where((Review review) {
-      
       if (event.filterConfiguration.stars != null) {
         if (review.stars < event.filterConfiguration.stars) {
           return false;

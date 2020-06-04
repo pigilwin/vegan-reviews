@@ -18,4 +18,7 @@ class ReviewsFilterConfiguration {
   final String foodType;
   final bool limited;
   final int stars;
+
+  @override
+  String toString() => "$foodType - $limited - $stars";
 }
