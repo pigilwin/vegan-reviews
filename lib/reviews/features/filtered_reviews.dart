@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vegan_reviews/reviews/reviews.dart';
+import 'package:vegan_reviews/shared/components/vegan_gradient.dart';
 
 class FilteredReviews extends StatefulWidget {
   @override
@@ -34,21 +35,26 @@ class _FilteredReviewsState extends State<FilteredReviews> {
       ),
       body: BlocBuilder<ReviewsBloc, ReviewsState>(
         builder: (BuildContext builderContext, ReviewsState state) {
-          return GridView.builder(
-            itemCount: state.filteredReviews.length,
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
+          return Container(
+            decoration: BoxDecoration(
+              gradient: VeganGradient.gradient(0.5)
             ),
-            itemBuilder: (BuildContext context, int i) {
-              return ReviewOverviewCard(
-                review: state.filteredReviews[i],
-                onTap: (Review review) {
-                  Navigator.of(context).pushNamed('/review', arguments: review.id);
-                },
-                shrinkStars: true,
-                shrinkText: true
-              );
-            }
+            child: GridView.builder(
+              itemCount: state.filteredReviews.length,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+              ),
+              itemBuilder: (BuildContext context, int i) {
+                return ReviewOverviewCard(
+                  review: state.filteredReviews[i],
+                  onTap: (Review review) {
+                    Navigator.of(context).pushNamed('/review', arguments: review.id);
+                  },
+                  shrinkStars: true,
+                  shrinkText: true
+                );
+              }
+            ),
           );
         },
       )
