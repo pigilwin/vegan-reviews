@@ -66,7 +66,13 @@ class ReviewOverviewCard extends StatelessWidget {
         topLeft: Radius.circular(5),
         topRight: Radius.circular(5)
       ),
-      child: Image.network(review.imageUrl),
+      child: Image.network(review.imageUrl,
+        loadingBuilder: (BuildContext context, Widget widget, ImageChunkEvent event) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        },
+      ),
     );
   }
 
