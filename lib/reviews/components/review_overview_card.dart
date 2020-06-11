@@ -45,7 +45,7 @@ class ReviewOverviewCard extends StatelessWidget {
               StarRating(
                 canBeEditted: false,
                 onRatingChanged: null,
-                stars: 10,
+                stars: Review.amountOfStars,
                 rating: review.stars,
                 size: 30.0,
               ),

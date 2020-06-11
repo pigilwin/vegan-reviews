@@ -39,6 +39,8 @@ class Review extends Equatable {
     "sweet": 'Sweet'
   };
 
+  static const int amountOfStars = 10;
+
   final String id;
   final String name;
   final String description;

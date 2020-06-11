@@ -16,46 +16,20 @@ class _SearchState extends State<Search> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      appBar: _getAppBar(context),
+      appBar: AppBar(
+        centerTitle: true,
+        title: const Text("Search for a review"),
+      ),
       body: BlocBuilder<ReviewsBloc, ReviewsState>(
-        builder: (BuildContext context, ReviewsState state) {
-          return PageView(
-            controller: controller,
-            children: buildChildren(state),
+        builder: (BuildContext builderContext, ReviewsState state) {
+          return GridView.count(
+            crossAxisCount: 2,
+            children: [
+              
+            ],
           );
         },
-      ),
-      endDrawer: FilterDrawer(),
-    );
-  }
-
-  List<Widget> buildChildren(ReviewsState state) {
-    final List<Widget> children = [];
-    for (Review review in state.filteredReviews) {
-      children.add(SingleChildScrollView(
-        child: ReviewOverviewCard(
-          onTap: (Review review) {
-            Navigator.of(context).pushNamed('/review', arguments: review.id);
-          },
-          review: review,
-        ),
-      ));
-    }
-    return children;
-  }
-
-  AppBar _getAppBar(BuildContext context) {
-    return AppBar(
-      centerTitle: true,
-      title: const Text("Search"),
-      actions: [
-        IconButton(
-          icon: const Icon(Icons.menu),
-          onPressed: () {
-            scaffoldKey.currentState.openEndDrawer();
-          },
-        )
-      ],
+      )
     );
   }
 }
