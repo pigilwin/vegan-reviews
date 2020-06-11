@@ -6,13 +6,17 @@ class ReviewOverviewCard extends StatelessWidget {
 
   const ReviewOverviewCard({
     this.review,
-    this.onTap
+    this.onTap,
+    this.shrinkStars,
+    this.shrinkText
   });
 
   static const double imageDimensions = 300;
 
   final Review review;
   final void Function(Review review) onTap;
+  final bool shrinkStars;
+  final bool shrinkText;
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +51,7 @@ class ReviewOverviewCard extends StatelessWidget {
                 onRatingChanged: null,
                 stars: Review.amountOfStars,
                 rating: review.stars,
-                size: 30.0,
+                size: shrinkStars ? 10.0 : 30.0,
               ),
               _getCreatedTime()
             ],
@@ -82,10 +86,16 @@ class ReviewOverviewCard extends StatelessWidget {
   }
 
   Widget _getCreatedTime() {
+    
+    double fontSize = 20;
+    if (shrinkText) {
+      fontSize = 10;
+    }
+
     final DateFormat dateFormat = DateFormat.yMMMMEEEEd();
     return Padding(
       padding: const EdgeInsets.all(10),
-      child: Text("${dateFormat.format(review.created)}", style: const TextStyle(fontSize: 18)),
+      child: Text("${dateFormat.format(review.created)}", style: TextStyle(fontSize: fontSize)),
     );
   }
 }

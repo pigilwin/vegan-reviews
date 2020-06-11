@@ -101,6 +101,8 @@ class _FullReviewState extends State<FullReview> {
               child: ReviewOverviewCard(
                 onTap: null,
                 review: review,
+                shrinkStars: false,
+                shrinkText: false,
               ),
             ),
             Expanded(
