@@ -35,34 +35,44 @@ class _SearchState extends State<Search> {
       ),
       body: BlocBuilder<ReviewsBloc, ReviewsState>(
         builder: (BuildContext builderContext, ReviewsState state) {
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Expanded(
-                child: GridView.count(
-                  padding: const EdgeInsets.all(5),
-                  crossAxisCount: 2,
-                  children: [
-                    _getFoodTypeSelector(),
-                    _getLimitedTypeSelector(),
-                    _getStarAmountSelector()
-                  ],
+          return Container(
+            decoration: BoxDecoration(
+              gradient: VeganGradient.gradient(0.2)
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Expanded(
+                  child: GridView.count(
+                    padding: const EdgeInsets.all(5),
+                    crossAxisCount: 2,
+                    children: [
+                      _getFoodTypeSelector(),
+                      _getLimitedTypeSelector(),
+                      _getStarAmountSelector()
+                    ],
+                  ),
                 ),
-              ),
-              Button(
-                buttonText: 'Search',
-                onPressed: () {
-                  context.bloc<ReviewsBloc>().add(FilterReviewsEvent(
-                    filterConfiguration: ReviewsFilterConfiguration(
-                      foodType: foodType,
-                      stars: stars,
-                      limited: limited
-                    )
-                  ));
-                  Navigator.of(context).pushNamed('/filtered');
-                },
-              )
-            ],
+                Padding(
+                  padding: const EdgeInsets.only(
+                    bottom: 22.0
+                  ),
+                  child: Button(
+                    buttonText: 'Search',
+                    onPressed: () {
+                      context.bloc<ReviewsBloc>().add(FilterReviewsEvent(
+                        filterConfiguration: ReviewsFilterConfiguration(
+                          foodType: foodType,
+                          stars: stars,
+                          limited: limited
+                        )
+                      ));
+                      Navigator.of(context).pushNamed('/filtered');
+                    },
+                  ),
+                )
+              ],
+            ),
           );
         },
       )
@@ -107,13 +117,16 @@ class _SearchState extends State<Search> {
   Widget _getStarAmountSelector() {
     return Card(
       child: Center(
-        child: StarAmountChooser(
-          value: stars,
-          selected: (int choice) {
-            setState(() {
-              stars = choice;
-            });
-          },
+        child: Padding(
+          padding: const EdgeInsets.all(5),
+          child: StarAmountChooser(
+            value: stars,
+            selected: (int choice) {
+              setState(() {
+                stars = choice;
+              });
+            },
+          ),
         ),
       ),
     );
