@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vegan_reviews/reviews/reviews.dart';
-import 'package:vegan_reviews/shared/shared.dart';
 
-class Search extends StatefulWidget {
+class FilteredReviews extends StatefulWidget {
   @override
-  _SearchState createState() => _SearchState();
+  _FilteredReviewsState createState() => _FilteredReviewsState();
 }
 
-class _SearchState extends State<Search> {
+class _FilteredReviewsState extends State<FilteredReviews> {
 
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
