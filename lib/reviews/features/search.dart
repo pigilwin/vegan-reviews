@@ -52,7 +52,14 @@ class _SearchState extends State<Search> {
               Button(
                 buttonText: 'Search',
                 onPressed: () {
-
+                  context.bloc<ReviewsBloc>().add(FilterReviewsEvent(
+                    filterConfiguration: ReviewsFilterConfiguration(
+                      foodType: foodType,
+                      stars: stars,
+                      limited: limited
+                    )
+                  ));
+                  Navigator.of(context).pushNamed('/filtered');
                 },
               )
             ],
