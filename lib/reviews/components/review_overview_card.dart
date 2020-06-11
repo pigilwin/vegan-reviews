@@ -68,6 +68,11 @@ class ReviewOverviewCard extends StatelessWidget {
       ),
       child: Image.network(review.imageUrl,
         loadingBuilder: (BuildContext context, Widget widget, ImageChunkEvent event) {
+          
+          if (event == null) {
+            return widget;
+          }
+          
           return const Center(
             child: CircularProgressIndicator(),
           );
