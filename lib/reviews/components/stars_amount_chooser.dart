@@ -15,7 +15,7 @@ class StarAmountChooser extends StatelessWidget {
   Widget build(Object context) {
     return DropdownButtonFormField<int>(
       decoration: const InputDecoration(
-        labelText: 'Amount of stars required'
+        labelText: 'Amount of stars'
       ),
       value: value,
       onChanged: selected,
