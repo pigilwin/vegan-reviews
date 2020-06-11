@@ -262,7 +262,7 @@ class _ReviewEditorState extends State<ReviewEditor> {
           Button(
             buttonText: 'Save',
             onPressed: () {
-              if (_formKey.currentState.validate()) {
+              if (isReviewValid()) {
                 final Review review = Review(
                   name: nameController.text,
                   description: descriptionController.text,
@@ -277,6 +277,10 @@ class _ReviewEditorState extends State<ReviewEditor> {
                 );
                 review.image = image;
                 widget.reviewFinished(review);
+              } else {
+                Scaffold.of(context).showSnackBar(const SnackBar(
+                  content: Text("Validation failed"),
+                ));
               }
             },
           ),
@@ -284,5 +288,14 @@ class _ReviewEditorState extends State<ReviewEditor> {
         ],
       ),
     );
+  }
+
+  bool isReviewValid() {
+    
+    if (imageUrl.isEmpty && image == null) {
+      return false;
+    }
+
+    return _formKey.currentState.validate();
   }
 }
