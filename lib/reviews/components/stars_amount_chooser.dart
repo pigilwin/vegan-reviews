@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vegan_reviews/reviews/reviews.dart';
 
 class StarAmountChooser extends StatelessWidget {
   
@@ -21,7 +22,7 @@ class StarAmountChooser extends StatelessWidget {
       icon: const Icon(Icons.arrow_downward),
       iconSize: 24,
       elevation: 16,
-      items: List<int>.generate(10, (int index) => index + 1).map<DropdownMenuItem<int>>((int value) {
+      items: List<int>.generate(Review.amountOfStars, (int index) => index + 1).map<DropdownMenuItem<int>>((int value) {
         return DropdownMenuItem<int>(
           value: value,
           child: Text(value.toString()),
