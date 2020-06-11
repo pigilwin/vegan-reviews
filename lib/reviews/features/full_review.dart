@@ -103,36 +103,40 @@ class _FullReviewState extends State<FullReview> {
                 review: review,
               ),
             ),
-            Container(
-              decoration: const BoxDecoration(
-                color: Colors.white
-              ),
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: SingleChildScrollView(
-                      child: SafeArea(
-                        child: Text(review.description,
-                          overflow: TextOverflow.clip,
-                          textAlign: TextAlign.justify,
-                          style: const TextStyle(fontSize: 20),
+            Expanded(
+              child: Card(
+                margin: const EdgeInsets.all(10),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(5)
+                  ),
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: SingleChildScrollView(
+                          child: SafeArea(
+                            child: Text(review.description,
+                              overflow: TextOverflow.clip,
+                              textAlign: TextAlign.justify,
+                              style: const TextStyle(fontSize: 20),
+                            ),
+                          ),
                         ),
                       ),
-                    ),
+                      const Divider(height: 20),
+                      _getSupplier(),
+                      _getPrice(),
+                      _getLimitedTime(),
+                    ],
                   ),
-                  const Divider(height: 20),
-                  _getSupplier(),
-                  _getPrice(),
-                  _getLimitedTime(),
-                ],
+                ),
               ),
             ),
-            Expanded(
-              child: Align(
-                alignment: FractionalOffset.bottomCenter,
-                child: Bottom(),
-              ),
+            Align(
+              alignment: FractionalOffset.bottomCenter,
+              child: Bottom(),
             )
           ],
         ),
