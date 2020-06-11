@@ -93,25 +93,25 @@ class _FullReviewState extends State<FullReview> {
         decoration: BoxDecoration(
           gradient: VeganGradient.gradient(0.2)
         ),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(5),
-                child: ReviewOverviewCard(
-                  onTap: null,
-                  review: review,
-                ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(5),
+              child: ReviewOverviewCard(
+                onTap: null,
+                review: review,
               ),
-              Container(
-                decoration: const BoxDecoration(
-                  color: Colors.white
-                ),
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(10),
+            ),
+            Container(
+              decoration: const BoxDecoration(
+                color: Colors.white
+              ),
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: SingleChildScrollView(
                       child: SafeArea(
                         child: Text(review.description,
                           overflow: TextOverflow.clip,
@@ -120,16 +120,21 @@ class _FullReviewState extends State<FullReview> {
                         ),
                       ),
                     ),
-                    const Divider(height: 20),
-                    _getSupplier(),
-                    _getPrice(),
-                    _getLimitedTime(),
-                    Bottom()
-                  ],
-                ),
+                  ),
+                  const Divider(height: 20),
+                  _getSupplier(),
+                  _getPrice(),
+                  _getLimitedTime(),
+                ],
               ),
-            ],
-          ),
+            ),
+            Expanded(
+              child: Align(
+                alignment: FractionalOffset.bottomCenter,
+                child: Bottom(),
+              ),
+            )
+          ],
         ),
       ),
       floatingActionButton: _getEditReviewButton(),
@@ -162,7 +167,7 @@ class _FullReviewState extends State<FullReview> {
   Widget _getPrice() {
     return Padding(
       padding: const EdgeInsets.all(10),
-      child: Text("Price: £${review.price}", style: const TextStyle(fontSize: 20)),
+      child: Text("Price: £${review.price.toStringAsFixed(2)}", style: const TextStyle(fontSize: 20)),
     );
   }
 
