@@ -13,16 +13,13 @@ part 'reviews_service.dart';
 
 class ReviewsBloc extends Bloc<ReviewsEvent, ReviewsState> {
   
-  ReviewsBloc() {
+  ReviewsBloc(): super(NoReviews()) {
     reviewsService.onCollectionChanges((List<Review> reviews, List<String> deleted) {
       add(NewLoadedReviewsEvent(reviews, deleted));
     });
   }
 
   final ReviewsService reviewsService = ReviewsService();
-  
-  @override
-  ReviewsState get initialState => NoReviews();
 
   @override
   Stream<ReviewsState> mapEventToState(

@@ -32,7 +32,7 @@ class _SignInTileState extends State<SignInTile>{
   @override
   Widget build(BuildContext context) {
     return BlocListener<AuthenticationBloc, AuthenticationState>(
-      bloc: authenticationBloc,
+      cubit: authenticationBloc,
       listener: (BuildContext context, AuthenticationState state) {
         if (state is NoAuthentication) {
           if (!state.wasPreviouslyLoggedIn){//Only show the message if the user was not previouslly logged in
@@ -49,7 +49,7 @@ class _SignInTileState extends State<SignInTile>{
         }
       },
       child: BlocBuilder<AuthenticationBloc, AuthenticationState>(
-        bloc: authenticationBloc,
+        cubit: authenticationBloc,
         builder: (BuildContext context, AuthenticationState state) {
           if (state is Authenticated) {
             return Center(

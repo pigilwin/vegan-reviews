@@ -13,10 +13,9 @@ part 'authentication_service.dart';
 
 class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> with Network {
 
-  final AuthenticationService authenticationService = AuthenticationService();
+  AuthenticationBloc(): super(const NoAuthentication());
 
-  @override
-  AuthenticationState get initialState => const NoAuthentication();
+  final AuthenticationService authenticationService = AuthenticationService();
 
   @override
   Stream<AuthenticationState> mapEventToState(
