@@ -93,8 +93,7 @@ class _FullReviewState extends State<FullReview> {
         decoration: BoxDecoration(
           gradient: VeganGradient.gradient(0.2)
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
+        child: ListView(
           children: [
             Padding(
               padding: const EdgeInsets.all(5),
@@ -135,10 +134,6 @@ class _FullReviewState extends State<FullReview> {
                   ),
                 ),
               ),
-            ),
-            Align(
-              alignment: FractionalOffset.bottomCenter,
-              child: Bottom(),
             )
           ],
         ),
