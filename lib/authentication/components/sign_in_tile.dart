@@ -49,7 +49,7 @@ class _SignInTileState extends State<SignInTile>{
         }
       },
       child: BlocBuilder<AuthenticationBloc, AuthenticationState>(
-        bloc: authenticationBloc,
+        cubit: authenticationBloc,
         builder: (BuildContext context, AuthenticationState state) {
           if (state is Authenticated) {
             return Center(
