@@ -50,8 +50,7 @@ class _FilteredReviewsState extends State<FilteredReviews> {
                   onTap: (Review review) {
                     Navigator.of(context).pushNamed('/review', arguments: review.id);
                   },
-                  shrinkStars: true,
-                  shrinkText: true
+                  shrink: true,
                 );
               }
             ),

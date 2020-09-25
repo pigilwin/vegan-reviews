@@ -103,8 +103,7 @@ class _HomeState extends State<Home> {
               onTap: (Review review) {
                 Navigator.of(context).pushNamed('/review', arguments: review.id);
               },
-              shrinkText: false,
-              shrinkStars: false,
+              shrink: false,
             ),
           ),
         ],

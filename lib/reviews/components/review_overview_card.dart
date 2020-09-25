@@ -7,16 +7,14 @@ class ReviewOverviewCard extends StatelessWidget {
   const ReviewOverviewCard({
     this.review,
     this.onTap,
-    this.shrinkStars,
-    this.shrinkText
+    this.shrink
   });
 
   static const double imageDimensions = 300;
 
   final Review review;
   final void Function(Review review) onTap;
-  final bool shrinkStars;
-  final bool shrinkText;
+  final bool shrink;
 
   @override
   Widget build(BuildContext context) {
@@ -25,17 +23,9 @@ class ReviewOverviewCard extends StatelessWidget {
       return const SizedBox.shrink();
     }    
     return GestureDetector(
-      onTap: () {
-        onTap(review);
-      },
+      onTap: () => onTap(review),
       child: Card(
         child: Container(
-          decoration: const BoxDecoration(
-            borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(10),
-              bottomRight: Radius.circular(10)
-            )
-          ),
           child: Column(
             children: [
               _getImage(),
@@ -51,7 +41,7 @@ class ReviewOverviewCard extends StatelessWidget {
                 onRatingChanged: null,
                 stars: Review.amountOfStars,
                 rating: review.stars,
-                size: shrinkStars ? 10.0 : 30.0,
+                size: shrink ? 10.0 : 30.0,
               ),
               _getCreatedTime()
             ],
@@ -65,30 +55,25 @@ class ReviewOverviewCard extends StatelessWidget {
     if (review.imageUrl.isEmpty) {
       return const SizedBox.shrink();
     }
-    return ClipRRect(
-      borderRadius: const BorderRadius.only(
-        topLeft: Radius.circular(5),
-        topRight: Radius.circular(5)
-      ),
-      child: Image.network(review.imageUrl,
-        loadingBuilder: (BuildContext context, Widget widget, ImageChunkEvent event) {
-          
-          if (event == null) {
-            return widget;
-          }
-          
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        },
-      ),
+    return Image.network(review.imageUrl,
+
+      loadingBuilder: (BuildContext context, Widget widget, ImageChunkEvent event) {
+        
+        if (event == null) {
+          return widget;
+        }
+        
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      }
     );
   }
 
   Widget _getCreatedTime() {
     
     double fontSize = 20;
-    if (shrinkText) {
+    if (shrink) {
       fontSize = 10;
     }
 
