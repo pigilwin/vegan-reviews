@@ -39,11 +39,11 @@ class _FilteredReviewsState extends State<FilteredReviews> {
             decoration: BoxDecoration(
               gradient: VeganGradient.gradient(0.5)
             ),
-            child: GridView.builder(
+            child: ListView.builder(
               itemCount: state.filteredReviews.length,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-              ),
+              //gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                //crossAxisCount: 2,
+              //),
               itemBuilder: (BuildContext context, int i) {
                 return ReviewOverviewCard(
                   review: state.filteredReviews[i],

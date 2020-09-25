@@ -10,8 +10,6 @@ class ReviewOverviewCard extends StatelessWidget {
     this.shrink
   });
 
-  static const double imageDimensions = 300;
-
   final Review review;
   final void Function(Review review) onTap;
   final bool shrink;
@@ -55,6 +53,7 @@ class ReviewOverviewCard extends StatelessWidget {
     if (review.imageUrl.isEmpty) {
       return const SizedBox.shrink();
     }
+
     return Image.network(review.imageUrl,
 
       loadingBuilder: (BuildContext context, Widget widget, ImageChunkEvent event) {
