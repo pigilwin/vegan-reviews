@@ -22,7 +22,7 @@ class StarAmountChooser extends StatelessWidget {
       icon: const Icon(Icons.arrow_downward),
       iconSize: 24,
       elevation: 16,
-      items: List<int>.generate(Review.amountOfStars, (int index) => index + 1).map<DropdownMenuItem<int>>((int value) {
+      items: List<int>.generate(Review.amountOfStars + 1, (int index) => index).map<DropdownMenuItem<int>>((int value) {
         return DropdownMenuItem<int>(
           value: value,
           child: Text(value.toString()),

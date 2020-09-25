@@ -43,34 +43,31 @@ class _SearchState extends State<Search> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Expanded(
-                  child: GridView.count(
+                  child: ListView(
                     padding: const EdgeInsets.all(5),
-                    crossAxisCount: 2,
                     children: [
                       _getFoodTypeSelector(),
                       _getLimitedTypeSelector(),
-                      _getStarAmountSelector()
+                      _getStarAmountSelector(),
+                      Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: Button(
+                          buttonText: 'Search',
+                          onPressed: () {
+                            context.bloc<ReviewsBloc>().add(FilterReviewsEvent(
+                              filterConfiguration: ReviewsFilterConfiguration(
+                                foodType: foodType,
+                                stars: stars,
+                                limited: limited
+                              )
+                            ));
+                            Navigator.of(context).pushNamed('/filtered');
+                          },
+                        ),
+                      )
                     ],
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                    bottom: 22.0
-                  ),
-                  child: Button(
-                    buttonText: 'Search',
-                    onPressed: () {
-                      context.bloc<ReviewsBloc>().add(FilterReviewsEvent(
-                        filterConfiguration: ReviewsFilterConfiguration(
-                          foodType: foodType,
-                          stars: stars,
-                          limited: limited
-                        )
-                      ));
-                      Navigator.of(context).pushNamed('/filtered');
-                    },
-                  ),
-                )
               ],
             ),
           );
