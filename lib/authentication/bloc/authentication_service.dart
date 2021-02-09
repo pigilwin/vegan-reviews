@@ -2,7 +2,7 @@ part of 'authentication_bloc.dart';
 
 class AuthenticationService {
 
-  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  final auth.FirebaseAuth _firebaseAuth = auth.FirebaseAuth.instance;
 
   Future<User> signInWithUsernameAndPassword(Email email, Password password) async {
     try {

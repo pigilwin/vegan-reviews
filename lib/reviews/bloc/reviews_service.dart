@@ -1,18 +1,20 @@
 part of 'reviews_bloc.dart';
 
 class ReviewsService {
-  final Firestore _firestore = Firestore.instance;
-  final FirebaseStorage _firebaseStorage = FirebaseStorage.instance;
+
+  final firestore.FirebaseFirestore _firestore = firestore.FirebaseFirestore.instance;
+  final storage.FirebaseStorage _firebaseStorage = storage.FirebaseStorage.instance;
 
   void onCollectionChanges(Function(List<Review>, List<String>) notifier) {
-    _firestore.collection('reviews').snapshots().listen((QuerySnapshot snapshot) async { 
+    _firestore.collection('reviews').snapshots().listen((firestore.QuerySnapshot snapshot) async { 
       final changedReviews = <Review>[];
       final deletedReviews = <String>[];
-      for (var change in snapshot.documentChanges) {
-        if (change.type != DocumentChangeType.removed){
+
+      for (var change in snapshot.docChanges){
+        if (change.type != firestore.DocumentChangeType.removed){
           changedReviews.add(await _fromDocumentChange(change));
         } else {
-          deletedReviews.add(change.document.documentID);
+          deletedReviews.add(change.doc.id);
         }
       }
       notifier(changedReviews, deletedReviews);
@@ -21,9 +23,8 @@ class ReviewsService {
 
   Future<void> add(Review review) async {
     final reference = _firebaseStorage.ref().child(review.imageName);
-    final task = reference.putFile(review.image);
-    await task.onComplete;
-    await _firestore.collection('reviews').document(review.id).setData(review.toMap());
+    await reference.putFile(review.image);
+    await _firestore.collection('reviews').doc(review.id).set(review.toMap());
   }
 
   Future<void> edit(Review review) async {
@@ -33,10 +34,9 @@ class ReviewsService {
       } on PlatformException {
         print('No image to delete');
       }
-      final task = _firebaseStorage.ref().child(review.imageName).putFile(review.image);
-      await task.onComplete;
+      await _firebaseStorage.ref().child(review.imageName).putFile(review.image);
     }
-    await _firestore.collection('reviews').document(review.id).updateData(review.toMap());
+    await _firestore.collection('reviews').doc(review.id).update(review.toMap());
   }
 
   Future<void> delete(Review review) async {
@@ -45,12 +45,12 @@ class ReviewsService {
     } on PlatformException {
       print('No image to delete');
     }
-    await _firestore.collection('reviews').document(review.id).delete();
+    await _firestore.collection('reviews').doc(review.id).delete();
   }
 
-  Future<Review> _fromDocumentChange(DocumentChange documentChange) async {
-    final data = documentChange.document.data;
-    final imageName = '${documentChange.document.documentID}.jpg';
+  Future<Review> _fromDocumentChange(firestore.DocumentChange documentChange) async {
+    final data = documentChange.doc.data();
+    final imageName = '${documentChange.doc.id}.jpg';
     
     var imageUrl = '';
     try{
@@ -61,7 +61,7 @@ class ReviewsService {
     }
     
     return Review(
-      id: documentChange.document.documentID,
+      id: documentChange.doc.id,
       name: data['name'],
       description: data['description'],
       stars: data['stars'],
