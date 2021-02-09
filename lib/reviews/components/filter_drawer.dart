@@ -17,7 +17,7 @@ class _FilterDrawerState extends State<FilterDrawer> {
   @override
   void initState() {
     super.initState();
-    final ReviewsFilterConfiguration filterConfiguration = context.bloc<ReviewsBloc>().state.filterConfiguration;
+    final filterConfiguration = context.read<ReviewsBloc>().state.filterConfiguration;
     limitedTime = filterConfiguration.limited;
     foodType = filterConfiguration.foodType;
     stars = filterConfiguration.stars;
@@ -35,7 +35,7 @@ class _FilterDrawerState extends State<FilterDrawer> {
           children: [
             const DrawerHeader(
               child: Center(
-                child: Text("Filter Reviews", style: TextStyle(fontSize: 22)),
+                child: Text('Filter Reviews', style: TextStyle(fontSize: 22)),
               ),
             ),
             SwitchListTile(
@@ -46,7 +46,7 @@ class _FilterDrawerState extends State<FilterDrawer> {
                 submitFilterRequest();
               },
               value: limitedTime,
-              title: const Text("Limited time items only"),
+              title: const Text('Limited time items only'),
             ),
             FoodTypeSelector(
               selected: (String type){
@@ -76,7 +76,7 @@ class _FilterDrawerState extends State<FilterDrawer> {
   }
 
   void submitFilterRequest() {
-    context.bloc<ReviewsBloc>().add(FilterReviewsEvent(filterConfiguration: ReviewsFilterConfiguration(
+    context.read<ReviewsBloc>().add(FilterReviewsEvent(filterConfiguration: ReviewsFilterConfiguration(
       foodType: foodType,
       limited: limitedTime,
       stars: stars

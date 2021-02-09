@@ -23,7 +23,7 @@ class Application extends StatelessWidget {
   }
 
   Route<dynamic> onGenerateRoute(RouteSettings settings) {
-    final WidgetBuilder builder = _getRoutes(settings)[settings.name];
+    final builder = _getRoutes(settings)[settings.name];
     return MaterialPageRoute(
       builder: builder
     );

@@ -48,14 +48,14 @@ class ReviewsBloc extends Bloc<ReviewsEvent, ReviewsState> {
   }
 
   Stream<ReviewsState> _mapNewLoadedReviewsEventToState(NewLoadedReviewsEvent event) async* {
-    final List<String> modifiedReviewIds = event.reviews.map<String>((Review review) {
+    final modifiedReviewIds = event.reviews.map<String>((Review review) {
       return review.id;
     }).toList();
-    final List<Review> reviews = List.from(state.allPossibleReviews);
-    final List<Review> reviewsWithoutDeleted = reviews.where((Review element) {
+    final reviews = List<Review>.from(state.allPossibleReviews);
+    final reviewsWithoutDeleted = reviews.where((Review element) {
       return !event.deleted.contains(element.id);
     }).toList();
-    final List<Review> reviewsWithoutModified = reviewsWithoutDeleted.where((Review element) {
+    final reviewsWithoutModified = reviewsWithoutDeleted.where((Review element) {
       return !modifiedReviewIds.contains(element.id);
     }).toList();
     reviewsWithoutModified.addAll(event.reviews);
@@ -90,8 +90,8 @@ class ReviewsBloc extends Bloc<ReviewsEvent, ReviewsState> {
   }
 
   Stream<ReviewsState> _mapFilterReviewsEventToState(FilterReviewsEvent event) async* {
-    final List<Review> allPossibleReviews = List.from(state.allPossibleReviews);
-    final List<Review> filteredReviews = allPossibleReviews.where((Review review) {
+    final allPossibleReviews = List<Review>.from(state.allPossibleReviews);
+    final filteredReviews = allPossibleReviews.where((Review review) {
       if (event.filterConfiguration.stars != null) {
         if (review.stars < event.filterConfiguration.stars) {
           return false;

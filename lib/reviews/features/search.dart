@@ -19,7 +19,7 @@ class _SearchState extends State<Search> {
   @override
   void initState() {
     super.initState();
-    final ReviewsState state = context.bloc<ReviewsBloc>().state;
+    final state = context.read<ReviewsBloc>().state;
     foodType = state.filterConfiguration.foodType;
     limited = state.filterConfiguration.limited;
     stars = state.filterConfiguration.stars;
@@ -31,7 +31,7 @@ class _SearchState extends State<Search> {
       key: scaffoldKey,
       appBar: AppBar(
         centerTitle: true,
-        title: const Text("Search for a review"),
+        title: const Text('Search for a review'),
       ),
       body: BlocBuilder<ReviewsBloc, ReviewsState>(
         builder: (BuildContext builderContext, ReviewsState state) {
@@ -54,7 +54,7 @@ class _SearchState extends State<Search> {
                         child: Button(
                           buttonText: 'Search',
                           onPressed: () {
-                            context.bloc<ReviewsBloc>().add(FilterReviewsEvent(
+                            context.read<ReviewsBloc>().add(FilterReviewsEvent(
                               filterConfiguration: ReviewsFilterConfiguration(
                                 foodType: foodType,
                                 stars: stars,
@@ -99,7 +99,7 @@ class _SearchState extends State<Search> {
     return Card(
       child: Center(
         child: SwitchListTile(
-          title: const Text("Only show limited items"),
+          title: const Text('Only show limited items'),
           value: limited,
           onChanged: (bool v) {
             setState(() {

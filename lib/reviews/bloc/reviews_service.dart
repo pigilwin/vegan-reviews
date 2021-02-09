@@ -6,9 +6,9 @@ class ReviewsService {
 
   void onCollectionChanges(Function(List<Review>, List<String>) notifier) {
     _firestore.collection('reviews').snapshots().listen((QuerySnapshot snapshot) async { 
-      final List<Review> changedReviews = [];
-      final List<String> deletedReviews = [];
-      for (DocumentChange change in snapshot.documentChanges) {
+      final changedReviews = <Review>[];
+      final deletedReviews = <String>[];
+      for (var change in snapshot.documentChanges) {
         if (change.type != DocumentChangeType.removed){
           changedReviews.add(await _fromDocumentChange(change));
         } else {
@@ -20,8 +20,8 @@ class ReviewsService {
   }
 
   Future<void> add(Review review) async {
-    final StorageReference reference = _firebaseStorage.ref().child(review.imageName);
-    final StorageUploadTask task = reference.putFile(review.image);
+    final reference = _firebaseStorage.ref().child(review.imageName);
+    final task = reference.putFile(review.image);
     await task.onComplete;
     await _firestore.collection('reviews').document(review.id).setData(review.toMap());
   }
@@ -33,7 +33,7 @@ class ReviewsService {
       } on PlatformException {
         print('No image to delete');
       }
-      final StorageUploadTask task = _firebaseStorage.ref().child(review.imageName).putFile(review.image);
+      final task = _firebaseStorage.ref().child(review.imageName).putFile(review.image);
       await task.onComplete;
     }
     await _firestore.collection('reviews').document(review.id).updateData(review.toMap());
@@ -49,12 +49,12 @@ class ReviewsService {
   }
 
   Future<Review> _fromDocumentChange(DocumentChange documentChange) async {
-    final Map<String, dynamic> data = documentChange.document.data;
-    final String imageName = "${documentChange.document.documentID}.jpg";
+    final data = documentChange.document.data;
+    final imageName = '${documentChange.document.documentID}.jpg';
     
-    String imageUrl = '';
+    var imageUrl = '';
     try{
-      final StorageReference reference = _firebaseStorage.ref().child(imageName);
+      final reference = _firebaseStorage.ref().child(imageName);
       imageUrl = await reference.getDownloadURL();
     } on PlatformException{
       imageUrl = '';//An error is thrown if the image is not found

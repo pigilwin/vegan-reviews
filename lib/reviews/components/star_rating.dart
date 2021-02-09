@@ -41,8 +41,8 @@ class StarRating extends StatelessWidget {
       },
       onHorizontalDragUpdate: (DragUpdateDetails updateDetails) {
         final RenderBox renderBox = context.findRenderObject();
-        final Offset offset = renderBox.globalToLocal(updateDetails.globalPosition);
-        int i = offset.dx ~/ size.toInt();
+        final offset = renderBox.globalToLocal(updateDetails.globalPosition);
+        var i = offset.dx ~/ size.toInt();
         if (i > stars) {
           i = stars;
         }
@@ -55,7 +55,7 @@ class StarRating extends StatelessWidget {
   }
 
   Widget _buildIcon(BuildContext context, int index) {
-    final Color color = Theme.of(context).primaryColor;
+    final color = Theme.of(context).primaryColor;
     
     if (index >= rating) {
       return Icon(Icons.star_border,

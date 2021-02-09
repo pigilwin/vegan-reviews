@@ -15,14 +15,14 @@ class _NewReviewState extends State<NewReview> {
   @override
   void initState() {
     super.initState();
-    reviewsBloc = context.bloc<ReviewsBloc>();
+    reviewsBloc = context.read<ReviewsBloc>();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Create a new review"),
+        title: const Text('Create a new review'),
         centerTitle: true,
       ),
       body: BlocListener<ReviewsBloc, ReviewsState>(

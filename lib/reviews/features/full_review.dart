@@ -24,8 +24,8 @@ class _FullReviewState extends State<FullReview> {
   @override
   void initState() {
     super.initState();
-    reviewsBloc = context.bloc<ReviewsBloc>();
-    final ReviewsState state = reviewsBloc.state;
+    reviewsBloc = context.read<ReviewsBloc>();
+    final state = reviewsBloc.state;
     if (state is LoadedReviews) {
       review = state.getReviewById(widget.reviewId);
     }
@@ -55,7 +55,7 @@ class _FullReviewState extends State<FullReview> {
                   });
                 },
               ),
-              title: Text("Editting ${review.name}"),
+              title: Text('Editting ${review.name}'),
               centerTitle: true,
             ),
             body: SafeArea(
@@ -147,7 +147,7 @@ class _FullReviewState extends State<FullReview> {
       return const Padding(
         padding: EdgeInsets.all(10),
         child: SafeArea(
-          child: Text("This was a limited time item so may not be avalible anylonger", 
+          child: Text('This was a limited time item so may not be avalible anylonger', 
             style: TextStyle(fontSize: 20, color: Colors.red),
             overflow: TextOverflow.clip,
           )
@@ -160,14 +160,14 @@ class _FullReviewState extends State<FullReview> {
   Widget _getSupplier() {
     return Padding(
       padding: const EdgeInsets.all(10),
-      child: Text("Brand: ${review.supplier}", style: const TextStyle(fontSize: 20)),
+      child: Text('Brand: ${review.supplier}', style: const TextStyle(fontSize: 20)),
     );
   }
 
   Widget _getPrice() {
     return Padding(
       padding: const EdgeInsets.all(10),
-      child: Text("Price: £${review.price.toStringAsFixed(2)}", style: const TextStyle(fontSize: 20)),
+      child: Text('Price: £${review.price.toStringAsFixed(2)}', style: const TextStyle(fontSize: 20)),
     );
   }
 

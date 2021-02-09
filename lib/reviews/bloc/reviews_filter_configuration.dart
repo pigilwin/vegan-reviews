@@ -20,5 +20,5 @@ class ReviewsFilterConfiguration {
   final int stars;
 
   @override
-  String toString() => "$foodType - $limited - $stars";
+  String toString() => '$foodType - $limited - $stars';
 }

@@ -78,7 +78,7 @@ class _ReviewEditorState extends State<ReviewEditor> {
         ),
         validator: (String name) {
           if (name.isEmpty) {
-            return "A name must be supplied";
+            return 'A name must be supplied';
           }
           return null;
         },
@@ -96,7 +96,7 @@ class _ReviewEditorState extends State<ReviewEditor> {
         ),
         validator: (String name) {
           if (name.isEmpty) {
-            return "A description must be supplied";
+            return 'A description must be supplied';
           }
           return null;
         },
@@ -116,10 +116,10 @@ class _ReviewEditorState extends State<ReviewEditor> {
         ),
         validator: (String value) {
           if (value.isEmpty) {
-            return "Please enter a price";
+            return 'Please enter a price';
           }
           if (double.tryParse(value) == null) {
-            return "Please enter a valid price";
+            return 'Please enter a valid price';
           }
           return null;
         },
@@ -141,7 +141,7 @@ class _ReviewEditorState extends State<ReviewEditor> {
         value: type,
         validator: (String value) {
           if (value == 'None Selected'){
-            return "A value must be selected";
+            return 'A value must be selected';
           }
           return null;
         },
@@ -174,8 +174,8 @@ class _ReviewEditorState extends State<ReviewEditor> {
           limitedTime = newlimitedTime;
         });
       },
-      title: const Text("Limited time?"),
-      subtitle: const Text("Was this a limited time option?"),
+      title: const Text('Limited time?'),
+      subtitle: const Text('Was this a limited time option?'),
     );
   }
 
@@ -189,7 +189,7 @@ class _ReviewEditorState extends State<ReviewEditor> {
         ),
         validator: (String value) {
           if (value.isEmpty) {
-            return "A supplier must be set";
+            return 'A supplier must be set';
           }
           return null;
         },
@@ -223,16 +223,16 @@ class _ReviewEditorState extends State<ReviewEditor> {
         Button(
           buttonText: 'Take a image',
           onPressed: () async {
-            final io.File cameraImage = await ImagePicker.pickImage(source: ImageSource.camera);
+            final cameraImage = await ImagePicker.pickImage(source: ImageSource.camera);
             setState(() {
               image = cameraImage;
             });
           },
         ),
         Button(
-          buttonText: "Choose a image",
+          buttonText: 'Choose a image',
           onPressed: () async {
-            final io.File galleryImage = await ImagePicker.pickImage(source: ImageSource.gallery);
+            final galleryImage = await ImagePicker.pickImage(source: ImageSource.gallery);
             setState(() {
               image = galleryImage;
             });
@@ -263,7 +263,7 @@ class _ReviewEditorState extends State<ReviewEditor> {
             buttonText: 'Save',
             onPressed: () {
               if (isReviewValid()) {
-                final Review review = Review(
+                final review = Review(
                   name: nameController.text,
                   description: descriptionController.text,
                   price: double.tryParse(priceController.text),
@@ -278,8 +278,8 @@ class _ReviewEditorState extends State<ReviewEditor> {
                 review.image = image;
                 widget.reviewFinished(review);
               } else {
-                Scaffold.of(context).showSnackBar(const SnackBar(
-                  content: Text("Validation failed"),
+                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                  content: Text('Validation failed'),
                 ));
               }
             },

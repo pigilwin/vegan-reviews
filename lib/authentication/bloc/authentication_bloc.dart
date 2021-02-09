@@ -37,7 +37,7 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
       return;
     }
 
-    final User user = await authenticationService.signInWithUsernameAndPassword(event.email, event.password);
+    final user = await authenticationService.signInWithUsernameAndPassword(event.email, event.password);
     
     if (user == null) {
       yield const NoAuthentication(wasPreviouslyLoggedIn: false);

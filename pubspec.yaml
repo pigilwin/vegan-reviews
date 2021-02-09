@@ -15,18 +15,20 @@ dependencies:
   firebase_auth: 0.16.0
   firebase_storage: 3.1.5
   google_sign_in: 4.5.1
-  bloc: 6.0.1
-  flutter_bloc: 6.0.1
-  equatable: 1.2.3
+  bloc: ^6.1.0
+  flutter_bloc: ^6.1.0
+  equatable: ^1.2.5
   image_picker: 0.6.6+4
   uuid: 2.0.4
   connectivity: 0.4.8+6
   intl: 0.16.1
+
   
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_launcher_icons: 0.7.5
+  pedantic: ^1.9.2
 
 flutter:
   uses-material-design: true

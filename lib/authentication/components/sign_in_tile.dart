@@ -19,7 +19,7 @@ class _SignInTileState extends State<SignInTile>{
   @override
   void initState() {
     super.initState();
-    authenticationBloc = context.bloc<AuthenticationBloc>();
+    authenticationBloc = context.read<AuthenticationBloc>();
   }
 
   @override
@@ -36,8 +36,8 @@ class _SignInTileState extends State<SignInTile>{
       listener: (BuildContext context, AuthenticationState state) {
         if (state is NoAuthentication) {
           if (!state.wasPreviouslyLoggedIn){//Only show the message if the user was not previouslly logged in
-            Scaffold.of(context).showSnackBar(const SnackBar(
-              content: Text("Failed to login", style: TextStyle(color: Colors.red)),
+            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+              content: Text('Failed to login', style: TextStyle(color: Colors.red)),
               duration: Duration(seconds: 5),
             ));
           }
@@ -55,7 +55,7 @@ class _SignInTileState extends State<SignInTile>{
             return Center(
               child: Column(
                 children: [
-                  Text("Hello ${state.user.email.value}", style: const TextStyle(fontSize: 20)),
+                  Text('Hello ${state.user.email.value}', style: const TextStyle(fontSize: 20)),
                   Button(
                     buttonText: 'Sign Out',
                     onPressed: () {
@@ -88,7 +88,7 @@ class _SignInTileState extends State<SignInTile>{
               controller: usernameController,
               validator: (String value) {
                 if (value.isEmpty) {
-                  return "A Email must be supplied";
+                  return 'A Email must be supplied';
                 }
                 return null;
               },
@@ -104,7 +104,7 @@ class _SignInTileState extends State<SignInTile>{
               controller: passwordController,
               validator: (String value) {
                 if (value.isEmpty) {
-                  return "A password must be supplied";
+                  return 'A password must be supplied';
                 }
                 return null;
               },

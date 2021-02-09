@@ -30,7 +30,7 @@ class FoodTypeSelector extends StatelessWidget {
   }
 
   List<DropdownMenuItem<String>> _getItems() {
-    final List<DropdownMenuItem<String>> items = [];
+    final items = <DropdownMenuItem<String>>[];
     Review.types.forEach((String key, String value) { 
       items.add(DropdownMenuItem(
         value: key,

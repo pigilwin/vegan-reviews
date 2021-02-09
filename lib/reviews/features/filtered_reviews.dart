@@ -19,7 +19,7 @@ class _FilteredReviewsState extends State<FilteredReviews> {
   @override
   void initState() {
     super.initState();
-    final ReviewsState state = context.bloc<ReviewsBloc>().state;
+    final state = context.read<ReviewsBloc>().state;
     foodType = state.filterConfiguration.foodType;
     limited = state.filterConfiguration.limited;
     stars = state.filterConfiguration.stars;
@@ -31,7 +31,7 @@ class _FilteredReviewsState extends State<FilteredReviews> {
       key: scaffoldKey,
       appBar: AppBar(
         centerTitle: true,
-        title: const Text("Reviews by filter"),
+        title: const Text('Reviews by filter'),
       ),
       body: BlocBuilder<ReviewsBloc, ReviewsState>(
         builder: (BuildContext builderContext, ReviewsState state) {

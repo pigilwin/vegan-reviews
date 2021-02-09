@@ -6,7 +6,7 @@ class AuthenticationService {
 
   Future<User> signInWithUsernameAndPassword(Email email, Password password) async {
     try {
-      final AuthResult result = await _firebaseAuth.signInWithEmailAndPassword(
+      final result = await _firebaseAuth.signInWithEmailAndPassword(
         email: email.value, 
         password: password.value
       );

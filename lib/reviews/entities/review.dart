@@ -34,9 +34,9 @@ class Review extends Equatable {
   }
 
   static const Map<String, String> types = {
-    "none": 'None Selected',
-    "savoury": 'Savoury',
-    "sweet": 'Sweet'
+    'none': 'None Selected',
+    'savoury': 'Savoury',
+    'sweet': 'Sweet'
   };
 
   static const int amountOfStars = 10;
@@ -67,7 +67,7 @@ class Review extends Equatable {
     };
   }
 
-  String get imageName => "${id}.jpg";
+  String get imageName => '${id}.jpg';
 
   int _boolToInt(bool value) {
     if (value) {

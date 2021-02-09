@@ -10,17 +10,17 @@ class WorthIt extends StatelessWidget {
   final Review review;
 
   static const Map<String, List<int>> emojis = {
-    "🤢": [0, 1, 2],
-    "😞": [3, 4],
-    "😑": [5, 6],
-    "😊": [7, 8],
-    "😍": [9, 10]
+    '🤢': [0, 1, 2],
+    '😞': [3, 4],
+    '😑': [5, 6],
+    '😊': [7, 8],
+    '😍': [9, 10]
   };
 
   @override
   Widget build(BuildContext context) {
     
-    String emoji = "";
+    var emoji = '';
     emojis.forEach((String face, List<int> value) { 
       if (value.contains(review.stars)){
         emoji = face;

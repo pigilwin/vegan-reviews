@@ -71,15 +71,15 @@ class ReviewOverviewCard extends StatelessWidget {
 
   Widget _getCreatedTime() {
     
-    double fontSize = 20;
+    var fontSize = 20.0;
     if (shrink) {
-      fontSize = 10;
+      fontSize = 10.0;
     }
 
-    final DateFormat dateFormat = DateFormat.yMMMMEEEEd();
+    final dateFormat = DateFormat.yMMMMEEEEd();
     return Padding(
       padding: const EdgeInsets.all(10),
-      child: Text("${dateFormat.format(review.created)}", style: TextStyle(fontSize: fontSize)),
+      child: Text('${dateFormat.format(review.created)}', style: TextStyle(fontSize: fontSize)),
     );
   }
 }
