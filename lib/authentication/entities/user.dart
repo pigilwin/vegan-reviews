@@ -26,4 +26,5 @@ class User {
   final String id;
 
   bool get isValid => id.isNotEmpty && email.value.isNotEmpty;
+  bool get isInvalid => !isValid;
 }

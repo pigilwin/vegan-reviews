@@ -38,8 +38,8 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
     }
 
     final user = await authenticationService.signInWithUsernameAndPassword(event.email, event.password);
-    
-    if (user.isValid) {
+        
+    if (user.isInvalid) {
       yield const NoAuthentication(false);
       return;
     }
