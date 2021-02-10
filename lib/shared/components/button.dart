@@ -12,13 +12,16 @@ class Button extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FlatButton(
-      color: Theme.of(context).primaryColor,
-      child: Text(buttonText, style: const TextStyle(fontSize: 20, color: Colors.white)),
-      onPressed: onPressed,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20)
+    return TextButton(
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.green,
+          borderRadius: BorderRadius.circular(5)
+        ),
+        padding: EdgeInsets.all(3),
+        child: Text(buttonText, style: const TextStyle(fontSize: 20, color: Colors.white)),
       ),
+      onPressed: onPressed
     );
   }
 }
