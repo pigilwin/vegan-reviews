@@ -15,6 +15,17 @@ class RequestAuthenticationEvent extends AuthenticationEvent {
   List<Object> get props => [email.value, password.value]; 
 }
 
+class PersistenceSignInEvent extends AuthenticationEvent {
+
+  const PersistenceSignInEvent(this.user);
+
+  final User user;
+
+  @override
+  List<Object> get props => [user];
+
+}
+
 class SignOutEvent extends AuthenticationEvent {
 
   const SignOutEvent();

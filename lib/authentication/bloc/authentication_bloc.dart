@@ -13,7 +13,13 @@ part 'authentication_service.dart';
 
 class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> with Network {
 
-  AuthenticationBloc(): super(const NoAuthentication(false));
+  AuthenticationBloc(): super(const NoAuthentication(false)) {
+    auth.FirebaseAuth.instance.authStateChanges().listen((event) {
+      if (event != null) {
+        add(PersistenceSignInEvent(User.fromFirebaseUser(event)));
+      }
+    });
+  }
 
   final AuthenticationService authenticationService = AuthenticationService();
 
@@ -21,6 +27,11 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
   Stream<AuthenticationState> mapEventToState(
     AuthenticationEvent event,
   ) async* {
+
+    if (event is PersistenceSignInEvent) {
+      yield* _mapPersistenceSignInEventToState(event);
+    }
+
     if (event is RequestAuthenticationEvent) {
       yield* _mapRequestAuthenticationEventToState(event);
     }
@@ -45,6 +56,11 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
     }
 
     yield Authenticated(user);
+  }
+
+  Stream<AuthenticationState> _mapPersistenceSignInEventToState(PersistenceSignInEvent event) async* {
+    yield const AuthenticationLoading();
+    yield Authenticated(event.user);
   }
 
   Stream<AuthenticationState> _mapSignOutEventToState() async* {
