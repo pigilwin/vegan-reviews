@@ -13,7 +13,7 @@ part 'authentication_service.dart';
 
 class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> with Network {
 
-  AuthenticationBloc(): super(const NoAuthentication());
+  AuthenticationBloc(): super(const NoAuthentication(false));
 
   final AuthenticationService authenticationService = AuthenticationService();
 
@@ -33,14 +33,14 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
     yield const AuthenticationLoading();
 
     if (await hasNoNetworkAccess()) {
-      yield const NoAuthentication(wasPreviouslyLoggedIn: false);
+      yield const NoAuthentication(false);
       return;
     }
 
     final user = await authenticationService.signInWithUsernameAndPassword(event.email, event.password);
     
-    if (user == null) {
-      yield const NoAuthentication(wasPreviouslyLoggedIn: false);
+    if (user.isValid) {
+      yield const NoAuthentication(false);
       return;
     }
 
@@ -50,6 +50,6 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
   Stream<AuthenticationState> _mapSignOutEventToState() async* {
     yield const AuthenticationLoading();
     await authenticationService.signOut();
-    yield const NoAuthentication(wasPreviouslyLoggedIn: true);
+    yield const NoAuthentication(true);
   }
 }

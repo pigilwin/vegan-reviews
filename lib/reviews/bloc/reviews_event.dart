@@ -44,15 +44,3 @@ class DeleteReviewEvent extends ReviewsEvent {
   @override
   List<Object> get props => [review];
 }
-
-class FilterReviewsEvent extends ReviewsEvent {
-
-  const FilterReviewsEvent({
-    this.filterConfiguration
-  });
-
-  final ReviewsFilterConfiguration filterConfiguration;
-
-  @override
-  List<Object> get props => [filterConfiguration];
-}

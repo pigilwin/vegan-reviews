@@ -90,7 +90,7 @@ class _SignInTileState extends State<SignInTile>{
                 if (value.isEmpty) {
                   return 'A Email must be supplied';
                 }
-                return null;
+                return '';
               },
               decoration: const InputDecoration(
                 labelText: 'Email'

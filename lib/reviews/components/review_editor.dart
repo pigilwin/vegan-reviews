@@ -223,18 +223,20 @@ class _ReviewEditorState extends State<ReviewEditor> {
         Button(
           buttonText: 'Take a image',
           onPressed: () async {
-            final cameraImage = await ImagePicker.pickImage(source: ImageSource.camera);
+            final imagePicker = ImagePicker();
+            final cameraImage = await imagePicker.getImage(source: ImageSource.camera);
             setState(() {
-              image = cameraImage;
+              image = io.File(cameraImage.path);
             });
           },
         ),
         Button(
           buttonText: 'Choose a image',
           onPressed: () async {
-            final galleryImage = await ImagePicker.pickImage(source: ImageSource.gallery);
+            final imagePicker = ImagePicker();
+            final galleryImage = await imagePicker.getImage(source: ImageSource.gallery);
             setState(() {
-              image = galleryImage;
+              image = io.File(galleryImage.path);
             });
           },
         )

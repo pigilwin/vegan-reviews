@@ -12,7 +12,7 @@ class AuthenticationService {
       );
       return User.fromFirebaseUser(result.user);
     } catch (e) {
-      return null;
+      return User.empty();
     }
   }
 

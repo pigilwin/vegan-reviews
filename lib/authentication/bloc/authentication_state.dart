@@ -16,7 +16,7 @@ class Authenticated extends AuthenticationState {
 
 class NoAuthentication extends AuthenticationState {
 
-  const NoAuthentication({this.wasPreviouslyLoggedIn});
+  const NoAuthentication(this.wasPreviouslyLoggedIn);
 
   final bool wasPreviouslyLoggedIn;
 

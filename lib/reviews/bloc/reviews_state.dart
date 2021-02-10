@@ -3,19 +3,15 @@ part of 'reviews_bloc.dart';
 abstract class ReviewsState extends Equatable {
   
   const ReviewsState(
-    this.allPossibleReviews, 
-    this.filteredReviews,
-    this.filterConfiguration
+    this.allPossibleReviews
   );
 
   final List<Review> allPossibleReviews;
-  final List<Review> filteredReviews;
-  final ReviewsFilterConfiguration filterConfiguration;
 
   Review get latestReview {
     
     if (allPossibleReviews.isEmpty) {
-      return null;
+      return Review.empty();
     }
     
     allPossibleReviews.sort((Review first, Review second) {
@@ -39,38 +35,29 @@ abstract class ReviewsState extends Equatable {
 
   @override
   List<Object> get props => [
-    allPossibleReviews, 
-    filteredReviews
+    allPossibleReviews
   ];
 }
 
 class NoReviews extends ReviewsState {
   
-  NoReviews(): super([], [], ReviewsFilterConfiguration.noFiltersApplied());
+  NoReviews(): super([]);
 }
 
 class LoadingReviews extends ReviewsState {
   
   const LoadingReviews(
-    List<Review> reviews, 
-    List<Review> filteredReviews,
-    ReviewsFilterConfiguration filterConfiguration
+    List<Review> reviews
   ): super(
-    reviews, 
-    filteredReviews, 
-    filterConfiguration
+    reviews
   );
 }
 
 class LoadedReviews extends ReviewsState {
   
   const LoadedReviews(
-    List<Review> reviews, 
-    List<Review> filteredReviews,
-    ReviewsFilterConfiguration filterConfiguration
+    List<Review> reviews,
   ): super(
-    reviews, 
-    filteredReviews,
-    filterConfiguration
+    reviews
   );
 }

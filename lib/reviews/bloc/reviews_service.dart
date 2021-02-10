@@ -28,14 +28,13 @@ class ReviewsService {
   }
 
   Future<void> edit(Review review) async {
-    if (review.image != null){//If we have selected a new image then we will delete the old one and upload
-      try{
-        await _firebaseStorage.ref().child(review.imageName).delete();//If the image does exist then delete it
-      } on PlatformException {
-        print('No image to delete');
-      }
-      await _firebaseStorage.ref().child(review.imageName).putFile(review.image);
+    try{
+      //If the image does exist then delete it
+      await _firebaseStorage.ref().child(review.imageName).delete();
+    } on PlatformException {
+      print('No image to delete');
     }
+    await _firebaseStorage.ref().child(review.imageName).putFile(review.image);
     await _firestore.collection('reviews').doc(review.id).update(review.toMap());
   }
 
@@ -59,6 +58,14 @@ class ReviewsService {
     } on PlatformException{
       imageUrl = '';//An error is thrown if the image is not found
     }
+
+    var created = DateTime.now();
+    try {
+      created = DateTime.parse(data['created']);
+    } on FormatException {
+      created = DateTime.now();
+    }
+    
     
     return Review(
       id: documentChange.doc.id,
@@ -70,7 +77,7 @@ class ReviewsService {
       supplier: data['supplier'],
       limited: _intToBool(data['limited']),
       price: data['price'],
-      created: DateTime.tryParse(data['created'])
+      created: created
     );
   }
 

@@ -3,18 +3,27 @@ import 'package:vegan_reviews/authentication/authentication.dart';
 
 class User {
   
-  const User({
+  const User(
     this.id,
     this.email
-  });
+  );
   
   factory User.fromFirebaseUser(auth.User user) {
     return User(
-      id: user.uid,
-      email: Email(user.email)
+      user.uid,
+      Email(user.email)
+    );
+  }
+
+  factory User.empty() {
+    return User(
+      '',
+      Email('')
     );
   }
 
   final Email email;
   final String id;
+
+  bool get isValid => id.isNotEmpty && email.value.isNotEmpty;
 }
