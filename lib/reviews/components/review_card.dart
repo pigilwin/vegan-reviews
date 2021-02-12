@@ -2,17 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:vegan_reviews/reviews/reviews.dart';
 
-class ReviewOverviewCard extends StatelessWidget {
+class ReviewCard extends StatelessWidget {
 
-  const ReviewOverviewCard({
+  const ReviewCard({
     this.review,
-    this.onTap,
-    this.shrink
+    this.onTap
   });
 
   final Review review;
   final void Function(Review review) onTap;
-  final bool shrink;
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +37,7 @@ class ReviewOverviewCard extends StatelessWidget {
                 onRatingChanged: null,
                 stars: Review.amountOfStars,
                 rating: review.stars,
-                size: shrink ? 10.0 : 30.0,
+                size: 30.0,
               ),
               _getCreatedTime()
             ],
@@ -71,11 +69,7 @@ class ReviewOverviewCard extends StatelessWidget {
 
   Widget _getCreatedTime() {
     
-    var fontSize = 20.0;
-    if (shrink) {
-      fontSize = 10.0;
-    }
-
+    final fontSize = 20.0;
     final dateFormat = DateFormat.yMMMMEEEEd();
     return Padding(
       padding: const EdgeInsets.all(10),

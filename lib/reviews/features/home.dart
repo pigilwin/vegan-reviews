@@ -24,7 +24,12 @@ class _HomeState extends State<Home> {
             itemCount: state.allPossibleReviews.length,
             itemBuilder: (context, i) {
               final review = state.allPossibleReviews[i];
-              
+              return ReviewCard(
+                review: review,
+                onTap: (r) {
+
+                }
+              );
             }
           );
         },
