@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:vegan_reviews/authentication/authentication.dart';
+import 'package:vegan_reviews/reviews/features/feed.dart';
 import 'package:vegan_reviews/reviews/reviews.dart';
 
 class Home extends StatefulWidget {
@@ -10,6 +12,14 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+
+  AuthenticationBloc authenticationBloc;
+
+  @override
+  void initState() {
+    super.initState();
+    authenticationBloc = context.read<AuthenticationBloc>();
+  }
   
   @override
   Widget build(BuildContext context) {
@@ -17,24 +27,37 @@ class _HomeState extends State<Home> {
       appBar: AppBar(
         centerTitle: true,
         title: Text('Jody\'s Vegan Reviews'),
+        actions: [
+          _getAuthIcon()
+        ],
       ),
-      body: BlocBuilder<ReviewsBloc, ReviewsState>(
-        builder: (context, ReviewsState state) {
-          return ListView.builder(
-            itemCount: state.allPossibleReviews.length,
-            itemBuilder: (context, i) {
-              final review = state.allPossibleReviews[i];
-              return ReviewCard(
-                review: review,
-                onTap: (r) {
-
-                }
-              );
-            }
-          );
-        },
+      body: PageView(
+        children: [Feed()],
       ),
       bottomNavigationBar: Navigation(),
+    );
+  }
+
+  Widget _getAuthIcon() {
+    return BlocBuilder<AuthenticationBloc, AuthenticationState>(
+      builder: (_, AuthenticationState state) {
+
+        if (state is Authenticated) {
+          return IconButton(
+            icon: Icon(Icons.logout),
+            onPressed: () {
+              authenticationBloc.add(const SignOutEvent());
+            },
+          );
+        }
+
+        return IconButton(
+          icon: Icon(Icons.login),
+          onPressed: () {
+            Navigator.of(context).pushNamed('/login');
+          },
+        );
+      },
     );
   }
 }
