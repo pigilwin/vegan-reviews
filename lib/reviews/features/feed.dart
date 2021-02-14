@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:vegan_reviews/authentication/authentication.dart';
 import 'package:vegan_reviews/reviews/reviews.dart';
 
 class Feed extends StatefulWidget {
@@ -10,6 +11,14 @@ class Feed extends StatefulWidget {
 
 class _FeedState extends State<Feed> {
 
+  AuthenticationBloc authenticationBloc;
+
+  @override
+  void initState() {
+    super.initState();
+    authenticationBloc = context.read<AuthenticationBloc>();
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ReviewsBloc, ReviewsState>(
@@ -19,7 +28,12 @@ class _FeedState extends State<Feed> {
           itemBuilder: (context, i) {
             final review = state.allPossibleReviews[i];
             return ReviewCard(
-              review: review
+              review: review,
+              onTap: () {
+                if (authenticationBloc.state is Authenticated) {
+                  Navigator.of(context).pushNamed('/review/edit', arguments: review.id);
+                }
+              },
             );
           }
         );

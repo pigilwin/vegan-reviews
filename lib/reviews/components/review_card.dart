@@ -5,24 +5,29 @@ import 'package:vegan_reviews/reviews/reviews.dart';
 class ReviewCard extends StatelessWidget {
 
   const ReviewCard({
-    this.review
+    this.review,
+    this.onTap
   });
 
   final Review review;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: Padding(
-        padding: EdgeInsets.all(6.5),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            _getImage(),
-            _getText(),
-            _getStars(),
-            _getCreatedTime()
-          ],
+    return GestureDetector(
+      onTap: onTap,
+      child: Card(
+        child: Padding(
+          padding: EdgeInsets.all(6.5),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              _getImage(),
+              _getText(),
+              _getStars(),
+              _getCreatedTime()
+            ],
+          ),
         ),
       ),
     );
