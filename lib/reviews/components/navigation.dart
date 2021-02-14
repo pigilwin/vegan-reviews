@@ -21,6 +21,11 @@ class _NavigationState extends State<Navigation> {
     ));
 
     items.add(BottomNavigationBarItem(
+      label: 'Saved',
+      icon: Icon(Icons.layers_rounded)
+    ));
+
+    items.add(BottomNavigationBarItem(
       label: 'About',
       icon: Icon(Icons.info)
     ));
