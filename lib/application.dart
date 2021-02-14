@@ -14,6 +14,7 @@ class Application extends StatelessWidget {
         title: 'Vegan Reviews',
         theme: ThemeData(
           primarySwatch: Colors.green,
+          scaffoldBackgroundColor: Colors.blueGrey[50],
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
         initialRoute: '/',

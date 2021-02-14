@@ -19,10 +19,7 @@ class _FeedState extends State<Feed> {
           itemBuilder: (context, i) {
             final review = state.allPossibleReviews[i];
             return ReviewCard(
-              review: review,
-              onTap: (r) {
-
-              }
+              review: review
             );
           }
         );
