@@ -3,12 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vegan_reviews/authentication/authentication.dart';
 import 'package:vegan_reviews/shared/shared.dart';
 
-class SignInTile extends StatefulWidget{
+class Authenticate extends StatefulWidget{
   @override
-  _SignInTileState createState() => _SignInTileState();
+  _AuthenticateState createState() => _AuthenticateState();
 }
 
-class _SignInTileState extends State<SignInTile>{
+class _AuthenticateState extends State<Authenticate>{
   
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
@@ -31,48 +31,41 @@ class _SignInTileState extends State<SignInTile>{
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<AuthenticationBloc, AuthenticationState>(
-      cubit: authenticationBloc,
-      listener: (BuildContext context, AuthenticationState state) {
-        if (state is NoAuthentication) {
-          if (!state.wasPreviouslyLoggedIn){//Only show the message if the user was not previouslly logged in
-            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-              content: Text('Failed to login', style: TextStyle(color: Colors.red)),
-              duration: Duration(seconds: 5),
-            ));
-          }
-        }
-
-        if (state is Authenticated){
-          usernameController.clear();
-          passwordController.clear();
-        }
-      },
-      child: BlocBuilder<AuthenticationBloc, AuthenticationState>(
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text('Authenicate'),
+      ),
+      body: BlocListener<AuthenticationBloc, AuthenticationState>(
         cubit: authenticationBloc,
-        builder: (BuildContext context, AuthenticationState state) {
-          if (state is Authenticated) {
-            return Center(
-              child: Column(
-                children: [
-                  Text('Hello ${state.user.email.value}', style: const TextStyle(fontSize: 20)),
-                  Button(
-                    buttonText: 'Sign Out',
-                    onPressed: () {
-                      authenticationBloc.add(const SignOutEvent());
-                    },
-                  )
-                ],
-              ),
-            );
+        listener: (BuildContext context, AuthenticationState state) {
+          if (state is NoAuthentication) {
+            if (!state.wasPreviouslyLoggedIn){//Only show the message if the user was not previouslly logged in
+              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                content: Text('Failed to login', style: TextStyle(color: Colors.red)),
+                duration: Duration(seconds: 5),
+              ));
+            }
           }
-          if (state is AuthenticationLoading) {
-            return const Center(
-              child: CircularProgressIndicator()
-            );
+          if (state is Authenticated){
+            usernameController.clear();
+            passwordController.clear();
+            Navigator.of(context).popUntil(ModalRoute.withName('/'));
           }
-          return _getSignInPage();
         },
+        child: BlocBuilder<AuthenticationBloc, AuthenticationState>(
+          cubit: authenticationBloc,
+          builder: (BuildContext context, AuthenticationState state) {
+            if (state is AuthenticationLoading) {
+              return const Center(
+                child: CircularProgressIndicator()
+              );
+            }
+            return Card(
+              child: _getSignInPage(),
+            );
+          },
+        ),
       ),
     );
   }

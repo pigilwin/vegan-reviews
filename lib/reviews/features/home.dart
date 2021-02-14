@@ -35,13 +35,14 @@ class _HomeState extends State<Home> {
         children: [Feed()],
       ),
       bottomNavigationBar: Navigation(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+      floatingActionButton: _getCreateButton(),
     );
   }
 
   Widget _getAuthIcon() {
     return BlocBuilder<AuthenticationBloc, AuthenticationState>(
       builder: (_, AuthenticationState state) {
-
         if (state is Authenticated) {
           return IconButton(
             icon: Icon(Icons.logout),
@@ -50,7 +51,6 @@ class _HomeState extends State<Home> {
             },
           );
         }
-
         return IconButton(
           icon: Icon(Icons.login),
           onPressed: () {
@@ -58,6 +58,22 @@ class _HomeState extends State<Home> {
           },
         );
       },
+    );
+  }
+
+  Widget _getCreateButton() {
+    return BlocBuilder<AuthenticationBloc, AuthenticationState>(
+      builder: (_, AuthenticationState state) {
+        if (state is Authenticated) {
+          return FloatingActionButton(
+            child: Icon(Icons.edit),
+            onPressed: () {
+              Navigator.of(context).pushNamed('/review/new');
+            },
+          );
+        }
+        return SizedBox.shrink();
+      }
     );
   }
 }
