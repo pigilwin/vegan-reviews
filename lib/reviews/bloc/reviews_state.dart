@@ -3,18 +3,18 @@ part of 'reviews_bloc.dart';
 abstract class ReviewsState extends Equatable {
   
   const ReviewsState(
-    this.allPossibleReviews
+    this.reviews
   );
 
-  final List<Review> allPossibleReviews;
+  final List<Review> reviews;
 
   Review get latestReview {
     
-    if (allPossibleReviews.isEmpty) {
+    if (reviews.isEmpty) {
       return Review.empty();
     }
     
-    allPossibleReviews.sort((Review first, Review second) {
+    reviews.sort((Review first, Review second) {
       if (first.created.isAfter(second.created)) {
         return 1;
       }
@@ -24,18 +24,18 @@ abstract class ReviewsState extends Equatable {
       return -1;
     });
 
-    return allPossibleReviews.last;
+    return reviews.last;
   }
 
   Review getReviewById(String reviewId) {
-    return allPossibleReviews.firstWhere((Review element) {
+    return reviews.firstWhere((Review element) {
       return element.id == reviewId;
     });
   }
 
   @override
   List<Object> get props => [
-    allPossibleReviews
+    reviews
   ];
 }
 

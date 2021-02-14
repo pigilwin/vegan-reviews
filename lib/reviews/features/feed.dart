@@ -24,9 +24,9 @@ class _FeedState extends State<Feed> {
     return BlocBuilder<ReviewsBloc, ReviewsState>(
       builder: (context, ReviewsState state) {
         return ListView.builder(
-          itemCount: state.allPossibleReviews.length,
+          itemCount: state.reviews.length,
           itemBuilder: (context, i) {
-            final review = state.allPossibleReviews[i];
+            final review = state.reviews[i];
             return ReviewCard(
               review: review,
               onTap: () {

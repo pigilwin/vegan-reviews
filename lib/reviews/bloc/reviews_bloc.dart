@@ -49,7 +49,7 @@ class ReviewsBloc extends Bloc<ReviewsEvent, ReviewsState> {
     final modifiedReviewIds = event.reviews.map<String>((Review review) {
       return review.id;
     }).toList();
-    final reviews = List<Review>.from(state.allPossibleReviews);
+    final reviews = List<Review>.from(state.reviews);
     final reviewsWithoutDeleted = reviews.where((Review element) {
       return !event.deleted.contains(element.id);
     }).toList();
@@ -59,21 +59,21 @@ class ReviewsBloc extends Bloc<ReviewsEvent, ReviewsState> {
     
     reviewsWithoutModified.addAll(event.reviews);
     
-    yield LoadedReviews(reviewsWithoutModified);
+    yield LoadedReviews(reviewsWithoutModified.reversed.toList());
   }
 
   Stream<ReviewsState> _mapAddNewReviewEventToState(AddNewReviewEvent event) async* {
-    yield LoadingReviews(state.allPossibleReviews);
+    yield LoadingReviews(state.reviews);
     await reviewsService.add(event.review);
   }
 
   Stream<ReviewsState> _mapEditReviewEventToState(EditReviewEvent event) async* {
-    yield LoadingReviews(state.allPossibleReviews);
+    yield LoadingReviews(state.reviews);
     await reviewsService.edit(event.review);
   }
 
   Stream<ReviewsState> _mapDeleteReviewEventToState(DeleteReviewEvent event) async* {
-    yield LoadingReviews(state.allPossibleReviews);
+    yield LoadingReviews(state.reviews);
     await reviewsService.delete(event.review);
   }
 }
