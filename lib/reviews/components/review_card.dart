@@ -53,17 +53,15 @@ class ReviewCard extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Container(
-          child: Text(
-            review.name + ': ',
-            style: TextStyle(
-              color: Colors.black,
-              fontWeight: FontWeight.bold,
+        Expanded(
+          child: RichText(
+            text: TextSpan(
+              children: <TextSpan>[
+                TextSpan(text: review.name + ': ', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+                TextSpan(text: review.description, style: TextStyle(color: Colors.black))
+              ]
             ),
           )
-        ),
-        Expanded(
-          child: Text(review.description)
         ),
       ],
     );
