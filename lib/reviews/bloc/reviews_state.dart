@@ -3,10 +3,12 @@ part of 'reviews_bloc.dart';
 abstract class ReviewsState extends Equatable {
   
   const ReviewsState(
-    this.reviews
+    this.reviews,
+    this.savedReviews
   );
 
   final List<Review> reviews;
+  final List<String> savedReviews;
 
   Review get latestReview {
     
@@ -35,21 +37,24 @@ abstract class ReviewsState extends Equatable {
 
   @override
   List<Object> get props => [
-    reviews
+    reviews,
+    savedReviews
   ];
 }
 
 class NoReviews extends ReviewsState {
   
-  NoReviews(): super([]);
+  NoReviews(): super([], []);
 }
 
 class LoadingReviews extends ReviewsState {
   
   const LoadingReviews(
-    List<Review> reviews
+    List<Review> reviews,
+    List<String> savedReviews
   ): super(
-    reviews
+    reviews,
+    savedReviews
   );
 }
 
@@ -57,7 +62,9 @@ class LoadedReviews extends ReviewsState {
   
   const LoadedReviews(
     List<Review> reviews,
+    List<String> savedReviews
   ): super(
-    reviews
+    reviews,
+    savedReviews
   );
 }
