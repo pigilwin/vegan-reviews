@@ -40,6 +40,14 @@ class _FeedState extends State<Feed> {
               toggleSave: () {
                 if (authenticationBloc.state is Authenticated) {
 
+                  ///
+                  /// The item is currently saved, removing
+                  ///
+                  if (state.savedReviews.contains(review.id)) {
+                    reviewsBloc.add(UnSaveReview(review));
+                  } else {
+                    reviewsBloc.add(SaveReview(review));
+                  }
                 }
               }
             );

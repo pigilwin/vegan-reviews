@@ -47,9 +47,9 @@ class DeleteReviewEvent extends ReviewsEvent {
   List<Object> get props => [review];
 }
 
-class SaveReview extends ReviewsEvent {
+class SaveReviewEvent extends ReviewsEvent {
   
-  const SaveReview(this.review);
+  const SaveReviewEvent(this.review);
 
   final Review review;
   
@@ -57,9 +57,9 @@ class SaveReview extends ReviewsEvent {
   List<Object> get props => [review];
 }
 
-class UnSaveReview extends ReviewsEvent {
+class UnSaveReviewEvent extends ReviewsEvent {
   
-  const UnSaveReview(this.review);
+  const UnSaveReviewEvent(this.review);
 
   final Review review;
   

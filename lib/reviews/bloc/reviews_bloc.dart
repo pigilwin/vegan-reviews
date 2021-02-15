@@ -31,6 +31,8 @@ class ReviewsBloc extends Bloc<ReviewsEvent, ReviewsState> {
   final ReviewsService reviewsService = ReviewsService();
   SharedPreferences sharedPreferences;
 
+  static const String preferencesKey = 'savedReviews';
+
   @override
   Stream<ReviewsState> mapEventToState(
     ReviewsEvent event,
@@ -50,6 +52,14 @@ class ReviewsBloc extends Bloc<ReviewsEvent, ReviewsState> {
 
     if (event is DeleteReviewEvent) {
       yield* _mapDeleteReviewEventToState(event);
+    }
+
+    if (event is SaveReviewEvent) {
+      yield* _mapSaveReviewEventToState(event);
+    }
+
+    if (event is UnSaveReviewEvent) {
+      yield* _mapUnSaveReviewEventToState(event);
     }
   }
 
@@ -90,19 +100,19 @@ class ReviewsBloc extends Bloc<ReviewsEvent, ReviewsState> {
     ///
     /// If we have never used the app before, save an empty list
     ///
-    if (!sharedPreferences.containsKey('savedReviews')) {
-      await sharedPreferences.setStringList('savedReviews', []);
+    if (!sharedPreferences.containsKey(preferencesKey)) {
+      await sharedPreferences.setStringList(preferencesKey, []);
     }
 
     ///
     /// Find the saved reviews that have been stored
     /// Loop through every saved review and remove the deleted ids
     ///
-    final savedReviews = sharedPreferences.getStringList('savedReviews').where((String savedId) {
+    final savedReviews = sharedPreferences.getStringList(preferencesKey).where((String savedId) {
       return !event.deleted.contains(savedId);
     });
 
-    await sharedPreferences.setStringList('savedReviews', []);
+    await sharedPreferences.setStringList(preferencesKey, []);
 
     yield LoadedReviews(reviewsWithoutModified.reversed.toList(), savedReviews);
   }
@@ -120,5 +130,23 @@ class ReviewsBloc extends Bloc<ReviewsEvent, ReviewsState> {
   Stream<ReviewsState> _mapDeleteReviewEventToState(DeleteReviewEvent event) async* {
     yield LoadingReviews(state.reviews, state.savedReviews);
     await reviewsService.delete(event.review);
+  }
+
+  Stream<ReviewsState> _mapSaveReviewEventToState(SaveReviewEvent event) async* {
+    yield LoadingReviews(state.reviews, state.savedReviews);
+    final savedReviews = List<String>.from(state.savedReviews);
+    savedReviews.add(event.review.id);
+    await sharedPreferences.setStringList(preferencesKey, savedReviews);
+    yield LoadedReviews(state.reviews, savedReviews);
+  }
+
+  Stream<ReviewsState> _mapUnSaveReviewEventToState(UnSaveReviewEvent event) async* {
+    yield LoadingReviews(state.reviews, state.savedReviews);
+    await reviewsService.delete(event.review);
+    final savedReviews = List<String>.from(state.savedReviews).where((String savedId) {
+      return event.review.id != savedId;
+    });
+    await sharedPreferences.setStringList(preferencesKey, savedReviews);
+    yield LoadedReviews(state.reviews, savedReviews);
   }
 }
