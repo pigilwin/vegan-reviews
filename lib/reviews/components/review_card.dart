@@ -29,6 +29,7 @@ class ReviewCard extends StatelessWidget {
               _getImage(),
               _getText(),
               _getStars(),
+              _getPrice(),
               _getCreatedTimeWithSaveIcon()
             ],
           ),
@@ -81,6 +82,22 @@ class ReviewCard extends StatelessWidget {
           size: 20.0,
           onRatingChanged: null,
         ),
+      ],
+    );
+  }
+
+  Widget _getPrice() {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        RichText(
+          text: TextSpan(
+            children: <TextSpan>[
+              TextSpan(text: 'Price: ', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+              TextSpan(text: review.price.toString(), style: TextStyle(color: Colors.black))
+            ]
+          ),
+        )
       ],
     );
   }
