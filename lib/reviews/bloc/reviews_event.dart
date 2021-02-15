@@ -46,3 +46,23 @@ class DeleteReviewEvent extends ReviewsEvent {
   @override
   List<Object> get props => [review];
 }
+
+class SaveReview extends ReviewsEvent {
+  
+  const SaveReview(this.review);
+
+  final Review review;
+  
+  @override
+  List<Object> get props => [review];
+}
+
+class UnSaveReview extends ReviewsEvent {
+  
+  const UnSaveReview(this.review);
+
+  final Review review;
+  
+  @override
+  List<Object> get props => [review];
+}
