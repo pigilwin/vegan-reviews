@@ -25,6 +25,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: _getCreateButton(),
         centerTitle: true,
         title: Text('Jody\'s Vegan Reviews'),
         actions: [
@@ -34,9 +35,7 @@ class _HomeState extends State<Home> {
       body: PageView(
         children: [Feed()],
       ),
-      bottomNavigationBar: Navigation(),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-      floatingActionButton: _getCreateButton(),
+      bottomNavigationBar: Navigation()
     );
   }
 
@@ -65,8 +64,8 @@ class _HomeState extends State<Home> {
     return BlocBuilder<AuthenticationBloc, AuthenticationState>(
       builder: (_, AuthenticationState state) {
         if (state is Authenticated) {
-          return FloatingActionButton(
-            child: Icon(Icons.edit),
+          return IconButton(
+            icon: Icon(Icons.edit),
             onPressed: () {
               Navigator.of(context).pushNamed('/review/new');
             },
