@@ -21,20 +21,20 @@ class ReviewsService {
     });
   }
 
-  Future<void> add(Review review) async {
+  Future<void> add(Review review, io.File image) async {
     final reference = _firebaseStorage.ref().child(review.imageName);
-    await reference.putFile(review.image);
+    await reference.putFile(image);
     await _firestore.collection('reviews').doc(review.id).set(review.toMap());
   }
 
-  Future<void> edit(Review review) async {
+  Future<void> edit(Review review, io.File image) async {
     try{
       //If the image does exist then delete it
       await _firebaseStorage.ref().child(review.imageName).delete();
     } on PlatformException {
       print('No image to delete');
     }
-    await _firebaseStorage.ref().child(review.imageName).putFile(review.image);
+    await _firebaseStorage.ref().child(review.imageName).putFile(image);
     await _firestore.collection('reviews').doc(review.id).update(review.toMap());
   }
 

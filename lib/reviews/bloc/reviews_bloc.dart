@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io' as io;
 import 'package:flutter/services.dart';
 
 import 'package:bloc/bloc.dart';
@@ -64,12 +65,12 @@ class ReviewsBloc extends Bloc<ReviewsEvent, ReviewsState> {
 
   Stream<ReviewsState> _mapAddNewReviewEventToState(AddNewReviewEvent event) async* {
     yield LoadingReviews(state.reviews);
-    await reviewsService.add(event.review);
+    await reviewsService.add(event.review, event.image);
   }
 
   Stream<ReviewsState> _mapEditReviewEventToState(EditReviewEvent event) async* {
     yield LoadingReviews(state.reviews);
-    await reviewsService.edit(event.review);
+    await reviewsService.edit(event.review, event.image);
   }
 
   Stream<ReviewsState> _mapDeleteReviewEventToState(DeleteReviewEvent event) async* {

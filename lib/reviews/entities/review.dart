@@ -1,4 +1,3 @@
-import 'dart:io' as io;
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:uuid/uuid.dart';
@@ -51,8 +50,6 @@ class Review extends Equatable {
   final String type;
   final DateTime created;
   final String imageUrl;
-
-  io.File image;
 
   Map<String, dynamic> toMap() {
     return {

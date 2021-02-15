@@ -17,22 +17,24 @@ class NewLoadedReviewsEvent extends ReviewsEvent {
 
 class AddNewReviewEvent extends ReviewsEvent {
   
-  const AddNewReviewEvent(this.review);
+  const AddNewReviewEvent(this.review, this.image);
 
   final Review review;
+  final io.File image;
   
   @override
-  List<Object> get props => [review];
+  List<Object> get props => [review, image];
 }
 
 class EditReviewEvent extends ReviewsEvent {
   
-  const EditReviewEvent(this.review);
+  const EditReviewEvent(this.review, this.image);
 
   final Review review;
+  final io.File image;
   
   @override
-  List<Object> get props => [review];
+  List<Object> get props => [review, image];
 }
 
 class DeleteReviewEvent extends ReviewsEvent {

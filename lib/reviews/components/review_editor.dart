@@ -13,7 +13,7 @@ class ReviewEditor extends StatefulWidget{
   });
 
   final Review review;
-  final void Function(Review review) reviewFinished;
+  final void Function(Review review, io.File image) reviewFinished;
   final void Function(Review review) reviewDeleted;
 
   @override
@@ -43,10 +43,9 @@ class _ReviewEditorState extends State<ReviewEditor> {
     supplierController = TextEditingController(text: widget.review.supplier);
     rating = widget.review.stars ?? 0;
     limitedTime = widget.review.limited;
-    image = widget.review.image;
     imageUrl = widget.review.imageUrl;
     type = widget.review.type;
-  }
+  } 
 
   @override
   Widget build(BuildContext context) {
@@ -277,8 +276,7 @@ class _ReviewEditorState extends State<ReviewEditor> {
                   created: DateTime.now(),
                   imageUrl: widget.review.imageUrl
                 );
-                review.image = image;
-                widget.reviewFinished(review);
+                widget.reviewFinished(review, image);
               } else {
                 ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                   content: Text('Validation failed'),

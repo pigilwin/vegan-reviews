@@ -1,3 +1,4 @@
+import 'dart:io' as io;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vegan_reviews/reviews/reviews.dart';
@@ -51,8 +52,11 @@ class _EditReviewState extends State<EditReview> {
               child: SingleChildScrollView(
                 child: ReviewEditor(
                   review: review,
-                  reviewFinished: (Review review) {
-                    reviewsBloc.add(AddNewReviewEvent(review));
+                  reviewFinished: (Review review, io.File image) {
+                    reviewsBloc.add(AddNewReviewEvent(review, image));
+                  },
+                  reviewDeleted: (Review review) {
+                    reviewsBloc.add(DeleteReviewEvent(review));
                   },
                 ),
               ),
