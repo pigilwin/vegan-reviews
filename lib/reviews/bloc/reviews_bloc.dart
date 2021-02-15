@@ -110,7 +110,7 @@ class ReviewsBloc extends Bloc<ReviewsEvent, ReviewsState> {
     ///
     final savedReviews = sharedPreferences.getStringList(preferencesKey).where((String savedId) {
       return !event.deleted.contains(savedId);
-    });
+    }).toList();
 
     await sharedPreferences.setStringList(preferencesKey, []);
 
@@ -142,10 +142,9 @@ class ReviewsBloc extends Bloc<ReviewsEvent, ReviewsState> {
 
   Stream<ReviewsState> _mapUnSaveReviewEventToState(UnSaveReviewEvent event) async* {
     yield LoadingReviews(state.reviews, state.savedReviews);
-    await reviewsService.delete(event.review);
     final savedReviews = List<String>.from(state.savedReviews).where((String savedId) {
       return event.review.id != savedId;
-    });
+    }).toList();
     await sharedPreferences.setStringList(preferencesKey, savedReviews);
     yield LoadedReviews(state.reviews, savedReviews);
   }

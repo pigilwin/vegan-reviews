@@ -32,6 +32,7 @@ class _FeedState extends State<Feed> {
             final review = state.reviews[i];
             return ReviewCard(
               review: review,
+              isSaved: state.savedReviews.contains(review.id),
               onTap: () {
                 if (authenticationBloc.state is Authenticated) {
                   Navigator.of(context).pushNamed('/review/edit', arguments: review.id);
@@ -44,9 +45,9 @@ class _FeedState extends State<Feed> {
                   /// The item is currently saved, removing
                   ///
                   if (state.savedReviews.contains(review.id)) {
-                    reviewsBloc.add(UnSaveReview(review));
+                    reviewsBloc.add(UnSaveReviewEvent(review));
                   } else {
-                    reviewsBloc.add(SaveReview(review));
+                    reviewsBloc.add(SaveReviewEvent(review));
                   }
                 }
               }
