@@ -6,11 +6,13 @@ class ReviewCard extends StatelessWidget {
 
   const ReviewCard({
     this.review,
-    this.onTap
+    this.onTap,
+    this.toggleSave
   });
 
   final Review review;
   final VoidCallback onTap;
+  final VoidCallback toggleSave;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +27,7 @@ class ReviewCard extends StatelessWidget {
               _getImage(),
               _getText(),
               _getStars(),
-              _getCreatedTime()
+              _getCreatedTimeWithSaveIcon()
             ],
           ),
         ),
@@ -81,11 +83,16 @@ class ReviewCard extends StatelessWidget {
     );
   }
 
-  Widget _getCreatedTime() {
+  Widget _getCreatedTimeWithSaveIcon() {
     final dateFormat = DateFormat.yMMMMEEEEd();
     return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
         Text('${dateFormat.format(review.created)}'),
+        IconButton(
+          icon: Icon(Icons.save),
+          onPressed: toggleSave,
+        )
       ],
     );
   }

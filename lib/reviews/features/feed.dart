@@ -12,16 +12,19 @@ class Feed extends StatefulWidget {
 class _FeedState extends State<Feed> {
 
   AuthenticationBloc authenticationBloc;
+  ReviewsBloc reviewsBloc;
 
   @override
   void initState() {
     super.initState();
     authenticationBloc = context.read<AuthenticationBloc>();
+    reviewsBloc = context.read<ReviewsBloc>();
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ReviewsBloc, ReviewsState>(
+      cubit: reviewsBloc,
       builder: (context, ReviewsState state) {
         return ListView.builder(
           itemCount: state.reviews.length,
@@ -34,6 +37,11 @@ class _FeedState extends State<Feed> {
                   Navigator.of(context).pushNamed('/review/edit', arguments: review.id);
                 }
               },
+              toggleSave: () {
+                if (authenticationBloc.state is Authenticated) {
+
+                }
+              }
             );
           }
         );
