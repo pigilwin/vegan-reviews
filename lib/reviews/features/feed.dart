@@ -9,7 +9,7 @@ class Feed extends StatefulWidget {
   _FeedState createState() => _FeedState();
 }
 
-class _FeedState extends State<Feed> {
+class _FeedState extends State<Feed> with AutomaticKeepAliveClientMixin<Feed> {
 
   AuthenticationBloc authenticationBloc;
   ReviewsBloc reviewsBloc;
@@ -57,4 +57,7 @@ class _FeedState extends State<Feed> {
       },
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

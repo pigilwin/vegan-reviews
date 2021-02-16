@@ -9,7 +9,7 @@ class SavedFeed extends StatefulWidget {
   _SavedFeedState createState() => _SavedFeedState();
 }
 
-class _SavedFeedState extends State<SavedFeed> {
+class _SavedFeedState extends State<SavedFeed> with AutomaticKeepAliveClientMixin<SavedFeed> {
 
   AuthenticationBloc authenticationBloc;
   ReviewsBloc reviewsBloc;
@@ -57,4 +57,7 @@ class _SavedFeedState extends State<SavedFeed> {
       },
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }
