@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 
 class Navigation extends StatefulWidget {
-  const Navigation();
+  const Navigation({
+    this.controller
+  });
+
+  final PageController controller;
 
   @override
   _NavigationState createState() => _NavigationState();
@@ -9,7 +13,13 @@ class Navigation extends StatefulWidget {
 
 class _NavigationState extends State<Navigation> {
 
-  int currentIndex = 0;
+  int _selectedIndex;
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedIndex = widget.controller.initialPage;
+  }
 
   @override
   Widget build(BuildContext context) {    
@@ -33,7 +43,13 @@ class _NavigationState extends State<Navigation> {
     
     return BottomNavigationBar(
       items: items,
-      currentIndex: currentIndex,
+      currentIndex: _selectedIndex,
+      onTap: (int i) {
+        widget.controller.animateToPage(i, duration: const Duration(milliseconds: 2), curve: Curves.bounceInOut);
+        setState(() {
+          _selectedIndex = i;
+        });
+      },
     );
   }
 }

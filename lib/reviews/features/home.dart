@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vegan_reviews/authentication/authentication.dart';
 import 'package:vegan_reviews/reviews/features/feed.dart';
+import 'package:vegan_reviews/reviews/features/saved_feed.dart';
 import 'package:vegan_reviews/reviews/reviews.dart';
 
 class Home extends StatefulWidget {
@@ -14,11 +15,13 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
 
   AuthenticationBloc authenticationBloc;
+  PageController pageController;
 
   @override
   void initState() {
     super.initState();
     authenticationBloc = context.read<AuthenticationBloc>();
+    pageController = PageController(initialPage: 0);
   }
   
   @override
@@ -33,9 +36,16 @@ class _HomeState extends State<Home> {
         ],
       ),
       body: PageView(
-        children: [Feed()],
+        scrollDirection: Axis.horizontal,
+        controller: pageController,
+        children: [
+          Feed(),
+          SavedFeed()
+        ],
       ),
-      bottomNavigationBar: Navigation()
+      bottomNavigationBar: Navigation(
+        controller: pageController
+      )
     );
   }
 
