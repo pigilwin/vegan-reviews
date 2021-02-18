@@ -23,6 +23,7 @@ class _FeedState extends State<Feed> with AutomaticKeepAliveClientMixin<Feed> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return BlocBuilder<ReviewsBloc, ReviewsState>(
       cubit: reviewsBloc,
       builder: (context, ReviewsState state) {
