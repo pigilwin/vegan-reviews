@@ -26,6 +26,7 @@ class ReviewCard extends StatelessWidget {
           padding: EdgeInsets.all(6.5),
           child: Column(
             mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               _getImage(),
               _getText(),
@@ -58,66 +59,78 @@ class ReviewCard extends StatelessWidget {
   }
 
   Widget _getText() {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Expanded(
-          child: RichText(
-            text: TextSpan(
-              children: <TextSpan>[
-                TextSpan(text: review.name + ': ', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
-                TextSpan(text: review.description, style: TextStyle(color: Colors.black))
-              ]
-            ),
-          )
-        ),
-      ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 2),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Expanded(
+            child: RichText(
+              text: TextSpan(
+                children: <TextSpan>[
+                  TextSpan(text: review.name + ': ', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+                  TextSpan(text: review.description, style: TextStyle(color: Colors.black))
+                ]
+              ),
+            )
+          ),
+        ],
+      ),
     );
   }
 
   Widget _getStars() {
-    return Row(
-      children: <Widget>[
-        StarRating(
-          canBeEditted: false,
-          stars: Review.amountOfStars,
-          rating: review.stars,
-          size: 20.0,
-          onRatingChanged: null,
-        ),
-      ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 2),
+      child: Row(
+        children: <Widget>[
+          StarRating(
+            canBeEditted: false,
+            stars: Review.amountOfStars,
+            rating: review.stars,
+            size: 20.0,
+            onRatingChanged: null,
+          ),
+        ],
+      ),
     );
   }
 
   Widget _getPrice() {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        RichText(
-          text: TextSpan(
-            children: <TextSpan>[
-              TextSpan(text: 'Price: £', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
-              TextSpan(text: review.price.toString(), style: TextStyle(color: Colors.black))
-            ]
-          ),
-        )
-      ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 5),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          RichText(
+            text: TextSpan(
+              children: <TextSpan>[
+                TextSpan(text: 'Price: £', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+                TextSpan(text: review.price.toString(), style: TextStyle(color: Colors.black))
+              ]
+            ),
+          )
+        ],
+      )
     );
   }
 
   Widget _getSupplier() {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        RichText(
-          text: TextSpan(
-            children: <TextSpan>[
-              TextSpan(text: 'Supplier: ', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
-              TextSpan(text: review.supplier, style: TextStyle(color: Colors.black))
-            ]
-          ),
-        )
-      ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 5),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          RichText(
+            text: TextSpan(
+              children: <TextSpan>[
+                TextSpan(text: 'Supplier: ', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+                TextSpan(text: review.supplier, style: TextStyle(color: Colors.black))
+              ]
+            ),
+          )
+        ],
+      )
     );
   }
 
@@ -131,7 +144,7 @@ class ReviewCard extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text(type)
+        Text(type, style: TextStyle(fontSize: 22))
       ],
     );
   }
