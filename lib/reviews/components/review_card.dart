@@ -31,6 +31,7 @@ class ReviewCard extends StatelessWidget {
               _getStars(),
               _getPrice(),
               _getSupplier(),
+              _getType(),
               _getCreatedTimeWithSaveIcon()
             ],
           ),
@@ -115,6 +116,21 @@ class ReviewCard extends StatelessWidget {
             ]
           ),
         )
+      ],
+    );
+  }
+
+  Widget _getType() {
+
+    var type = '';
+    if (Review.savouryEmojiMap.containsKey(review.type)) {
+      type = Review.savouryEmojiMap[review.type];
+    }
+
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text(type)
       ],
     );
   }

@@ -38,6 +38,11 @@ class Review extends Equatable {
     'sweet': 'Sweet'
   };
 
+  static const Map<String, String> savouryEmojiMap = {
+    'savoury': '🍕',
+    'sweet': '🍬'
+  };
+
   static const int amountOfStars = 10;
 
   final String id;
