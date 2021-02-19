@@ -30,6 +30,7 @@ class ReviewCard extends StatelessWidget {
               _getText(),
               _getStars(),
               _getPrice(),
+              _getSupplier(),
               _getCreatedTimeWithSaveIcon()
             ],
           ),
@@ -93,8 +94,24 @@ class ReviewCard extends StatelessWidget {
         RichText(
           text: TextSpan(
             children: <TextSpan>[
-              TextSpan(text: 'Price: ', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+              TextSpan(text: 'Price: £', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
               TextSpan(text: review.price.toString(), style: TextStyle(color: Colors.black))
+            ]
+          ),
+        )
+      ],
+    );
+  }
+
+  Widget _getSupplier() {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        RichText(
+          text: TextSpan(
+            children: <TextSpan>[
+              TextSpan(text: 'Supplier: ', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+              TextSpan(text: review.supplier, style: TextStyle(color: Colors.black))
             ]
           ),
         )
