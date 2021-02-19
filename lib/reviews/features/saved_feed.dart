@@ -40,16 +40,13 @@ class _SavedFeedState extends State<SavedFeed> with AutomaticKeepAliveClientMixi
                 }
               },
               toggleSave: () {
-                if (authenticationBloc.state is Authenticated) {
-
-                  ///
-                  /// The item is currently saved, removing
-                  ///
-                  if (state.savedReviews.contains(review.id)) {
-                    reviewsBloc.add(UnSaveReviewEvent(review));
-                  } else {
-                    reviewsBloc.add(SaveReviewEvent(review));
-                  }
+                ///
+                /// The item is currently saved, removing
+                ///
+                if (state.savedReviews.contains(review.id)) {
+                  reviewsBloc.add(UnSaveReviewEvent(review));
+                } else {
+                  reviewsBloc.add(SaveReviewEvent(review));
                 }
               }
             );
