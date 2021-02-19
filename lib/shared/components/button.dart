@@ -18,7 +18,7 @@ class Button extends StatelessWidget {
           color: Colors.green,
           borderRadius: BorderRadius.circular(5)
         ),
-        padding: EdgeInsets.all(3),
+        padding: EdgeInsets.all(8),
         child: Text(buttonText, style: const TextStyle(fontSize: 20, color: Colors.white)),
       ),
       onPressed: onPressed
