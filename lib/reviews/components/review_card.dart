@@ -21,6 +21,7 @@ class ReviewCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Card(
+        color: review.limited ? Colors.red.withOpacity(10) : Colors.white,
         child: Padding(
           padding: EdgeInsets.all(6.5),
           child: Column(
