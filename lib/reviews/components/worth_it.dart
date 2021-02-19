@@ -3,12 +3,6 @@ import 'package:vegan_reviews/reviews/reviews.dart';
 
 class WorthIt extends StatelessWidget {
   
-  const WorthIt({
-    @required this.review
-  });
-
-  final Review review;
-
   static const Map<String, List<int>> emojis = {
     '🤢': [0, 1, 2],
     '😞': [3, 4],
@@ -17,14 +11,19 @@ class WorthIt extends StatelessWidget {
     '😍': [9, 10]
   };
 
+
+  const WorthIt({
+    @required this.review
+  });
+
+  final Review review;
+
   @override
   Widget build(BuildContext context) {
-    
-    var emoji = '';
-    emojis.forEach((String face, List<int> value) { 
-      if (value.contains(review.stars)){
-        emoji = face;
-      }
+    final emoji = emojis.keys.firstWhere((String key) {
+      return emojis[key].contains(review.stars);
+    }, orElse: () {
+      return '';
     });
 
     return Padding(
