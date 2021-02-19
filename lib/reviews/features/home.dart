@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vegan_reviews/authentication/authentication.dart';
+import 'package:vegan_reviews/reviews/features/about.dart';
 import 'package:vegan_reviews/reviews/features/feed.dart';
 import 'package:vegan_reviews/reviews/features/saved_feed.dart';
 import 'package:vegan_reviews/reviews/reviews.dart';
@@ -40,7 +41,8 @@ class _HomeState extends State<Home> {
         controller: pageController,
         children: [
           Feed(),
-          SavedFeed()
+          SavedFeed(),
+          About()
         ],
       ),
       bottomNavigationBar: Navigation(
