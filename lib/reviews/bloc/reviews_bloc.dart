@@ -112,7 +112,7 @@ class ReviewsBloc extends Bloc<ReviewsEvent, ReviewsState> {
       return !event.deleted.contains(savedId);
     }).toList();
 
-    await sharedPreferences.setStringList(preferencesKey, []);
+    await sharedPreferences.setStringList(preferencesKey, savedReviews);
 
     yield LoadedReviews(reviewsWithoutModified.reversed.toList(), savedReviews);
   }
