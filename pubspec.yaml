@@ -1,7 +1,7 @@
 name: vegan_reviews
 description: A review app of vegan food for Jody
 publish_to: 'none'
-version: 1.1.1+3
+version: 1.2.1+4
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
