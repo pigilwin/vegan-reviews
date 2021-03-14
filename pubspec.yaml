@@ -9,27 +9,27 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  cupertino_icons: ^1.0.0
-  firebase_core: ^0.7.0
-  cloud_firestore: ^0.16.0
-  firebase_auth: ^0.20.0+1
-  firebase_storage: ^7.0.0
-  google_sign_in: ^4.5.9
-  bloc: ^6.1.0
-  flutter_bloc: ^6.1.0
-  equatable: ^1.2.5
-  image_picker: ^0.6.7+22
-  uuid: ^2.2.2
-  connectivity: ^2.0.2
-  intl: 0.16.1
-  shared_preferences: ^0.5.12+4
+  cupertino_icons: ^1.0.2
+  firebase_core: ^1.0.1
+  cloud_firestore: ^1.0.1
+  firebase_auth: ^1.0.1
+  firebase_storage: ^8.0.0
+  google_sign_in: ^5.0.0
+  bloc: ^7.0.0-nullsafety.3
+  flutter_bloc: ^7.0.0-nullsafety.5
+  equatable: ^2.0.0
+  image_picker: ^0.7.2+1
+  uuid: ^3.0.1
+  connectivity: ^3.0.2
+  intl: ^0.17.0
+  shared_preferences: ^2.0.4
 
   
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_launcher_icons: 0.7.5
-  pedantic: ^1.9.2
+  flutter_launcher_icons: 0.9.0
+  pedantic: ^1.11.0
 
 flutter:
   uses-material-design: true
