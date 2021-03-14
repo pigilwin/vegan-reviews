@@ -1,6 +1,6 @@
 part of 'reviews_bloc.dart';
 
-abstract class ReviewsEvent extends Equatable {
+abstract class ReviewsEvent{
   const ReviewsEvent();
 }
 
@@ -10,9 +10,6 @@ class NewLoadedReviewsEvent extends ReviewsEvent {
 
   final List<Review> reviews;
   final List<String> deleted;
-
-  @override
-  List<Object> get props => [reviews, deleted];
 }
 
 class AddNewReviewEvent extends ReviewsEvent {
@@ -21,9 +18,6 @@ class AddNewReviewEvent extends ReviewsEvent {
 
   final Review review;
   final io.File image;
-  
-  @override
-  List<Object> get props => [review, image];
 }
 
 class EditReviewEvent extends ReviewsEvent {
@@ -32,9 +26,6 @@ class EditReviewEvent extends ReviewsEvent {
 
   final Review review;
   final io.File image;
-  
-  @override
-  List<Object> get props => [review, image];
 }
 
 class DeleteReviewEvent extends ReviewsEvent {
@@ -42,9 +33,6 @@ class DeleteReviewEvent extends ReviewsEvent {
   const DeleteReviewEvent(this.review);
 
   final Review review;
-  
-  @override
-  List<Object> get props => [review];
 }
 
 class SaveReviewEvent extends ReviewsEvent {
@@ -52,9 +40,6 @@ class SaveReviewEvent extends ReviewsEvent {
   const SaveReviewEvent(this.review);
 
   final Review review;
-  
-  @override
-  List<Object> get props => [review];
 }
 
 class UnSaveReviewEvent extends ReviewsEvent {
@@ -62,7 +47,4 @@ class UnSaveReviewEvent extends ReviewsEvent {
   const UnSaveReviewEvent(this.review);
 
   final Review review;
-  
-  @override
-  List<Object> get props => [review];
 }

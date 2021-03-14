@@ -48,7 +48,7 @@ class ReviewsService {
   }
 
   Future<Review> _fromDocumentChange(firestore.DocumentChange documentChange) async {
-    final data = documentChange.doc.data();
+    final data = documentChange.doc.data()!;
     final imageName = '${documentChange.doc.id}.jpg';
     
     var imageUrl = '';

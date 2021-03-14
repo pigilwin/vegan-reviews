@@ -5,16 +5,16 @@ import 'package:vegan_reviews/reviews/reviews.dart';
 class ReviewCard extends StatelessWidget {
 
   const ReviewCard({
-    this.review,
-    this.isSaved,
-    this.onTap,
-    this.toggleSave
+    required this.review,
+    required this.isSaved,
+    required this.onTap,
+    required this.toggleSave
   });
 
   final Review review;
   final bool isSaved;
-  final VoidCallback onTap;
-  final VoidCallback toggleSave;
+  final VoidCallback? onTap;
+  final VoidCallback? toggleSave;
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +47,7 @@ class ReviewCard extends StatelessWidget {
       return const SizedBox.shrink();
     }
     return Image.network(review.imageUrl,
-      loadingBuilder: (BuildContext context, Widget widget, ImageChunkEvent event) {
+      loadingBuilder: (BuildContext context, Widget widget, ImageChunkEvent? event) {
         if (event == null) {
           return widget;
         }
@@ -136,7 +136,7 @@ class ReviewCard extends StatelessWidget {
 
   Widget _getType() {
 
-    var type = '';
+    String? type = '';
     if (Review.savouryEmojiMap.containsKey(review.type)) {
       type = Review.savouryEmojiMap[review.type];
     }
@@ -144,7 +144,7 @@ class ReviewCard extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text(type, style: TextStyle(fontSize: 22))
+        Text(type!, style: TextStyle(fontSize: 22))
       ],
     );
   }

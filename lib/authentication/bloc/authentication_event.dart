@@ -12,7 +12,7 @@ class RequestAuthenticationEvent extends AuthenticationEvent {
   final Password password;
   
   @override
-  List<Object> get props => [email.value, password.value]; 
+  List<Object?> get props => [email.value, password.value]; 
 }
 
 class PersistenceSignInEvent extends AuthenticationEvent {

@@ -25,7 +25,7 @@ class Application extends StatelessWidget {
   }
 
   Route<dynamic> onGenerateRoute(RouteSettings settings) {
-    final builder = _getRoutes(settings)[settings.name];
+    final builder = _getRoutes(settings)[settings.name!]!;
     return MaterialPageRoute(
       builder: builder,
       settings: settings
@@ -37,7 +37,7 @@ class Application extends StatelessWidget {
       '/': (BuildContext context) => Home(),
       '/login': (BuildContext context) => Authenticate(),
       '/review/new': (BuildContext context) => NewReview(),
-      '/review/edit': (BuildContext context) => EditReview(settings.arguments)
+      '/review/edit': (BuildContext context) => EditReview(settings.arguments as String)
     };
   }
 

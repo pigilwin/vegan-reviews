@@ -11,7 +11,7 @@ class NewReview extends StatefulWidget {
 
 class _NewReviewState extends State<NewReview> {
 
-  ReviewsBloc reviewsBloc;
+  late ReviewsBloc reviewsBloc;
 
   @override
   void initState() {

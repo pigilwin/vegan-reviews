@@ -29,7 +29,7 @@ class ReviewsBloc extends Bloc<ReviewsEvent, ReviewsState> {
   }
 
   final ReviewsService reviewsService = ReviewsService();
-  SharedPreferences sharedPreferences;
+  late SharedPreferences sharedPreferences;
 
   static const String preferencesKey = 'savedReviews';
 
@@ -108,7 +108,7 @@ class ReviewsBloc extends Bloc<ReviewsEvent, ReviewsState> {
     /// Find the saved reviews that have been stored
     /// Loop through every saved review and remove the deleted ids
     ///
-    final savedReviews = sharedPreferences.getStringList(preferencesKey).where((String savedId) {
+    final savedReviews = sharedPreferences.getStringList(preferencesKey)!.where((String savedId) {
       return !event.deleted.contains(savedId);
     }).toList();
 

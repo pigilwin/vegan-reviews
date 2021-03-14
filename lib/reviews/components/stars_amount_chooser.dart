@@ -4,12 +4,12 @@ import 'package:vegan_reviews/reviews/reviews.dart';
 class StarAmountChooser extends StatelessWidget {
   
   const StarAmountChooser({
-    @required this.value,
-    @required this.selected
+    required this.value,
+    required this.selected
   });
 
   final int value;
-  final void Function(int value) selected;
+  final void Function(int? value) selected;
   
   @override
   Widget build(Object context) {

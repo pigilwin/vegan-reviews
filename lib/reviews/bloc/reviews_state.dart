@@ -29,7 +29,7 @@ abstract class ReviewsState extends Equatable {
     return reviews.last;
   }
 
-  Review getReviewById(String reviewId) {
+  Review getReviewById(String? reviewId) {
     return reviews.firstWhere((Review element) {
       return element.id == reviewId;
     });

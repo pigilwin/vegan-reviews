@@ -1,20 +1,19 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
 import 'package:uuid/uuid.dart';
 
 class Review extends Equatable {
 
   Review({
-    @required this.id,
-    @required this.name,
-    @required this.description,
-    @required this.created,
-    @required this.stars,
-    @required this.price,
-    @required this.supplier,
-    @required this.limited,
-    @required this.type,
-    @required this.imageUrl
+    required this.id,
+    required this.name,
+    required this.description,
+    required this.created,
+    required this.stars,
+    required this.price,
+    required this.supplier,
+    required this.limited,
+    required this.type,
+    required this.imageUrl
   });
 
   factory Review.empty() {
@@ -79,7 +78,7 @@ class Review extends Equatable {
   }
 
   @override
-  List<Object> get props => [
+  List<Object?> get props => [
     id,
     name,
     description,

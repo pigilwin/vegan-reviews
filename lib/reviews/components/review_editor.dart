@@ -7,14 +7,14 @@ import 'package:vegan_reviews/shared/shared.dart';
 class ReviewEditor extends StatefulWidget{
 
   const ReviewEditor({
-    @required this.review,
-    @required this.reviewFinished,
+    required this.review,
+    required this.reviewFinished,
     this.reviewDeleted
   });
 
   final Review review;
   final void Function(Review review, io.File image) reviewFinished;
-  final void Function(Review review) reviewDeleted;
+  final void Function(Review review)? reviewDeleted;
 
   @override
   _ReviewEditorState createState() => _ReviewEditorState();
@@ -24,15 +24,16 @@ class _ReviewEditorState extends State<ReviewEditor> {
 
   final _formKey = GlobalKey<FormState>();//No type here due to it breaking the validation
   
-  TextEditingController nameController;
-  TextEditingController descriptionController;
-  TextEditingController priceController;
-  TextEditingController supplierController;
-  int rating;
-  bool limitedTime;
-  io.File image;
-  String imageUrl;
-  String type;
+  late TextEditingController nameController;
+  late TextEditingController descriptionController;
+  late TextEditingController priceController;
+  late TextEditingController supplierController;
+  late int rating;
+  late bool limitedTime;
+  late String imageUrl;
+  late String type;
+
+  io.File? image;
 
   @override
   void initState() {
@@ -41,7 +42,7 @@ class _ReviewEditorState extends State<ReviewEditor> {
     descriptionController = TextEditingController(text: widget.review.description);
     priceController = TextEditingController(text: widget.review.price.toString());
     supplierController = TextEditingController(text: widget.review.supplier);
-    rating = widget.review.stars ?? 0;
+    rating = widget.review.stars;
     limitedTime = widget.review.limited;
     imageUrl = widget.review.imageUrl;
     type = widget.review.type;
@@ -75,8 +76,8 @@ class _ReviewEditorState extends State<ReviewEditor> {
         decoration: const InputDecoration(
           labelText: 'Name'
         ),
-        validator: (String name) {
-          if (name.isEmpty) {
+        validator: (String? name) {
+          if (name!.isEmpty) {
             return 'A name must be supplied';
           }
           return null;
@@ -93,8 +94,8 @@ class _ReviewEditorState extends State<ReviewEditor> {
         decoration: const InputDecoration(
           labelText: 'Description'
         ),
-        validator: (String name) {
-          if (name.isEmpty) {
+        validator: (String? name) {
+          if (name!.isEmpty) {
             return 'A description must be supplied';
           }
           return null;
@@ -113,8 +114,8 @@ class _ReviewEditorState extends State<ReviewEditor> {
         decoration: const InputDecoration(
           labelText: 'Price'
         ),
-        validator: (String value) {
-          if (value.isEmpty) {
+        validator: (String? value) {
+          if (value!.isEmpty) {
             return 'Please enter a price';
           }
           if (double.tryParse(value) == null) {
@@ -138,12 +139,6 @@ class _ReviewEditorState extends State<ReviewEditor> {
           });
         },
         value: type,
-        validator: (String value) {
-          if (value == 'None Selected'){
-            return 'A value must be selected';
-          }
-          return null;
-        },
       ),
     );
   }
@@ -186,8 +181,8 @@ class _ReviewEditorState extends State<ReviewEditor> {
         decoration: const InputDecoration(
           labelText: 'Supplier'
         ),
-        validator: (String value) {
-          if (value.isEmpty) {
+        validator: (String? value) {
+          if (value!.isEmpty) {
             return 'A supplier must be set';
           }
           return null;
@@ -201,7 +196,7 @@ class _ReviewEditorState extends State<ReviewEditor> {
     if (image != null){
       return Padding(
         padding: const EdgeInsets.all(20),
-        child: Image.file(image),
+        child: Image.file(image!),
       );
     }
 
@@ -225,7 +220,7 @@ class _ReviewEditorState extends State<ReviewEditor> {
             final imagePicker = ImagePicker();
             final cameraImage = await imagePicker.getImage(source: ImageSource.camera);
             setState(() {
-              image = io.File(cameraImage.path);
+              image = io.File(cameraImage!.path);
             });
           },
         ),
@@ -235,7 +230,7 @@ class _ReviewEditorState extends State<ReviewEditor> {
             final imagePicker = ImagePicker();
             final galleryImage = await imagePicker.getImage(source: ImageSource.gallery);
             setState(() {
-              image = io.File(galleryImage.path);
+              image = io.File(galleryImage!.path);
             });
           },
         )
@@ -250,7 +245,7 @@ class _ReviewEditorState extends State<ReviewEditor> {
       deleteButton = Button(
         buttonText: 'Delete',
         onPressed: () {
-          widget.reviewDeleted(widget.review);
+          widget.reviewDeleted!(widget.review);
         },
       );
     }
@@ -267,7 +262,7 @@ class _ReviewEditorState extends State<ReviewEditor> {
                 final review = Review(
                   name: nameController.text,
                   description: descriptionController.text,
-                  price: double.tryParse(priceController.text),
+                  price: double.tryParse(priceController.text) ?? 0.0,
                   stars: rating,
                   limited: limitedTime,
                   supplier: supplierController.text,
@@ -276,7 +271,7 @@ class _ReviewEditorState extends State<ReviewEditor> {
                   created: DateTime.now(),
                   imageUrl: widget.review.imageUrl
                 );
-                widget.reviewFinished(review, image);
+                widget.reviewFinished(review, image!);
               } else {
                 ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                   content: Text('Validation failed'),
@@ -292,10 +287,10 @@ class _ReviewEditorState extends State<ReviewEditor> {
 
   bool isReviewValid() {
     
-    if (imageUrl.isEmpty && image == null) {
+    if (imageUrl.isEmpty) {
       return false;
     }
 
-    return _formKey.currentState.validate();
+    return _formKey.currentState!.validate();
   }
 }

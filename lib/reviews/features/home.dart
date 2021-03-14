@@ -15,8 +15,8 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
 
-  AuthenticationBloc authenticationBloc;
-  PageController pageController;
+  late AuthenticationBloc authenticationBloc;
+  PageController? pageController;
 
   @override
   void initState() {

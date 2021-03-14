@@ -4,14 +4,12 @@ import 'package:vegan_reviews/reviews/reviews.dart';
 class FoodTypeSelector extends StatelessWidget {
   
   const FoodTypeSelector({
-    @required this.value,
-    @required this.selected,
-    @required this.validator
+    required this.value,
+    required this.selected
   });
 
   final String value;
   final void Function(String value) selected;
-  final String Function(String value) validator;
   
   @override
   Widget build(Object context) {
@@ -20,9 +18,16 @@ class FoodTypeSelector extends StatelessWidget {
         labelText: 'Food Type'
       ),
       value: value,
-      onChanged: selected,
+      onChanged: (String? value) {
+        selected(value!);
+      },
       icon: const Icon(Icons.arrow_downward),
-      validator: validator,
+      validator: (String? value) {
+        if (value == 'None Selected'){
+          return 'A value must be selected';
+        }
+        return null;
+      },
       iconSize: 24,
       elevation: 16,
       items: _getItems(),

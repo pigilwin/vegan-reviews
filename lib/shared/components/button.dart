@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 class Button extends StatelessWidget {
   
   const Button({
-    @required this.buttonText,
-    @required this.onPressed
+    required this.buttonText,
+    required this.onPressed
   });
 
   final String buttonText;

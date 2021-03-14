@@ -11,8 +11,8 @@ class SavedFeed extends StatefulWidget {
 
 class _SavedFeedState extends State<SavedFeed> with AutomaticKeepAliveClientMixin<SavedFeed> {
 
-  AuthenticationBloc authenticationBloc;
-  ReviewsBloc reviewsBloc;
+  late AuthenticationBloc authenticationBloc;
+  ReviewsBloc? reviewsBloc;
 
   @override
   void initState() {
@@ -44,9 +44,9 @@ class _SavedFeedState extends State<SavedFeed> with AutomaticKeepAliveClientMixi
                 /// The item is currently saved, removing
                 ///
                 if (state.savedReviews.contains(review.id)) {
-                  reviewsBloc.add(UnSaveReviewEvent(review));
+                  reviewsBloc!.add(UnSaveReviewEvent(review));
                 } else {
-                  reviewsBloc.add(SaveReviewEvent(review));
+                  reviewsBloc!.add(SaveReviewEvent(review));
                 }
               }
             );

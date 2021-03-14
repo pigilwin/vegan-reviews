@@ -3,16 +3,16 @@ import 'package:flutter/material.dart';
 class StarRating extends StatelessWidget {
   
   const StarRating({
-    @required this.canBeEditted,
-    @required this.onRatingChanged,
-    @required this.rating,
-    @required this.stars,
-    @required this.size
+    required this.canBeEditted,
+    required this.onRatingChanged,
+    required this.rating,
+    required this.stars,
+    required this.size
   });
 
   final int stars;
-  final int rating;
-  final void Function(int rating) onRatingChanged;
+  final int? rating;
+  final void Function(int rating)? onRatingChanged;
   final bool canBeEditted;
   final double size;
   
@@ -36,10 +36,10 @@ class StarRating extends StatelessWidget {
     
     return GestureDetector(
       onTap: () {
-        onRatingChanged(index + 1);
+        onRatingChanged!(index + 1);
       },
       onHorizontalDragUpdate: (DragUpdateDetails updateDetails) {
-        final RenderBox renderBox = context.findRenderObject();
+        final renderBox = context.findRenderObject() as RenderBox;
         final offset = renderBox.globalToLocal(updateDetails.globalPosition);
         var i = offset.dx ~/ size.toInt();
         if (i > stars) {
@@ -48,7 +48,7 @@ class StarRating extends StatelessWidget {
         if (i < 0) {
           i = 0;
         }
-        onRatingChanged(i);
+        onRatingChanged!(i);
       },
       child: _buildIcon(context, index),
     );
@@ -57,7 +57,7 @@ class StarRating extends StatelessWidget {
   Widget _buildIcon(BuildContext context, int index) {
     final color = Theme.of(context).primaryColor;
     
-    if (index >= rating) {
+    if (index >= rating!) {
       return Icon(Icons.star_border,
         color: color,
         size: size,

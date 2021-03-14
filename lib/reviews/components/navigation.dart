@@ -5,7 +5,7 @@ class Navigation extends StatefulWidget {
     this.controller
   });
 
-  final PageController controller;
+  final PageController? controller;
 
   @override
   _NavigationState createState() => _NavigationState();
@@ -13,12 +13,12 @@ class Navigation extends StatefulWidget {
 
 class _NavigationState extends State<Navigation> {
 
-  int _selectedIndex;
+  late int _selectedIndex;
 
   @override
   void initState() {
     super.initState();
-    _selectedIndex = widget.controller.initialPage;
+    _selectedIndex = widget.controller!.initialPage;
   }
 
   @override
@@ -45,7 +45,7 @@ class _NavigationState extends State<Navigation> {
       items: items,
       currentIndex: _selectedIndex,
       onTap: (int i) {
-        widget.controller.animateToPage(i, duration: const Duration(milliseconds: 2), curve: Curves.bounceInOut);
+        widget.controller!.animateToPage(i, duration: const Duration(milliseconds: 2), curve: Curves.bounceInOut);
         setState(() {
           _selectedIndex = i;
         });

@@ -17,8 +17,8 @@ class _EditReviewState extends State<EditReview> {
 
   _EditReviewState(this.id);
 
-  ReviewsBloc reviewsBloc;
-  Review review;
+  late ReviewsBloc reviewsBloc;
+  late Review review;
   String id;
 
   @override

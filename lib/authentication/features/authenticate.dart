@@ -14,7 +14,7 @@ class _AuthenticateState extends State<Authenticate>{
   final TextEditingController passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();//No type here due to it breaking the validation
 
-  AuthenticationBloc authenticationBloc;
+  AuthenticationBloc? authenticationBloc;
 
   @override
   void initState() {
@@ -79,8 +79,8 @@ class _AuthenticateState extends State<Authenticate>{
             padding: const EdgeInsets.all(20),
             child: TextFormField(
               controller: usernameController,
-              validator: (String value) {
-                if (value.isEmpty) {
+              validator: (String? value) {
+                if (value!.isEmpty) {
                   return 'A Email must be supplied';
                 }
                 return null;
@@ -95,8 +95,8 @@ class _AuthenticateState extends State<Authenticate>{
             padding: const EdgeInsets.all(20),
             child: TextFormField(
               controller: passwordController,
-              validator: (String value) {
-                if (value.isEmpty) {
+              validator: (String? value) {
+                if (value!.isEmpty) {
                   return 'A password must be supplied';
                 }
                 return null;
@@ -110,8 +110,8 @@ class _AuthenticateState extends State<Authenticate>{
           Button(
             buttonText: 'Sign In',
             onPressed: () {
-              if (_formKey.currentState.validate()){
-                authenticationBloc.add(RequestAuthenticationEvent(
+              if (_formKey.currentState!.validate()){
+                authenticationBloc!.add(RequestAuthenticationEvent(
                   Email(usernameController.text),
                   Password(passwordController.text)
                 ));
