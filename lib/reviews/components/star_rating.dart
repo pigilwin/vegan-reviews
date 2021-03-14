@@ -35,7 +35,6 @@ class StarRating extends StatelessWidget {
     }
     
     return GestureDetector(
-      child: _buildIcon(context, index),
       onTap: () {
         onRatingChanged(index + 1);
       },
@@ -51,6 +50,7 @@ class StarRating extends StatelessWidget {
         }
         onRatingChanged(i);
       },
+      child: _buildIcon(context, index),
     );
   }
 

@@ -25,7 +25,7 @@ class _SavedFeedState extends State<SavedFeed> with AutomaticKeepAliveClientMixi
   Widget build(BuildContext context) {
     super.build(context);
     return BlocBuilder<ReviewsBloc, ReviewsState>(
-      cubit: reviewsBloc,
+      bloc: reviewsBloc,
       builder: (context, ReviewsState state) {
         return ListView.builder(
           itemCount: state.savedReviews.length,

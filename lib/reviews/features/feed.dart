@@ -25,7 +25,7 @@ class _FeedState extends State<Feed> with AutomaticKeepAliveClientMixin<Feed> {
   Widget build(BuildContext context) {
     super.build(context);
     return BlocBuilder<ReviewsBloc, ReviewsState>(
-      cubit: reviewsBloc,
+      bloc: reviewsBloc,
       builder: (context, ReviewsState state) {
         return ListView.builder(
           itemCount: state.reviews.length,

@@ -13,6 +13,7 @@ class Button extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton(
+      onPressed: onPressed,
       child: Container(
         decoration: BoxDecoration(
           color: Colors.green,
@@ -20,8 +21,6 @@ class Button extends StatelessWidget {
         ),
         padding: EdgeInsets.all(8),
         child: Text(buttonText, style: const TextStyle(fontSize: 20, color: Colors.white)),
-      ),
-      onPressed: onPressed
-    );
+      ),    );
   }
 }

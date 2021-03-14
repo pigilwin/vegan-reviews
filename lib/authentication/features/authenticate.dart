@@ -37,7 +37,7 @@ class _AuthenticateState extends State<Authenticate>{
         title: Text('Authenicate'),
       ),
       body: BlocListener<AuthenticationBloc, AuthenticationState>(
-        cubit: authenticationBloc,
+        bloc: authenticationBloc,
         listener: (BuildContext context, AuthenticationState state) {
           if (state is NoAuthentication) {
             if (!state.wasPreviouslyLoggedIn){//Only show the message if the user was not previouslly logged in
@@ -54,7 +54,7 @@ class _AuthenticateState extends State<Authenticate>{
           }
         },
         child: BlocBuilder<AuthenticationBloc, AuthenticationState>(
-          cubit: authenticationBloc,
+          bloc: authenticationBloc,
           builder: (BuildContext context, AuthenticationState state) {
             if (state is AuthenticationLoading) {
               return const Center(

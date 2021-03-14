@@ -69,7 +69,7 @@ class Review extends Equatable {
     };
   }
 
-  String get imageName => '${id}.jpg';
+  String get imageName => '$id.jpg';
 
   int _boolToInt(bool value) {
     if (value) {
