@@ -4,6 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vegan_reviews/reviews/reviews.dart';
 
 class NewReview extends StatefulWidget {
+  const NewReview({required Key key}) : super(key: key);
+
 
   @override
   _NewReviewState createState() => _NewReviewState();

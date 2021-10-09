@@ -7,6 +7,8 @@ import 'package:vegan_reviews/reviews/features/saved_feed.dart';
 import 'package:vegan_reviews/reviews/reviews.dart';
 
 class Home extends StatefulWidget {
+  
+  const Home({required Key key}) : super(key: key);
 
   @override
   _HomeState createState() => _HomeState();

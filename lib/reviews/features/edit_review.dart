@@ -5,27 +5,31 @@ import 'package:vegan_reviews/reviews/reviews.dart';
 
 class EditReview extends StatefulWidget {
 
-  const EditReview(this.id);
+  const EditReview({
+    required Key key,
+    required this.id
+  }): super(key: key);
 
   final String id;
 
   @override
-  _EditReviewState createState() => _EditReviewState(id);
+  _EditReviewState createState() => _EditReviewState();
 }
 
 class _EditReviewState extends State<EditReview> {
 
-  _EditReviewState(this.id);
+  _EditReviewState();
 
   late ReviewsBloc reviewsBloc;
   late Review review;
-  String id;
+  late String id;
 
   @override
   void initState() {
     super.initState();
     reviewsBloc = context.read<ReviewsBloc>();
     review = reviewsBloc.state.getReviewById(id);
+    id = widget.id;
   }
 
   @override

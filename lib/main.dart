@@ -5,5 +5,5 @@ import 'package:vegan_reviews/application.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(Application());
+  runApp(const Application(key: Key('application-instance'),));
 }

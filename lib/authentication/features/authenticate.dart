@@ -4,6 +4,8 @@ import 'package:vegan_reviews/authentication/authentication.dart';
 import 'package:vegan_reviews/shared/shared.dart';
 
 class Authenticate extends StatefulWidget{
+  const Authenticate({required Key key}) : super(key: key);
+
   @override
   _AuthenticateState createState() => _AuthenticateState();
 }
@@ -108,6 +110,7 @@ class _AuthenticateState extends State<Authenticate>{
             ),
           ),
           Button(
+            key: const Key('sign-in-button'),
             buttonText: 'Sign In',
             onPressed: () {
               if (_formKey.currentState!.validate()){

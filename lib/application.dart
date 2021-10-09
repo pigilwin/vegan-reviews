@@ -6,6 +6,8 @@ import 'package:vegan_reviews/reviews/reviews.dart';
 
 class Application extends StatelessWidget {
   
+  const Application({required Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
@@ -34,10 +36,10 @@ class Application extends StatelessWidget {
 
   Map<String, WidgetBuilder> _getRoutes(RouteSettings settings) {
     return {
-      '/': (BuildContext context) => Home(),
-      '/login': (BuildContext context) => Authenticate(),
-      '/review/new': (BuildContext context) => NewReview(),
-      '/review/edit': (BuildContext context) => EditReview(settings.arguments as String)
+      '/': (BuildContext context) => const Home(key: Key('home'),),
+      '/login': (BuildContext context) => const Authenticate(key: Key('authenticate'),),
+      '/review/new': (BuildContext context) => const NewReview(key: Key('new-review')),
+      '/review/edit': (BuildContext context) => EditReview(key: const Key('edit-review'), id: settings.arguments as String,)
     };
   }
 
