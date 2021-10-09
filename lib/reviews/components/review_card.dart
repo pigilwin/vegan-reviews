@@ -23,7 +23,7 @@ class ReviewCard extends StatelessWidget {
       child: Card(
         color: review.limited ? Colors.red.withOpacity(10) : Colors.white,
         child: Padding(
-          padding: EdgeInsets.all(6.5),
+          padding: const EdgeInsets.all(6.5),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -68,8 +68,8 @@ class ReviewCard extends StatelessWidget {
             child: RichText(
               text: TextSpan(
                 children: <TextSpan>[
-                  TextSpan(text: review.name + ': ', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
-                  TextSpan(text: review.description, style: TextStyle(color: Colors.black))
+                  TextSpan(text: review.name + ': ', style: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+                  TextSpan(text: review.description, style: const TextStyle(color: Colors.black))
                 ]
               ),
             )
@@ -105,8 +105,8 @@ class ReviewCard extends StatelessWidget {
           RichText(
             text: TextSpan(
               children: <TextSpan>[
-                TextSpan(text: 'Price: £', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
-                TextSpan(text: review.price.toString(), style: TextStyle(color: Colors.black))
+                const TextSpan(text: 'Price: £', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+                TextSpan(text: review.price.toString(), style: const TextStyle(color: Colors.black))
               ]
             ),
           )
@@ -124,8 +124,8 @@ class ReviewCard extends StatelessWidget {
           RichText(
             text: TextSpan(
               children: <TextSpan>[
-                TextSpan(text: 'Supplier: ', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
-                TextSpan(text: review.supplier, style: TextStyle(color: Colors.black))
+                const TextSpan(text: 'Supplier: ', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+                TextSpan(text: review.supplier, style: const TextStyle(color: Colors.black))
               ]
             ),
           )
@@ -144,7 +144,7 @@ class ReviewCard extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text(type!, style: TextStyle(fontSize: 22))
+        Text(type!, style: const TextStyle(fontSize: 22))
       ],
     );
   }
@@ -156,7 +156,7 @@ class ReviewCard extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
-        Text('${dateFormat.format(review.created)}'),
+        Text(dateFormat.format(review.created)),
         IconButton(
           icon: Icon(icon),
           onPressed: toggleSave,

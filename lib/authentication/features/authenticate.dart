@@ -34,7 +34,7 @@ class _AuthenticateState extends State<Authenticate>{
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('Authenicate'),
+        title: const Text('Authenicate'),
       ),
       body: BlocListener<AuthenticationBloc, AuthenticationState>(
         bloc: authenticationBloc,

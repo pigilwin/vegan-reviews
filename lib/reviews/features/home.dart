@@ -31,7 +31,7 @@ class _HomeState extends State<Home> {
       appBar: AppBar(
         leading: _getCreateButton(),
         centerTitle: true,
-        title: Text('Jody\'s Vegan Reviews'),
+        title: const Text('Jody\'s Vegan Reviews'),
         actions: [
           _getAuthIcon()
         ],
@@ -56,14 +56,14 @@ class _HomeState extends State<Home> {
       builder: (_, AuthenticationState state) {
         if (state is Authenticated) {
           return IconButton(
-            icon: Icon(Icons.logout),
+            icon: const Icon(Icons.logout),
             onPressed: () {
               authenticationBloc.add(const SignOutEvent());
             },
           );
         }
         return IconButton(
-          icon: Icon(Icons.login),
+          icon: const Icon(Icons.login),
           onPressed: () {
             Navigator.of(context).pushNamed('/login');
           },
@@ -77,13 +77,13 @@ class _HomeState extends State<Home> {
       builder: (_, AuthenticationState state) {
         if (state is Authenticated) {
           return IconButton(
-            icon: Icon(Icons.edit),
+            icon: const Icon(Icons.edit),
             onPressed: () {
               Navigator.of(context).pushNamed('/review/new');
             },
           );
         }
-        return SizedBox.shrink();
+        return const SizedBox.shrink();
       }
     );
   }

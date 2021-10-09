@@ -6,7 +6,7 @@ class About extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Column(
-        children: [
+        children: const [
           Text('About Jody\'s Vegan Reviews')
         ],
       ),

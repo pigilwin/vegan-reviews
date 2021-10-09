@@ -3,7 +3,7 @@ import 'package:uuid/uuid.dart';
 
 class Review extends Equatable {
 
-  Review({
+  const Review({
     required this.id,
     required this.name,
     required this.description,
@@ -18,7 +18,7 @@ class Review extends Equatable {
 
   factory Review.empty() {
     return Review(
-      id: Uuid().v4(),
+      id: const Uuid().v4(),
       name: '',
       description: '',
       imageUrl: '',

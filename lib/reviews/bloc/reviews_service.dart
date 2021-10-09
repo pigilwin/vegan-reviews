@@ -32,6 +32,7 @@ class ReviewsService {
       //If the image does exist then delete it
       await _firebaseStorage.ref().child(review.imageName).delete();
     } on PlatformException {
+      // ignore: avoid_print
       print('No image to delete');
     }
     await _firebaseStorage.ref().child(review.imageName).putFile(image);
@@ -42,6 +43,7 @@ class ReviewsService {
     try{
       await _firebaseStorage.ref().child(review.imageName).delete();//If the image does exist then delete it
     } on PlatformException {
+      // ignore: avoid_print
       print('No image to delete');
     }
     await _firestore.collection('reviews').doc(review.id).delete();

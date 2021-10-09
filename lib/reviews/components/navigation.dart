@@ -25,17 +25,17 @@ class _NavigationState extends State<Navigation> {
   Widget build(BuildContext context) {    
     final items = <BottomNavigationBarItem>[];
 
-    items.add(BottomNavigationBarItem(
+    items.add(const BottomNavigationBarItem(
       label: 'Home',
       icon: Icon(Icons.home)
     ));
 
-    items.add(BottomNavigationBarItem(
+    items.add(const BottomNavigationBarItem(
       label: 'Saved',
       icon: Icon(Icons.layers_rounded)
     ));
 
-    items.add(BottomNavigationBarItem(
+    items.add(const BottomNavigationBarItem(
       label: 'About',
       icon: Icon(Icons.info)
     ));

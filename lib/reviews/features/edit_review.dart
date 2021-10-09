@@ -5,7 +5,7 @@ import 'package:vegan_reviews/reviews/reviews.dart';
 
 class EditReview extends StatefulWidget {
 
-  EditReview(this.id);
+  const EditReview(this.id);
 
   final String id;
 

@@ -16,7 +16,7 @@ class User {
   }
 
   factory User.empty() {
-    return User(
+    return const User(
       '',
       Email('')
     );
