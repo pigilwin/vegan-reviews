@@ -44,6 +44,7 @@ class _NewReviewState extends State<NewReview> {
             return SafeArea(
               child: SingleChildScrollView(
                 child: ReviewEditor(
+                  key: const Key('review-editor-card'),
                   review: Review.empty(),
                   reviewFinished: (Review review, io.File image) {
                     reviewsBloc.add(AddNewReviewEvent(review, image));

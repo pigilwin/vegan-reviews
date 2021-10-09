@@ -34,6 +34,7 @@ class _SavedFeedState extends State<SavedFeed> with AutomaticKeepAliveClientMixi
           itemBuilder: (context, i) {
             final review = state.getReviewById(state.savedReviews[i]);
             return ReviewCard(
+              key: const Key('saved-feed-review-card'),
               review: review,
               isSaved: state.savedReviews.contains(review.id),
               onTap: () {

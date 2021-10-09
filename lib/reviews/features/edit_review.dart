@@ -55,6 +55,7 @@ class _EditReviewState extends State<EditReview> {
             return SafeArea(
               child: SingleChildScrollView(
                 child: ReviewEditor(
+                  key: const Key('edit-review-card'),
                   review: review,
                   reviewFinished: (Review review, io.File image) {
                     reviewsBloc.add(AddNewReviewEvent(review, image));

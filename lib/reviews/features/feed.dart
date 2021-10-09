@@ -4,6 +4,8 @@ import 'package:vegan_reviews/authentication/authentication.dart';
 import 'package:vegan_reviews/reviews/reviews.dart';
 
 class Feed extends StatefulWidget {
+  const Feed({required Key key}) : super(key: key);
+
 
   @override
   _FeedState createState() => _FeedState();
@@ -32,6 +34,7 @@ class _FeedState extends State<Feed> with AutomaticKeepAliveClientMixin<Feed> {
           itemBuilder: (context, i) {
             final review = state.reviews[i];
             return ReviewCard(
+              key: const Key('feed-review-card'),
               review: review,
               isSaved: state.savedReviews.contains(review.id),
               onTap: () {

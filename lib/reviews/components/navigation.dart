@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 
 class Navigation extends StatefulWidget {
   const Navigation({
+    required Key key,
     this.controller
-  });
+  }): super(key: key);
 
   final PageController? controller;
 

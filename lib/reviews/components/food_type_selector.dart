@@ -4,9 +4,10 @@ import 'package:vegan_reviews/reviews/reviews.dart';
 class FoodTypeSelector extends StatelessWidget {
   
   const FoodTypeSelector({
+    required Key key,
     required this.value,
     required this.selected
-  });
+  }): super(key: key);
 
   final String value;
   final void Function(String value) selected;

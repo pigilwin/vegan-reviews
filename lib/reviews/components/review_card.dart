@@ -5,11 +5,12 @@ import 'package:vegan_reviews/reviews/reviews.dart';
 class ReviewCard extends StatelessWidget {
 
   const ReviewCard({
+    required Key key,
     required this.review,
     required this.isSaved,
     required this.onTap,
     required this.toggleSave
-  });
+  }): super(key: key);
 
   final Review review;
   final bool isSaved;

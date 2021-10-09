@@ -41,14 +41,15 @@ class _HomeState extends State<Home> {
       body: PageView(
         scrollDirection: Axis.horizontal,
         controller: pageController,
-        children: [
-          Feed(),
-          const SavedFeed(key: Key('saved-feed-page'),),
-          const About(key: Key('about-page'),)
+        children: const [
+          Feed(key: Key('feed-page'),),
+          SavedFeed(key: Key('saved-feed-page'),),
+          About(key: Key('about-page'),)
         ],
       ),
       bottomNavigationBar: Navigation(
-        controller: pageController
+        controller: pageController, 
+        key: const Key('navigation-bar'),
       )
     );
   }

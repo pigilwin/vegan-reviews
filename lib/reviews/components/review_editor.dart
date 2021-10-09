@@ -7,10 +7,11 @@ import 'package:vegan_reviews/shared/shared.dart';
 class ReviewEditor extends StatefulWidget{
 
   const ReviewEditor({
+    required Key key,
     required this.review,
     required this.reviewFinished,
     this.reviewDeleted
-  });
+  }): super(key: key);
 
   final Review review;
   final void Function(Review review, io.File image) reviewFinished;
@@ -133,6 +134,7 @@ class _ReviewEditorState extends State<ReviewEditor> {
     return Padding(
       padding: const EdgeInsets.all(20),
       child: FoodTypeSelector(
+        key: const Key('food-type-selector'),
         selected: (String foodType) {
           setState(() {
             type = foodType;
