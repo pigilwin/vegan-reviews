@@ -147,6 +147,7 @@ class _ReviewEditorState extends State<ReviewEditor> {
     return Padding(
       padding: const EdgeInsets.all(20),
       child: StarRating(
+        key: const Key('can-be-editted-star-rating'),
         canBeEditted: true,
         onRatingChanged: (int newRating) {
           setState(() {
@@ -215,6 +216,7 @@ class _ReviewEditorState extends State<ReviewEditor> {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         Button(
+          key: const Key('take-a-image-button'),
           buttonText: 'Take a image',
           onPressed: () async {
             final imagePicker = ImagePicker();
@@ -225,6 +227,7 @@ class _ReviewEditorState extends State<ReviewEditor> {
           },
         ),
         Button(
+          key: const Key('choose-a-image-button'),
           buttonText: 'Choose a image',
           onPressed: () async {
             final imagePicker = ImagePicker();
@@ -243,6 +246,7 @@ class _ReviewEditorState extends State<ReviewEditor> {
     Widget deleteButton = const SizedBox.shrink();
     if (widget.reviewDeleted != null) {
       deleteButton = Button(
+        key: const Key('delete-a-image-button'),
         buttonText: 'Delete',
         onPressed: () {
           widget.reviewDeleted!(widget.review);
@@ -256,6 +260,7 @@ class _ReviewEditorState extends State<ReviewEditor> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Button(
+            key: const Key('save-button'),
             buttonText: 'Save',
             onPressed: () {
               if (isReviewValid()) {

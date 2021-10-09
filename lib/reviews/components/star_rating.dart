@@ -3,12 +3,13 @@ import 'package:flutter/material.dart';
 class StarRating extends StatelessWidget {
   
   const StarRating({
+    required Key key,
     required this.canBeEditted,
     required this.onRatingChanged,
     required this.rating,
     required this.stars,
     required this.size
-  });
+  }): super(key: key);
 
   final int stars;
   final int? rating;

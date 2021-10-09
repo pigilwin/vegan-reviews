@@ -85,6 +85,7 @@ class ReviewCard extends StatelessWidget {
       child: Row(
         children: <Widget>[
           StarRating(
+            key: const Key('can-not-be-editted-star-rating'),
             canBeEditted: false,
             stars: Review.amountOfStars,
             rating: review.stars,

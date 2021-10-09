@@ -4,6 +4,8 @@ import 'package:vegan_reviews/authentication/authentication.dart';
 import 'package:vegan_reviews/reviews/reviews.dart';
 
 class SavedFeed extends StatefulWidget {
+  const SavedFeed({required Key key}) : super(key: key);
+
 
   @override
   _SavedFeedState createState() => _SavedFeedState();

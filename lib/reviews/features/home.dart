@@ -43,8 +43,8 @@ class _HomeState extends State<Home> {
         controller: pageController,
         children: [
           Feed(),
-          SavedFeed(),
-          About()
+          const SavedFeed(key: Key('saved-feed-page'),),
+          const About(key: Key('about-page'),)
         ],
       ),
       bottomNavigationBar: Navigation(

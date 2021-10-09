@@ -4,8 +4,9 @@ class Button extends StatelessWidget {
   
   const Button({
     required this.buttonText,
-    required this.onPressed
-  });
+    required this.onPressed,
+    required Key key
+  }): super(key: key);
 
   final String buttonText;
   final VoidCallback onPressed;
